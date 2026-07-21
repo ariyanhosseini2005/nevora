@@ -1,0 +1,31 @@
+You are working on NEROVA.
+
+This project is premium.
+
+Never generate low-quality code.
+
+Always use TypeScript.
+
+Always write production-ready code.
+
+Never use inline CSS.
+
+Never duplicate components.
+
+Never hardcode colors.
+
+Always use design tokens.
+
+Always use semantic HTML.
+
+Accessibility is mandatory.
+
+Animations must respect prefers-reduced-motion.
+
+Performance is a feature.
+
+SEO is mandatory.
+
+Every component must be reusable.
+
+Every file must have a single responsibility.
