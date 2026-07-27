@@ -35,7 +35,7 @@ export function useElementScrollProgress<T extends HTMLElement>(
 
     function publish(nextProgress: number) {
       setProgress((previousProgress) =>
-        Math.abs(previousProgress - nextProgress) < 0.0002
+        Math.abs(previousProgress - nextProgress) < 0.00012
           ? previousProgress
           : nextProgress,
       );
@@ -52,10 +52,13 @@ export function useElementScrollProgress<T extends HTMLElement>(
         initialized = true;
       } else {
         const elapsed = Math.min(Math.max(time - lastTime, 1), 64);
-        const response = 1 - Math.exp(-elapsed / 82);
+        const distance = Math.abs(targetProgress - currentProgress);
+        const distanceRatio = Math.min(distance / 0.035, 1);
+        const responseTime = 112 - distanceRatio * 40;
+        const response = 1 - Math.exp(-elapsed / responseTime);
         currentProgress += (targetProgress - currentProgress) * response;
 
-        if (Math.abs(targetProgress - currentProgress) < 0.00012) {
+        if (Math.abs(targetProgress - currentProgress) < 0.00008) {
           currentProgress = targetProgress;
         }
       }
@@ -63,7 +66,7 @@ export function useElementScrollProgress<T extends HTMLElement>(
       lastTime = time;
       publish(currentProgress);
 
-      if (Math.abs(targetProgress - currentProgress) >= 0.00012) {
+      if (Math.abs(targetProgress - currentProgress) >= 0.00008) {
         animationFrame = window.requestAnimationFrame(animate);
       }
     }

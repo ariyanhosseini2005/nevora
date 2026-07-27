@@ -27,10 +27,13 @@ type ScrollSegment = {
 const START_FRAME = 204;
 const END_FRAME = 743;
 const FRAME_COUNT = END_FRAME - START_FRAME + 1;
-const MOBILE_PRELOAD_RADIUS = 7;
-const DESKTOP_PRELOAD_RADIUS = 11;
-const MOBILE_CACHE_LIMIT = 18;
-const DESKTOP_CACHE_LIMIT = 28;
+const INITIAL_PRELOAD_COUNT = 4;
+const MOBILE_PRELOAD_RADIUS = 11;
+const DESKTOP_PRELOAD_RADIUS = 18;
+const MOBILE_CACHE_LIMIT = 22;
+const DESKTOP_CACHE_LIMIT = 32;
+const CONSTRAINED_PRELOAD_RADIUS = 5;
+const CONSTRAINED_CACHE_LIMIT = 14;
 const PUBLIC_BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
 
 const journeyBeatTimings: JourneyBeatTiming[] = [
@@ -145,10 +148,11 @@ function frameAtScrollProgress(progress: number) {
 }
 
 function copyOpacity(frame: number, beat: JourneyBeatTiming) {
-  const fadeFrames = 5;
+  const fadeFrames = 4;
   const enter =
-    beat.start === START_FRAME ? 1 : clamp((frame - beat.start + fadeFrames) / fadeFrames);
-  const exit = beat.end === END_FRAME ? 1 : clamp((beat.end - frame + fadeFrames) / fadeFrames);
+    beat.start === START_FRAME ? 1 : clamp((frame - beat.start + 1) / fadeFrames);
+  const exit =
+    beat.end === END_FRAME ? 1 : clamp((beat.end - frame + 1) / fadeFrames);
   return Math.min(enter, exit);
 }
 
@@ -208,11 +212,13 @@ function ReducedMotionJourney() {
 }
 
 export function CinematicJourney() {
-  ReactDOM.preload(frameSources[0], {
-    as: "image",
-    type: "image/webp",
-    fetchPriority: "high",
-  });
+  for (let index = 0; index < INITIAL_PRELOAD_COUNT; index += 1) {
+    ReactDOM.preload(frameSources[index], {
+      as: "image",
+      type: "image/webp",
+      fetchPriority: index === 0 ? "high" : "low",
+    });
+  }
 
   const { locale, direction } = useLanguage();
   const copy = messages[locale].journey;
@@ -224,6 +230,9 @@ export function CinematicJourney() {
   const previousIndexRef = useRef(0);
   const cacheCenterRef = useRef(0);
   const cacheLimitRef = useRef(DESKTOP_CACHE_LIMIT);
+  const renderedSourceIndexRef = useRef(-1);
+  const drawRequestRef = useRef<number | null>(null);
+  const pendingFrameRef = useRef(START_FRAME);
   const mountedRef = useRef(false);
   const progress = useElementScrollProgress(sceneRef);
   const shouldReduceMotion = Boolean(useReducedMotion());
@@ -235,14 +244,17 @@ export function CinematicJourney() {
   const sequenceProgress = clamp((framePosition - START_FRAME) / (FRAME_COUNT - 1));
   const brandProgress = clamp((framePosition - 720) / (743 - 720));
   const brandOpacity = cinematicEase(clamp((brandProgress - 0.08) / 0.42));
-  const activeBeat = journeyBeatTimings.find(
+  const activeBeatIndex = journeyBeatTimings.findIndex(
     (beat) => currentFrame >= beat.start && currentFrame <= beat.end,
   );
+  const activeBeat =
+    activeBeatIndex >= 0 ? journeyBeatTimings[activeBeatIndex] : undefined;
 
   const drawFrame = useCallback((frame: number) => {
     const canvas = canvasRef.current;
     const targetIndex = frameToIndex(frame);
     let image = imageCacheRef.current.get(targetIndex);
+    let resolvedSourceIndex = targetIndex;
 
     if (!image?.complete || image.naturalWidth === 0) {
       let nearestDistance = Number.POSITIVE_INFINITY;
@@ -256,6 +268,7 @@ export function CinematicJourney() {
         ) {
           image = candidate;
           nearestDistance = distance;
+          resolvedSourceIndex = candidateIndex;
         }
       }
     }
@@ -266,10 +279,19 @@ export function CinematicJourney() {
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     const targetWidth = Math.max(Math.round(bounds.width * pixelRatio), 1);
     const targetHeight = Math.max(Math.round(bounds.height * pixelRatio), 1);
+    const dimensionsChanged =
+      canvas.width !== targetWidth || canvas.height !== targetHeight;
 
-    if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+    if (dimensionsChanged) {
       canvas.width = targetWidth;
       canvas.height = targetHeight;
+    }
+
+    if (
+      !dimensionsChanged &&
+      renderedSourceIndexRef.current === resolvedSourceIndex
+    ) {
+      return;
     }
 
     const context = canvas.getContext("2d", { alpha: false });
@@ -294,7 +316,21 @@ export function CinematicJourney() {
       targetWidth,
       targetHeight,
     );
+    renderedSourceIndexRef.current = resolvedSourceIndex;
   }, []);
+
+  const scheduleDraw = useCallback(
+    (frame: number) => {
+      pendingFrameRef.current = frame;
+      if (drawRequestRef.current !== null) return;
+
+      drawRequestRef.current = window.requestAnimationFrame(() => {
+        drawRequestRef.current = null;
+        drawFrame(pendingFrameRef.current);
+      });
+    },
+    [drawFrame],
+  );
 
   const trimImageCache = useCallback(() => {
     const cache = imageCacheRef.current;
@@ -325,9 +361,14 @@ export function CinematicJourney() {
 
       const task = new Promise<void>((resolve) => {
         const image = new window.Image();
+        let settled = false;
         image.decoding = "async";
         image.fetchPriority = priority;
-        image.onload = () => {
+
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+
           if (mountedRef.current) {
             imageCacheRef.current.set(index, image);
             trimImageCache();
@@ -338,12 +379,24 @@ export function CinematicJourney() {
 
             if (Math.abs(index - frameToIndex(currentFrameRef.current)) <= 2) {
               setFirstFrameReady(true);
-              drawFrame(currentFrameRef.current);
+              scheduleDraw(currentFrameRef.current);
             }
           }
           resolve();
         };
-        image.onerror = () => resolve();
+
+        image.onload = () => {
+          void image
+            .decode()
+            .catch(() => undefined)
+            .finally(finish);
+        };
+        image.onerror = () => {
+          if (!settled) {
+            settled = true;
+            resolve();
+          }
+        };
         image.src = frameSources[index];
       });
 
@@ -356,7 +409,7 @@ export function CinematicJourney() {
 
       return task;
     },
-    [drawFrame, trimImageCache],
+    [scheduleDraw, trimImageCache],
   );
 
   useEffect(() => {
@@ -368,6 +421,11 @@ export function CinematicJourney() {
       mountedRef.current = false;
       imageCache.clear();
       inFlight.clear();
+
+      if (drawRequestRef.current !== null) {
+        window.cancelAnimationFrame(drawRequestRef.current);
+        drawRequestRef.current = null;
+      }
     };
   }, []);
 
@@ -377,8 +435,26 @@ export function CinematicJourney() {
     let cancelled = false;
     let cursor = 0;
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const radius = isMobile ? MOBILE_PRELOAD_RADIUS : DESKTOP_PRELOAD_RADIUS;
-    const movingForward = currentIndex >= previousIndexRef.current;
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+    const constrainedConnection =
+      connection?.saveData === true ||
+      connection?.effectiveType === "slow-2g" ||
+      connection?.effectiveType === "2g";
+    const baseRadius = constrainedConnection
+      ? CONSTRAINED_PRELOAD_RADIUS
+      : isMobile
+        ? MOBILE_PRELOAD_RADIUS
+        : DESKTOP_PRELOAD_RADIUS;
+    const indexDelta = currentIndex - previousIndexRef.current;
+    const radius = Math.min(
+      baseRadius + Math.abs(indexDelta) * 2,
+      baseRadius + (isMobile ? 4 : 8),
+    );
+    const movingForward = indexDelta >= 0;
     const priorityOrder = [currentIndex];
 
     for (let distance = 1; distance <= radius; distance += 1) {
@@ -396,9 +472,13 @@ export function CinematicJourney() {
     currentFrameRef.current = currentFrame;
     previousIndexRef.current = currentIndex;
     cacheCenterRef.current = currentIndex;
-    cacheLimitRef.current = isMobile ? MOBILE_CACHE_LIMIT : DESKTOP_CACHE_LIMIT;
+    cacheLimitRef.current = constrainedConnection
+      ? CONSTRAINED_CACHE_LIMIT
+      : isMobile
+        ? MOBILE_CACHE_LIMIT
+        : DESKTOP_CACHE_LIMIT;
     trimImageCache();
-    drawFrame(currentFrame);
+    scheduleDraw(currentFrame);
 
     async function loadWorker() {
       while (!cancelled) {
@@ -411,7 +491,8 @@ export function CinematicJourney() {
       }
     }
 
-    void Promise.all(Array.from({ length: isMobile ? 2 : 3 }, () => loadWorker()));
+    const workerCount = constrainedConnection ? 2 : isMobile ? 3 : 4;
+    void Promise.all(Array.from({ length: workerCount }, () => loadWorker()));
 
     return () => {
       cancelled = true;
@@ -419,8 +500,8 @@ export function CinematicJourney() {
   }, [
     currentFrame,
     currentIndex,
-    drawFrame,
     loadFrame,
+    scheduleDraw,
     shouldReduceMotion,
     trimImageCache,
   ]);
@@ -431,7 +512,8 @@ export function CinematicJourney() {
     const handleResize = () => {
       window.cancelAnimationFrame(resizeFrame);
       resizeFrame = window.requestAnimationFrame(() => {
-        drawFrame(currentFrameRef.current);
+        renderedSourceIndexRef.current = -1;
+        scheduleDraw(currentFrameRef.current);
       });
     };
     window.addEventListener("resize", handleResize);
@@ -439,7 +521,7 @@ export function CinematicJourney() {
       window.cancelAnimationFrame(resizeFrame);
       window.removeEventListener("resize", handleResize);
     };
-  }, [drawFrame, shouldReduceMotion]);
+  }, [scheduleDraw, shouldReduceMotion]);
 
   if (shouldReduceMotion) {
     return <ReducedMotionJourney />;
@@ -457,7 +539,9 @@ export function CinematicJourney() {
       <div className="sticky top-0 h-svh overflow-hidden bg-[#080705] text-cream">
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 h-full w-full"
+          className={`absolute inset-0 h-full w-full transition-opacity duration-700 ease-out [backface-visibility:hidden] [transform:translateZ(0)] ${
+            firstFrameReady ? "opacity-100" : "opacity-0"
+          }`}
           role="img"
           aria-label={`${copy.frameLabel} ${currentFrame}`}
         />
@@ -565,43 +649,53 @@ export function CinematicJourney() {
           </div>
           <div className="relative h-px overflow-visible bg-cream/18">
             <span
-              className="absolute inset-y-0 bg-premium-gold"
+              className="absolute inset-0 bg-premium-gold will-change-transform"
               style={{
-                width: `${sequenceProgress * 100}%`,
-                left: direction === "ltr" ? 0 : undefined,
-                right: direction === "rtl" ? 0 : undefined,
+                transform: `scaleX(${sequenceProgress})`,
+                transformOrigin: direction === "ltr" ? "left center" : "right center",
               }}
             />
-            {journeyBeatTimings.map((beat) => (
-              <span
-                key={beat.id}
-                className="absolute top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cream/70"
-                style={{
-                  left: `${
-                    (direction === "rtl"
-                      ? 1 - frameToIndex(beat.start) / (FRAME_COUNT - 1)
-                      : frameToIndex(beat.start) / (FRAME_COUNT - 1)) * 100
-                  }%`,
-                }}
-              />
-            ))}
+            {journeyBeatTimings.map((beat) => {
+              const isActive = activeBeat?.id === beat.id;
+
+              return (
+                <span
+                  key={beat.id}
+                  className={`absolute top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-[transform,background-color] duration-300 ${
+                    isActive
+                      ? "scale-150 bg-premium-gold"
+                      : "scale-100 bg-cream/60"
+                  }`}
+                  style={{
+                    left: `${
+                      (direction === "rtl"
+                        ? 1 - frameToIndex(beat.start) / (FRAME_COUNT - 1)
+                        : frameToIndex(beat.start) / (FRAME_COUNT - 1)) * 100
+                    }%`,
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
 
-        {!firstFrameReady && (
-          <div className="absolute inset-0 z-40 grid place-items-center bg-[#080705]">
-            <div className="w-48 text-center">
-              <p className="mb-3 text-[0.6rem] tracking-[0.3em] text-cream/64 uppercase">
-                {copy.loading}
-              </p>
-              <div className="h-px overflow-hidden bg-cream/16">
-                <span
-                  className="block h-full w-1/3 animate-pulse bg-premium-gold"
-                />
-              </div>
+        <div
+          className={`absolute inset-0 z-40 grid place-items-center bg-[#080705] transition-opacity duration-700 ease-out ${
+            firstFrameReady ? "pointer-events-none opacity-0" : "opacity-100"
+          }`}
+          aria-hidden={firstFrameReady}
+        >
+          <div className="w-48 text-center">
+            <p className="mb-3 text-[0.6rem] tracking-[0.3em] text-cream/64 uppercase">
+              {copy.loading}
+            </p>
+            <div className="h-px overflow-hidden bg-cream/16">
+              <span
+                className="block h-full w-1/3 animate-pulse bg-premium-gold"
+              />
             </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
