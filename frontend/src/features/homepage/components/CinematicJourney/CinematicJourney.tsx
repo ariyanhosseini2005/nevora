@@ -442,7 +442,7 @@ export function CinematicJourney() {
       id={sectionIds.hero}
       ref={sceneRef}
       aria-label={copy.ariaLabel}
-      className="relative h-[4140svh] bg-[#080705] md:h-[4620svh]"
+      className="relative h-[1750svh] bg-[#080705] md:h-[2000svh]"
     >
       <h1 className="sr-only">{copy.srTitle}</h1>
 
