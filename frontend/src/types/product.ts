@@ -5,4 +5,5 @@ export interface Product {
   price: number;
   rating: number;
   image: string;
+  weightGrams: number;
 }

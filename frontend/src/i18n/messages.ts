@@ -53,10 +53,43 @@ type SiteMessages = {
   };
   products: {
     ariaLabel: string;
+    eyebrow: string;
     heading: string;
     intro: string;
     ratingLabel: string;
-    items: Array<{ name: string; origin: string }>;
+    bagWeight: string;
+    viewDetails: string;
+    addToCart: string;
+    closeDetails: string;
+    tastingNotes: string;
+    roastLabel: string;
+    processLabel: string;
+    items: Array<{
+      name: string;
+      origin: string;
+      description: string;
+      notes: string[];
+      roast: string;
+      process: string;
+    }>;
+  };
+  cart: {
+    label: string;
+    title: string;
+    close: string;
+    emptyTitle: string;
+    emptyDescription: string;
+    continueShopping: string;
+    remove: string;
+    decrease: string;
+    increase: string;
+    quantity: string;
+    subtotal: string;
+    shipping: string;
+    shippingNote: string;
+    checkout: string;
+    checkoutNote: string;
+    itemCount: string;
   };
   story: {
     ariaLabel: string;
@@ -240,15 +273,65 @@ export const messages: Record<Locale, SiteMessages> = {
     },
     products: {
       ariaLabel: "Our coffee collection",
+      eyebrow: "Roasted in small batches",
       heading: "The Collection",
       intro:
         "A small, rotating selection of single-origin beans, chosen for character over volume.",
       ratingLabel: "Rated {rating} out of 5",
+      bagWeight: "{weight} g whole bean",
+      viewDetails: "Discover this coffee",
+      addToCart: "Add to bag",
+      closeDetails: "Close product details",
+      tastingNotes: "Tasting notes",
+      roastLabel: "Roast",
+      processLabel: "Process",
       items: [
-        { name: "Yirgacheffe Reserve", origin: "Ethiopia" },
-        { name: "Huila Single Origin", origin: "Colombia" },
-        { name: "Mandheling Dark Roast", origin: "Indonesia" },
+        {
+          name: "Yirgacheffe Reserve",
+          origin: "Ethiopia",
+          description:
+            "A luminous washed lot with a tea-like body, lifted florals and a precise citrus finish.",
+          notes: ["Jasmine", "Bergamot", "White peach"],
+          roast: "Light",
+          process: "Washed",
+        },
+        {
+          name: "Huila Single Origin",
+          origin: "Colombia",
+          description:
+            "A balanced daily coffee with caramel sweetness, ripe red fruit and a clean cacao finish.",
+          notes: ["Red apple", "Caramel", "Cacao"],
+          roast: "Medium-light",
+          process: "Washed",
+        },
+        {
+          name: "Mandheling Dark Roast",
+          origin: "Indonesia",
+          description:
+            "Deep and composed, with a syrupy body, restrained spice and a long dark-cacao finish.",
+          notes: ["Dark cacao", "Cedar", "Brown spice"],
+          roast: "Medium-dark",
+          process: "Wet-hulled",
+        },
       ],
+    },
+    cart: {
+      label: "Shopping bag",
+      title: "Your selection",
+      close: "Close shopping bag",
+      emptyTitle: "Your next ritual starts here.",
+      emptyDescription: "Choose a coffee from the collection and it will be kept here.",
+      continueShopping: "Explore the collection",
+      remove: "Remove",
+      decrease: "Decrease quantity of {product}",
+      increase: "Increase quantity of {product}",
+      quantity: "Quantity",
+      subtotal: "Subtotal",
+      shipping: "Shipping",
+      shippingNote: "Calculated at checkout",
+      checkout: "Secure checkout — next phase",
+      checkoutNote: "Your bag is ready. Payment and delivery connect in the next release.",
+      itemCount: "{count} items in shopping bag",
     },
     story: {
       ariaLabel: "Our story",
@@ -346,8 +429,7 @@ export const messages: Record<Locale, SiteMessages> = {
       reducedItalicTitle: "تا آیین کامل‌شده.",
       reducedDescription:
         "۵۱۶ فریم تولیدی، یک خاستگاه، یک جهت و یک مسیر سینمایی پیوسته را حفظ می‌کنند.",
-      reducedAlt:
-        "آیین کامل عصاره‌گیری در یک لیوان کوتاه دوجداره با کرمای طلایی آرام",
+      reducedAlt: "آیین کامل عصاره‌گیری در یک لیوان کوتاه دوجداره با کرمای طلایی آرام",
       loading: "در حال آماده‌سازی سفر",
       scrollHint: "هر فریم با اسکرول شما حرکت می‌کند",
       frameLabel: "فریم",
@@ -377,8 +459,7 @@ export const messages: Record<Locale, SiteMessages> = {
           label: "۰۴ · آستانه",
           title: "چوب می‌رسد",
           italicTitle: "به لبه‌ی فولاد.",
-          description:
-            "محور دوربین ثابت می‌ماند و ریل خشک‌کردن به دهانه‌ی مدور رُستر مماس می‌شود.",
+          description: "محور دوربین ثابت می‌ماند و ریل خشک‌کردن به دهانه‌ی مدور رُستر مماس می‌شود.",
         },
         {
           label: "۰۵ · رُستر",
@@ -469,15 +550,63 @@ export const messages: Record<Locale, SiteMessages> = {
     },
     products: {
       ariaLabel: "مجموعه قهوه‌های ما",
+      eyebrow: "برشته‌شده در بچ‌های محدود",
       heading: "مجموعه نوورا",
-      intro:
-        "گزیده‌ای محدود و پویا از قهوه‌های تک‌خاستگاه؛ انتخاب‌شده برای شخصیت طعمی، نه تیراژ.",
+      intro: "گزیده‌ای محدود و پویا از قهوه‌های تک‌خاستگاه؛ انتخاب‌شده برای شخصیت طعمی، نه تیراژ.",
       ratingLabel: "امتیاز {rating} از ۵",
+      bagWeight: "{weight} گرم، دانه کامل",
+      viewDetails: "کشف این قهوه",
+      addToCart: "افزودن به سبد",
+      closeDetails: "بستن جزئیات محصول",
+      tastingNotes: "یادداشت‌های طعمی",
+      roastLabel: "رُست",
+      processLabel: "فرآوری",
       items: [
-        { name: "ذخیره یرگاچف", origin: "اتیوپی" },
-        { name: "تک‌خاستگاه هویلا", origin: "کلمبیا" },
-        { name: "رُست تیره ماندلینگ", origin: "اندونزی" },
+        {
+          name: "ذخیره یرگاچف",
+          origin: "اتیوپی",
+          description:
+            "لات شسته‌ای درخشان با بافتی شبیه چای، رایحه‌های گلی و پایانی دقیق و مرکباتی.",
+          notes: ["یاس", "برگاموت", "هلو سفید"],
+          roast: "روشن",
+          process: "شسته",
+        },
+        {
+          name: "تک‌خاستگاه هویلا",
+          origin: "کلمبیا",
+          description:
+            "قهوه‌ای متعادل برای هر روز؛ با شیرینی کارامل، میوه قرمز رسیده و پایان تمیز کاکائویی.",
+          notes: ["سیب قرمز", "کارامل", "کاکائو"],
+          roast: "متوسط رو به روشن",
+          process: "شسته",
+        },
+        {
+          name: "رُست تیره ماندلینگ",
+          origin: "اندونزی",
+          description: "عمیق و متین، با بافتی شربتی، ادویه‌ای مهارشده و پایان طولانی کاکائوی تلخ.",
+          notes: ["کاکائوی تلخ", "چوب سدر", "ادویه گرم"],
+          roast: "متوسط رو به تیره",
+          process: "پوست‌کنی خیس",
+        },
       ],
+    },
+    cart: {
+      label: "سبد خرید",
+      title: "انتخاب شما",
+      close: "بستن سبد خرید",
+      emptyTitle: "آیین بعدی شما از اینجا آغاز می‌شود.",
+      emptyDescription: "قهوه‌ای از مجموعه انتخاب کنید تا اینجا برایتان نگه داشته شود.",
+      continueShopping: "مشاهده مجموعه",
+      remove: "حذف",
+      decrease: "کم‌کردن تعداد {product}",
+      increase: "افزودن تعداد {product}",
+      quantity: "تعداد",
+      subtotal: "جمع جزء",
+      shipping: "ارسال",
+      shippingNote: "در مرحله پرداخت محاسبه می‌شود",
+      checkout: "پرداخت امن — مرحله بعد",
+      checkoutNote: "سبد شما آماده است؛ پرداخت و ارسال در نسخه بعدی متصل می‌شوند.",
+      itemCount: "{count} محصول در سبد خرید",
     },
     story: {
       ariaLabel: "داستان ما",
@@ -506,7 +635,8 @@ export const messages: Record<Locale, SiteMessages> = {
         },
         {
           title: "رُست پس از سفارش",
-          description: "دانه‌ها چند روز پس از برشته‌کاری ارسال می‌شوند، نه بعد از ماه‌ها انبارداری.",
+          description:
+            "دانه‌ها چند روز پس از برشته‌کاری ارسال می‌شوند، نه بعد از ماه‌ها انبارداری.",
         },
       ],
     },

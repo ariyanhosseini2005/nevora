@@ -14,6 +14,8 @@ homepage.
 - English and Persian content with automatic LTR/RTL layout
 - Responsive desktop and mobile art direction
 - Reduced-motion fallback and accessible navigation
+- Bilingual product quick views with origin, roast, process, and tasting notes
+- Persistent client-side shopping bag with quantity and subtotal controls
 - Self-hosted Inter, Playfair Display, and Vazirmatn variable fonts
 - Static metadata, Open Graph image, robots file, and sitemap
 

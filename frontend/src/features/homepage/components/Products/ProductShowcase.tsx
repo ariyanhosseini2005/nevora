@@ -1,18 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useCallback, useState } from "react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { ProductCard } from "@/components/cards/ProductCard";
+import { ProductQuickView } from "@/features/commerce/ProductQuickView";
+import { useCart } from "@/features/commerce/CartProvider";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { sectionIds } from "@/constants/routes";
 import { products } from "@/features/homepage/data/products";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { messages } from "@/i18n/messages";
+import type { Product } from "@/types/product";
 
 export function ProductShowcase() {
   const { locale } = useLanguage();
+  const { addItem } = useCart();
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const copy = messages[locale].products;
+  const selectedProductIndex = selectedProduct
+    ? products.findIndex((product) => product.id === selectedProduct.id)
+    : -1;
+  const selectedLocalized = selectedProductIndex >= 0 ? copy.items[selectedProductIndex] : null;
+  const closeQuickView = useCallback(() => setSelectedProduct(null), []);
 
   return (
     <Section id={sectionIds.products} ariaLabel={copy.ariaLabel} className="bg-cream">
@@ -23,15 +34,28 @@ export function ProductShowcase() {
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
         >
-          <motion.h2
-            variants={fadeUp}
-            className="max-w-[36rem] font-heading text-3xl text-coffee-dark sm:text-4xl"
-          >
-            {copy.heading}
-          </motion.h2>
-          <motion.p variants={fadeUp} className="mt-sm max-w-[36rem] text-coffee-brown">
-            {copy.intro}
-          </motion.p>
+          <div className="grid gap-md border-b border-coffee-dark/10 pb-md md:grid-cols-[1fr_0.9fr] md:items-end">
+            <div>
+              <motion.p
+                variants={fadeUp}
+                className="text-[0.66rem] font-medium tracking-[0.3em] text-coffee-brown uppercase"
+              >
+                {copy.eyebrow}
+              </motion.p>
+              <motion.h2
+                variants={fadeUp}
+                className="mt-xs max-w-[36rem] font-heading text-3xl text-coffee-dark sm:text-4xl lg:text-5xl"
+              >
+                {copy.heading}
+              </motion.h2>
+            </div>
+            <motion.p
+              variants={fadeUp}
+              className="max-w-[36rem] text-sm leading-relaxed text-coffee-brown md:justify-self-end md:text-base"
+            >
+              {copy.intro}
+            </motion.p>
+          </div>
 
           <motion.div
             variants={staggerContainer}
@@ -45,12 +69,32 @@ export function ProductShowcase() {
                   origin={copy.items[index].origin}
                   locale={locale}
                   ratingLabel={copy.ratingLabel}
+                  bagWeight={copy.bagWeight}
+                  viewDetails={copy.viewDetails}
+                  addToCart={copy.addToCart}
+                  onViewDetails={() => setSelectedProduct(product)}
+                  onAddToCart={() => addItem(product.id)}
                 />
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
       </Container>
+
+      <ProductQuickView
+        product={selectedProduct}
+        localized={selectedLocalized}
+        locale={locale}
+        ratingLabel={copy.ratingLabel}
+        bagWeight={copy.bagWeight}
+        tastingNotes={copy.tastingNotes}
+        roastLabel={copy.roastLabel}
+        processLabel={copy.processLabel}
+        addToCart={copy.addToCart}
+        closeLabel={copy.closeDetails}
+        onClose={closeQuickView}
+        onAddToCart={addItem}
+      />
     </Section>
   );
 }

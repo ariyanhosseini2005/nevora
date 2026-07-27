@@ -155,6 +155,16 @@ Quality gate:
 
 ## Phase 7 — Commerce integration
 
+Status: Commerce foundation integrated; checkout and service APIs remain
+
+Current delivery:
+
+- Editorial product cards with bilingual tasting, roast, and process details
+- Accessible product quick-view interaction for desktop, tablet, and mobile
+- Persistent local shopping bag with add, remove, quantity, and subtotal controls
+- Localized cart badge and drawer that follow English LTR and Persian RTL
+- Static-export-compatible product boundary ready for a future commerce API
+
 Deliverables:
 
 - Replace the current generic homepage order with the cinematic journey plus

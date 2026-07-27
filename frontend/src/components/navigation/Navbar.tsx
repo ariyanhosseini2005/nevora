@@ -1,10 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
+import { useCart } from "@/features/commerce/CartProvider";
 import { navLinks } from "@/data/navigation";
 import { sectionIds } from "@/constants/routes";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -14,10 +15,17 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const { locale } = useLanguage();
   const copy = messages[locale].nav;
+  const cartCopy = messages[locale].cart;
+  const { itemCount, openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isJourneyActive, setIsJourneyActive] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const localizedItemCount = new Intl.NumberFormat(locale === "fa" ? "fa-IR" : "en-US").format(
+    itemCount,
+  );
+  const cartLabel =
+    itemCount > 0 ? cartCopy.itemCount.replace("{count}", localizedItemCount) : cartCopy.label;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 40);
@@ -64,6 +72,23 @@ export function Navbar() {
 
         <div className="hidden items-center gap-sm lg:flex">
           <LanguageSwitcher />
+          <button
+            type="button"
+            data-cart-trigger
+            className="relative grid size-11 place-items-center rounded-full border border-cream/20 text-cream transition-colors hover:border-premium-gold hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold"
+            aria-label={cartLabel}
+            onClick={openCart}
+          >
+            <ShoppingBag className="size-4.5" aria-hidden="true" />
+            {itemCount > 0 && (
+              <span
+                className="absolute -end-1 -top-1 grid min-h-5 min-w-5 place-items-center rounded-full bg-premium-gold px-1 text-[0.6rem] font-bold text-coffee-dark"
+                aria-hidden="true"
+              >
+                {localizedItemCount}
+              </span>
+            )}
+          </button>
           <Button href={`#${sectionIds.cta}`} variant="primary">
             {copy.join}
           </Button>
@@ -71,6 +96,23 @@ export function Navbar() {
 
         <div className="flex items-center gap-xs lg:hidden">
           <LanguageSwitcher className="px-2" />
+          <button
+            type="button"
+            data-cart-trigger
+            className="relative grid size-11 place-items-center rounded-full text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold"
+            aria-label={cartLabel}
+            onClick={openCart}
+          >
+            <ShoppingBag className="size-5" aria-hidden="true" />
+            {itemCount > 0 && (
+              <span
+                className="absolute end-0 top-0 grid min-h-5 min-w-5 place-items-center rounded-full bg-premium-gold px-1 text-[0.6rem] font-bold text-coffee-dark"
+                aria-hidden="true"
+              >
+                {localizedItemCount}
+              </span>
+            )}
+          </button>
           <button
             type="button"
             className="grid size-11 place-items-center rounded-full text-cream transition-colors hover:bg-cream/10"

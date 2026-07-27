@@ -9,6 +9,7 @@ export const products: Product[] = [
     price: 24,
     rating: 4.9,
     image: homepageImages.products[0],
+    weightGrams: 250,
   },
   {
     id: "colombia-huila",
@@ -17,6 +18,7 @@ export const products: Product[] = [
     price: 21,
     rating: 4.7,
     image: homepageImages.products[1],
+    weightGrams: 250,
   },
   {
     id: "sumatra-mandheling",
@@ -25,5 +27,6 @@ export const products: Product[] = [
     price: 22,
     rating: 4.8,
     image: homepageImages.products[2],
+    weightGrams: 250,
   },
 ];
