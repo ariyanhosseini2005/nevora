@@ -86,6 +86,7 @@ export function ProductQuickView({
           <motion.button
             type="button"
             tabIndex={-1}
+            aria-hidden="true"
             aria-label={closeLabel}
             className="fixed inset-0 bg-coffee-dark/72 backdrop-blur-sm"
             initial={{ opacity: 0 }}
@@ -98,13 +99,13 @@ export function ProductQuickView({
             role="dialog"
             aria-modal="true"
             aria-labelledby={`product-${product.id}-title`}
-            className="relative z-10 grid max-h-[94svh] w-full max-w-[68rem] overflow-y-auto rounded-t-[2rem] bg-soft-white shadow-2xl sm:max-h-[88svh] sm:rounded-[2rem] lg:grid-cols-[1.05fr_0.95fr]"
+            className="relative z-10 grid max-h-[94svh] w-full max-w-[68rem] overflow-y-auto rounded-t-[2rem] bg-soft-white shadow-2xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:max-h-[88svh] sm:rounded-[2rem] min-[700px]:grid-cols-[0.88fr_1.12fr] min-[700px]:overflow-hidden lg:grid-cols-[1.05fr_0.95fr]"
             initial={{ opacity: 0, y: 36, scale: 0.985 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.99 }}
             transition={{ duration: 0.44, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative min-h-[19rem] overflow-hidden bg-cream sm:min-h-[26rem] lg:min-h-[38rem]">
+            <div className="relative min-h-[19rem] overflow-hidden bg-cream sm:min-h-[24rem] min-[700px]:min-h-full lg:min-h-[38rem]">
               <Image
                 src={product.image}
                 alt={`${localized.name} — ${localized.origin}`}
@@ -118,7 +119,7 @@ export function ProductQuickView({
               </span>
             </div>
 
-            <div className="relative flex flex-col p-md sm:p-lg lg:p-xl">
+            <div className="relative flex flex-col overflow-y-auto p-md [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:p-lg lg:p-xl">
               <button
                 ref={closeButtonRef}
                 type="button"

@@ -62,7 +62,11 @@ export function ProductShowcase() {
             className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-3"
           >
             {products.map((product, index) => (
-              <motion.div key={product.id} variants={fadeUp}>
+              <motion.div
+                key={product.id}
+                variants={fadeUp}
+                className="sm:last:col-span-2 sm:last:mx-auto sm:last:w-[calc(50%-1.5rem)] lg:last:col-span-1 lg:last:w-auto"
+              >
                 <ProductCard
                   {...product}
                   name={copy.items[index].name}

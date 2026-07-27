@@ -11,9 +11,7 @@ function clamp(value: number, min: number, max: number) {
  * Native page scrolling remains untouched; only the visual playhead is gently
  * damped so wheel, trackpad and touch input advance through intermediate frames.
  */
-export function useElementScrollProgress<T extends HTMLElement>(
-  elementRef: RefObject<T | null>,
-) {
+export function useElementScrollProgress<T extends HTMLElement>(elementRef: RefObject<T | null>) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -35,9 +33,7 @@ export function useElementScrollProgress<T extends HTMLElement>(
 
     function publish(nextProgress: number) {
       setProgress((previousProgress) =>
-        Math.abs(previousProgress - nextProgress) < 0.00012
-          ? previousProgress
-          : nextProgress,
+        Math.abs(previousProgress - nextProgress) < 0.00008 ? previousProgress : nextProgress,
       );
     }
 
@@ -54,11 +50,11 @@ export function useElementScrollProgress<T extends HTMLElement>(
         const elapsed = Math.min(Math.max(time - lastTime, 1), 64);
         const distance = Math.abs(targetProgress - currentProgress);
         const distanceRatio = Math.min(distance / 0.035, 1);
-        const responseTime = 112 - distanceRatio * 40;
+        const responseTime = 96 - distanceRatio * 40;
         const response = 1 - Math.exp(-elapsed / responseTime);
         currentProgress += (targetProgress - currentProgress) * response;
 
-        if (Math.abs(targetProgress - currentProgress) < 0.00008) {
+        if (Math.abs(targetProgress - currentProgress) < 0.00005) {
           currentProgress = targetProgress;
         }
       }
@@ -66,7 +62,7 @@ export function useElementScrollProgress<T extends HTMLElement>(
       lastTime = time;
       publish(currentProgress);
 
-      if (Math.abs(targetProgress - currentProgress) >= 0.00008) {
+      if (Math.abs(targetProgress - currentProgress) >= 0.00005) {
         animationFrame = window.requestAnimationFrame(animate);
       }
     }

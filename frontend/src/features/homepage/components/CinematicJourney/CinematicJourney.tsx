@@ -24,16 +24,21 @@ type ScrollSegment = {
   frameEnd: number;
 };
 
+type FrameLoadRequest = {
+  index: number;
+  priority: "high" | "low";
+};
+
 const START_FRAME = 204;
 const END_FRAME = 743;
 const FRAME_COUNT = END_FRAME - START_FRAME + 1;
-const INITIAL_PRELOAD_COUNT = 4;
-const MOBILE_PRELOAD_RADIUS = 11;
-const DESKTOP_PRELOAD_RADIUS = 18;
-const MOBILE_CACHE_LIMIT = 22;
-const DESKTOP_CACHE_LIMIT = 32;
-const CONSTRAINED_PRELOAD_RADIUS = 5;
-const CONSTRAINED_CACHE_LIMIT = 14;
+const INITIAL_PRELOAD_COUNT = 3;
+const MOBILE_PRELOAD_RADIUS = 8;
+const DESKTOP_PRELOAD_RADIUS = 12;
+const MOBILE_CACHE_LIMIT = 16;
+const DESKTOP_CACHE_LIMIT = 24;
+const CONSTRAINED_PRELOAD_RADIUS = 4;
+const CONSTRAINED_CACHE_LIMIT = 10;
 const PUBLIC_BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
 
 const journeyBeatTimings: JourneyBeatTiming[] = [
@@ -142,17 +147,17 @@ function frameAtScrollProgress(progress: number) {
     (progress - segment.scrollStart) / (segment.scrollEnd - segment.scrollStart),
   );
   return (
-    segment.frameStart +
-    (segment.frameEnd - segment.frameStart) * cinematicEase(localProgress)
+    segment.frameStart + (segment.frameEnd - segment.frameStart) * cinematicEase(localProgress)
   );
 }
 
 function copyOpacity(frame: number, beat: JourneyBeatTiming) {
-  const fadeFrames = 4;
+  const beatLength = beat.end - beat.start + 1;
+  const fadeFrames = Math.min(Math.max(beatLength * 0.12, 5), 9);
   const enter =
-    beat.start === START_FRAME ? 1 : clamp((frame - beat.start + 1) / fadeFrames);
+    beat.start === START_FRAME ? 1 : cinematicEase(clamp((frame - beat.start + 1) / fadeFrames));
   const exit =
-    beat.end === END_FRAME ? 1 : clamp((beat.end - frame + 1) / fadeFrames);
+    beat.end === END_FRAME ? 1 : cinematicEase(clamp((beat.end - frame + 1) / fadeFrames));
   return Math.min(enter, exit);
 }
 
@@ -191,18 +196,10 @@ function ReducedMotionJourney() {
           {copy.reducedDescription}
         </p>
         <div className="mt-lg flex flex-col gap-sm sm:flex-row sm:flex-wrap">
-          <Button
-            href={`#${sectionIds.products}`}
-            variant="primary"
-            className="w-full sm:w-auto"
-          >
+          <Button href={`#${sectionIds.products}`} variant="primary" className="w-full sm:w-auto">
             {copy.brand.primaryCta}
           </Button>
-          <Button
-            href={`#${sectionIds.story}`}
-            variant="secondary"
-            className="w-full sm:w-auto"
-          >
+          <Button href={`#${sectionIds.story}`} variant="secondary" className="w-full sm:w-auto">
             {copy.brand.secondaryCta}
           </Button>
         </div>
@@ -233,6 +230,9 @@ export function CinematicJourney() {
   const renderedSourceIndexRef = useRef(-1);
   const drawRequestRef = useRef<number | null>(null);
   const pendingFrameRef = useRef(START_FRAME);
+  const loadQueueRef = useRef<FrameLoadRequest[]>([]);
+  const activeLoadCountRef = useRef(0);
+  const maxConcurrentLoadsRef = useRef(3);
   const mountedRef = useRef(false);
   const progress = useElementScrollProgress(sceneRef);
   const shouldReduceMotion = Boolean(useReducedMotion());
@@ -247,8 +247,7 @@ export function CinematicJourney() {
   const activeBeatIndex = journeyBeatTimings.findIndex(
     (beat) => currentFrame >= beat.start && currentFrame <= beat.end,
   );
-  const activeBeat =
-    activeBeatIndex >= 0 ? journeyBeatTimings[activeBeatIndex] : undefined;
+  const activeBeat = activeBeatIndex >= 0 ? journeyBeatTimings[activeBeatIndex] : undefined;
 
   const drawFrame = useCallback((frame: number) => {
     const canvas = canvasRef.current;
@@ -261,11 +260,7 @@ export function CinematicJourney() {
 
       for (const [candidateIndex, candidate] of imageCacheRef.current) {
         const distance = Math.abs(candidateIndex - targetIndex);
-        if (
-          distance < nearestDistance &&
-          candidate.complete &&
-          candidate.naturalWidth > 0
-        ) {
+        if (distance < nearestDistance && candidate.complete && candidate.naturalWidth > 0) {
           image = candidate;
           nearestDistance = distance;
           resolvedSourceIndex = candidateIndex;
@@ -276,21 +271,17 @@ export function CinematicJourney() {
     if (!canvas || !image?.complete || image.naturalWidth === 0) return;
 
     const bounds = canvas.getBoundingClientRect();
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, bounds.width < 768 ? 1.5 : 2);
     const targetWidth = Math.max(Math.round(bounds.width * pixelRatio), 1);
     const targetHeight = Math.max(Math.round(bounds.height * pixelRatio), 1);
-    const dimensionsChanged =
-      canvas.width !== targetWidth || canvas.height !== targetHeight;
+    const dimensionsChanged = canvas.width !== targetWidth || canvas.height !== targetHeight;
 
     if (dimensionsChanged) {
       canvas.width = targetWidth;
       canvas.height = targetHeight;
     }
 
-    if (
-      !dimensionsChanged &&
-      renderedSourceIndexRef.current === resolvedSourceIndex
-    ) {
+    if (!dimensionsChanged && renderedSourceIndexRef.current === resolvedSourceIndex) {
       return;
     }
 
@@ -412,6 +403,31 @@ export function CinematicJourney() {
     [scheduleDraw, trimImageCache],
   );
 
+  const pumpLoadQueue = useCallback(
+    function pump() {
+      if (!mountedRef.current) return;
+
+      while (
+        activeLoadCountRef.current < maxConcurrentLoadsRef.current &&
+        loadQueueRef.current.length > 0
+      ) {
+        const request = loadQueueRef.current.shift();
+        if (!request) break;
+
+        const cached = imageCacheRef.current.get(request.index);
+        if (cached?.complete && cached.naturalWidth > 0) continue;
+        if (inFlightRef.current.has(request.index)) continue;
+
+        activeLoadCountRef.current += 1;
+        void loadFrame(request.index, request.priority).finally(() => {
+          activeLoadCountRef.current = Math.max(activeLoadCountRef.current - 1, 0);
+          pump();
+        });
+      }
+    },
+    [loadFrame],
+  );
+
   useEffect(() => {
     const imageCache = imageCacheRef.current;
     const inFlight = inFlightRef.current;
@@ -419,6 +435,7 @@ export function CinematicJourney() {
 
     return () => {
       mountedRef.current = false;
+      loadQueueRef.current = [];
       imageCache.clear();
       inFlight.clear();
 
@@ -432,8 +449,6 @@ export function CinematicJourney() {
   useEffect(() => {
     if (shouldReduceMotion) return;
 
-    let cancelled = false;
-    let cursor = 0;
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const connection = (
       navigator as Navigator & {
@@ -450,10 +465,7 @@ export function CinematicJourney() {
         ? MOBILE_PRELOAD_RADIUS
         : DESKTOP_PRELOAD_RADIUS;
     const indexDelta = currentIndex - previousIndexRef.current;
-    const radius = Math.min(
-      baseRadius + Math.abs(indexDelta) * 2,
-      baseRadius + (isMobile ? 4 : 8),
-    );
+    const radius = Math.min(baseRadius + Math.abs(indexDelta) * 2, baseRadius + (isMobile ? 4 : 8));
     const movingForward = indexDelta >= 0;
     const priorityOrder = [currentIndex];
 
@@ -479,32 +491,15 @@ export function CinematicJourney() {
         : DESKTOP_CACHE_LIMIT;
     trimImageCache();
     scheduleDraw(currentFrame);
-
-    async function loadWorker() {
-      while (!cancelled) {
-        const queueIndex = cursor;
-        cursor += 1;
-        if (queueIndex >= priorityOrder.length) return;
-
-        const index = priorityOrder[queueIndex];
-        await loadFrame(index, index === currentIndex ? "high" : "low");
-      }
-    }
-
-    const workerCount = constrainedConnection ? 2 : isMobile ? 3 : 4;
-    void Promise.all(Array.from({ length: workerCount }, () => loadWorker()));
-
-    return () => {
-      cancelled = true;
-    };
-  }, [
-    currentFrame,
-    currentIndex,
-    loadFrame,
-    scheduleDraw,
-    shouldReduceMotion,
-    trimImageCache,
-  ]);
+    maxConcurrentLoadsRef.current = constrainedConnection ? 2 : isMobile ? 2 : 3;
+    loadQueueRef.current = priorityOrder
+      .filter((index) => !imageCacheRef.current.has(index) && !inFlightRef.current.has(index))
+      .map((index, queuePosition) => ({
+        index,
+        priority: queuePosition === 0 || Math.abs(index - currentIndex) <= 2 ? "high" : "low",
+      }));
+    pumpLoadQueue();
+  }, [currentFrame, currentIndex, pumpLoadQueue, scheduleDraw, shouldReduceMotion, trimImageCache]);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -532,7 +527,7 @@ export function CinematicJourney() {
       id={sectionIds.hero}
       ref={sceneRef}
       aria-label={copy.ariaLabel}
-      className="relative h-[1750svh] bg-[#080705] md:h-[2000svh]"
+      className="relative h-[1500svh] bg-[#080705] md:h-[1700svh]"
     >
       <h1 className="sr-only">{copy.srTitle}</h1>
 
@@ -610,7 +605,7 @@ export function CinematicJourney() {
 
         <div className="relative z-10 mx-auto h-full max-w-(--container-max) px-sm sm:px-lg md:px-xl">
           {journeyBeatTimings.map((beat, index) => {
-            const opacity = copyOpacity(currentFrame, beat);
+            const opacity = copyOpacity(framePosition, beat);
             const beatCopy = copy.beats[index];
 
             return (
@@ -662,9 +657,7 @@ export function CinematicJourney() {
                 <span
                   key={beat.id}
                   className={`absolute top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full transition-[transform,background-color] duration-300 ${
-                    isActive
-                      ? "scale-150 bg-premium-gold"
-                      : "scale-100 bg-cream/60"
+                    isActive ? "scale-150 bg-premium-gold" : "scale-100 bg-cream/60"
                   }`}
                   style={{
                     left: `${
@@ -690,9 +683,7 @@ export function CinematicJourney() {
               {copy.loading}
             </p>
             <div className="h-px overflow-hidden bg-cream/16">
-              <span
-                className="block h-full w-1/3 animate-pulse bg-premium-gold"
-              />
+              <span className="block h-full w-1/3 animate-pulse bg-premium-gold" />
             </div>
           </div>
         </div>

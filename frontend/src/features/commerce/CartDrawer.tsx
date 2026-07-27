@@ -64,6 +64,7 @@ export function CartDrawer() {
           <motion.button
             type="button"
             tabIndex={-1}
+            aria-hidden="true"
             aria-label={copy.cart.close}
             className="absolute inset-0 bg-coffee-dark/58 backdrop-blur-[2px]"
             initial={{ opacity: 0 }}
