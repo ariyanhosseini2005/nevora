@@ -35,7 +35,7 @@ export function ProductShowcase() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-xl grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-3"
           >
             {products.map((product, index) => (
               <motion.div key={product.id} variants={fadeUp}>

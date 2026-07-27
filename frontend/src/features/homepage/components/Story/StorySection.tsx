@@ -22,7 +22,7 @@ export function StorySection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="grid grid-cols-1 items-center gap-xl lg:grid-cols-2"
+          className="grid grid-cols-1 items-center gap-lg lg:grid-cols-2 lg:gap-xl"
         >
           <motion.div variants={fadeUp} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image

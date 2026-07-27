@@ -43,13 +43,13 @@ export function Navbar() {
     >
       <nav
         aria-label={copy.primaryLabel}
-        className="mx-auto flex max-w-(--container-max) items-center justify-between px-lg py-sm md:px-xl"
+        className="mx-auto flex max-w-(--container-max) items-center justify-between px-sm py-sm sm:px-lg md:px-xl"
       >
         <a href={`#${sectionIds.hero}`} className="font-heading text-xl tracking-wide text-cream">
           NEVORA
         </a>
 
-        <ul className="hidden items-center gap-lg md:flex">
+        <ul className="hidden items-center gap-md lg:flex xl:gap-lg">
           {navLinks.map((link, index) => (
             <li key={link.href}>
               <a
@@ -62,18 +62,18 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-sm md:flex">
+        <div className="hidden items-center gap-sm lg:flex">
           <LanguageSwitcher />
           <Button href={`#${sectionIds.cta}`} variant="primary">
             {copy.join}
           </Button>
         </div>
 
-        <div className="flex items-center gap-xs md:hidden">
-          <LanguageSwitcher className="h-9 px-2" />
+        <div className="flex items-center gap-xs lg:hidden">
+          <LanguageSwitcher className="px-2" />
           <button
             type="button"
-            className="text-cream"
+            className="grid size-11 place-items-center rounded-full text-cream transition-colors hover:bg-cream/10"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             aria-label={isMenuOpen ? copy.closeMenu : copy.openMenu}
@@ -92,9 +92,9 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden bg-coffee-dark md:hidden"
+            className="overflow-hidden bg-coffee-dark lg:hidden"
           >
-            <ul className="flex flex-col gap-md px-lg py-md">
+            <ul className="flex flex-col gap-md px-sm py-md sm:px-lg md:px-xl">
               {navLinks.map((link, index) => (
                 <li key={link.href}>
                   <a

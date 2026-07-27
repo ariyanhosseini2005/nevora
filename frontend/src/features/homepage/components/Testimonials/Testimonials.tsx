@@ -32,13 +32,13 @@ export function Testimonials() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-xl grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-3"
           >
             {testimonials.map((testimonial, index) => (
               <motion.figure
                 key={testimonial.id}
                 variants={fadeUp}
-                className="space-y-md rounded-2xl bg-soft-white p-lg shadow-md"
+                className="space-y-md rounded-2xl bg-soft-white p-md shadow-md sm:p-lg"
               >
                 <Quote className="size-6 text-premium-gold" aria-hidden="true" />
                 <blockquote className="text-coffee-dark">

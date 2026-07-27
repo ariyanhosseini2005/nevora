@@ -15,7 +15,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       onClick={toggleLocale}
       aria-label={copy.switchLabel}
       className={cn(
-        "inline-flex h-10 items-center gap-2 rounded-full border border-cream/20 bg-coffee-dark/55 px-3 text-xs font-medium tracking-[0.12em] text-cream backdrop-blur-md transition-colors hover:border-premium-gold hover:text-premium-gold",
+        "inline-flex h-11 items-center gap-2 rounded-full border border-cream/20 bg-coffee-dark/55 px-3 text-xs font-medium tracking-[0.12em] text-cream backdrop-blur-md transition-colors hover:border-premium-gold hover:text-premium-gold",
         className,
       )}
     >

@@ -21,10 +21,10 @@ export function Footer() {
   }).format(new Date().getFullYear());
 
   return (
-    <footer className="bg-coffee-dark px-lg py-xl text-cream md:px-xl">
+    <footer className="bg-coffee-dark px-sm py-lg text-cream sm:px-lg sm:py-xl md:px-xl">
       <Container>
-        <div className="grid grid-cols-1 gap-xl sm:grid-cols-3">
-          <div>
+        <div className="grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-3 lg:gap-xl">
+          <div className="sm:col-span-2 lg:col-span-1">
             <a href={`#${sectionIds.hero}`} className="font-heading text-xl tracking-wide">
               NEVORA
             </a>
@@ -54,7 +54,7 @@ export function Footer() {
             </h2>
             <a
               href="mailto:hello@nevoracoffee.com"
-              className="mt-sm flex items-center gap-xs text-sm text-cream/85 hover:text-premium-gold"
+              className="mt-sm flex flex-wrap items-center gap-xs break-all text-sm text-cream/85 hover:text-premium-gold"
               dir="ltr"
             >
               <Mail className="size-4" aria-hidden="true" />

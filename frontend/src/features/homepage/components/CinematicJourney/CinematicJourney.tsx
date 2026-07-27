@@ -160,7 +160,7 @@ function ReducedMotionJourney() {
     <section
       id={sectionIds.hero}
       aria-label={copy.ariaLabel}
-      className="relative flex min-h-svh items-end overflow-hidden bg-[#080705] px-lg py-xl text-cream md:items-center md:px-xl"
+      className="relative flex min-h-svh items-end overflow-hidden bg-[#080705] px-sm py-lg text-cream sm:px-lg sm:py-xl md:items-center md:px-xl"
     >
       <Image
         src={frameSources[539]}
@@ -174,23 +174,31 @@ function ReducedMotionJourney() {
         className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,7,5,0.08)_0%,rgba(8,7,5,0.24)_46%,rgba(8,7,5,0.92)_100%)] md:bg-[linear-gradient(90deg,rgba(8,7,5,0.9)_0%,rgba(8,7,5,0.28)_62%,rgba(8,7,5,0.18)_100%)]"
         aria-hidden="true"
       />
-      <LanguageSwitcher className="absolute top-lg end-lg z-20 md:top-xl md:end-xl" />
+      <LanguageSwitcher className="absolute top-sm end-sm z-20 sm:top-lg sm:end-lg md:top-xl md:end-xl" />
       <div className="relative z-10 mx-auto w-full max-w-(--container-max)">
         <p className="mb-sm text-[0.65rem] font-medium tracking-[0.34em] text-premium-gold uppercase sm:text-xs">
           {copy.reducedEyebrow}
         </p>
-        <h1 className="max-w-[48rem] font-heading text-[clamp(2.8rem,7vw,6.8rem)] leading-[0.94] tracking-[-0.04em]">
+        <h1 className="max-w-[48rem] font-heading text-[clamp(2.25rem,7vw,6.8rem)] leading-[0.94] tracking-[-0.04em]">
           {copy.reducedTitle}
           <span className="block italic text-cream/88">{copy.reducedItalicTitle}</span>
         </h1>
         <p className="mt-md max-w-[34rem] text-sm leading-relaxed text-cream/72 sm:text-base md:text-lg">
           {copy.reducedDescription}
         </p>
-        <div className="mt-lg flex flex-wrap gap-sm">
-          <Button href={`#${sectionIds.products}`} variant="primary">
+        <div className="mt-lg flex flex-col gap-sm sm:flex-row sm:flex-wrap">
+          <Button
+            href={`#${sectionIds.products}`}
+            variant="primary"
+            className="w-full sm:w-auto"
+          >
             {copy.brand.primaryCta}
           </Button>
-          <Button href={`#${sectionIds.story}`} variant="secondary">
+          <Button
+            href={`#${sectionIds.story}`}
+            variant="secondary"
+            className="w-full sm:w-auto"
+          >
             {copy.brand.secondaryCta}
           </Button>
         </div>
@@ -464,14 +472,14 @@ export function CinematicJourney() {
         />
 
         <div
-          className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-lg pt-lg transition-opacity md:px-xl md:pt-xl"
+          className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-sm pt-[max(1rem,env(safe-area-inset-top))] transition-opacity sm:px-lg sm:pt-lg md:px-xl md:pt-xl"
           style={{ opacity: 1 - brandOpacity }}
         >
           <span className="font-heading text-sm tracking-[0.28em] text-cream uppercase">
             Nevora
           </span>
           <div className="flex items-center gap-sm">
-            <span className="hidden text-[0.58rem] tracking-[0.2em] text-cream/54 uppercase sm:block">
+            <span className="hidden text-[0.58rem] tracking-[0.2em] text-cream/54 uppercase md:block">
               {copy.previewLabel}
             </span>
             {sequenceProgress < 0.93 && <LanguageSwitcher />}
@@ -479,7 +487,7 @@ export function CinematicJourney() {
         </div>
 
         <div
-          className="pointer-events-none absolute inset-0 z-20 flex items-start justify-center px-lg pt-[11svh] text-center md:px-xl md:pt-[9svh]"
+          className="journey-brand pointer-events-none absolute inset-0 z-20 flex items-start justify-center px-sm pt-[10svh] text-center sm:px-lg md:px-xl md:pt-[9svh]"
           style={{
             opacity: brandOpacity,
             transform: `translate3d(0, ${14 * (1 - brandOpacity)}px, 0)`,
@@ -487,28 +495,36 @@ export function CinematicJourney() {
           }}
           aria-hidden={brandProgress < 0.2}
         >
-          <div className="max-w-[54rem]">
+          <div className="w-full max-w-[54rem]">
             <p className="text-[0.62rem] font-medium tracking-[0.38em] text-premium-gold uppercase sm:text-xs">
               {copy.brand.eyebrow}
             </p>
-            <h2 className="mt-sm font-heading text-[clamp(4rem,12vw,10rem)] leading-[0.82] tracking-[-0.055em] text-cream">
+            <h2 className="mt-sm font-heading text-[clamp(3rem,12vw,10rem)] leading-[0.82] tracking-[-0.055em] text-cream">
               {copy.brand.title}
             </h2>
             <p className="mx-auto mt-md max-w-[34rem] text-sm leading-relaxed text-cream/76 sm:text-base md:text-lg">
               {copy.brand.tagline}
             </p>
-            <div className="mt-lg flex flex-wrap justify-center gap-sm">
-              <Button href={`#${sectionIds.products}`} variant="primary">
+            <div className="journey-brand-actions mt-md flex flex-col gap-sm sm:mt-lg sm:flex-row sm:flex-wrap sm:justify-center">
+              <Button
+                href={`#${sectionIds.products}`}
+                variant="primary"
+                className="w-full sm:w-auto"
+              >
                 {copy.brand.primaryCta}
               </Button>
-              <Button href={`#${sectionIds.story}`} variant="secondary">
+              <Button
+                href={`#${sectionIds.story}`}
+                variant="secondary"
+                className="w-full sm:w-auto"
+              >
                 {copy.brand.secondaryCta}
               </Button>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto h-full max-w-(--container-max) px-lg md:px-xl">
+        <div className="relative z-10 mx-auto h-full max-w-(--container-max) px-sm sm:px-lg md:px-xl">
           {journeyBeatTimings.map((beat, index) => {
             const opacity = copyOpacity(currentFrame, beat);
             const beatCopy = copy.beats[index];
@@ -516,7 +532,7 @@ export function CinematicJourney() {
             return (
               <div
                 key={beat.id}
-                className="absolute inset-x-lg bottom-[17svh] max-w-[42rem] will-change-[opacity,transform] md:inset-x-xl md:top-1/2 md:bottom-auto md:-translate-y-1/2"
+                className="journey-copy absolute inset-x-sm bottom-[15svh] max-w-[42rem] will-change-[opacity,transform] sm:inset-x-lg sm:bottom-[17svh] md:inset-x-xl md:top-1/2 md:bottom-auto md:-translate-y-1/2"
                 style={{
                   opacity,
                   transform: `translate3d(0, ${18 * (1 - opacity)}px, 0)`,
@@ -527,11 +543,11 @@ export function CinematicJourney() {
                 <p className="mb-sm text-[0.62rem] font-medium tracking-[0.34em] text-premium-gold uppercase sm:text-xs">
                   {beatCopy.label}
                 </p>
-                <h2 className="font-heading text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.94] tracking-[-0.04em]">
+                <h2 className="font-heading text-[clamp(2rem,7vw,6.5rem)] leading-[0.94] tracking-[-0.04em]">
                   {beatCopy.title}
                   <span className="block italic text-cream/88">{beatCopy.italicTitle}</span>
                 </h2>
-                <p className="mt-md max-w-[32rem] text-sm leading-relaxed text-cream/72 sm:text-base md:text-lg">
+                <p className="mt-sm max-w-[32rem] text-[0.8125rem] leading-relaxed text-cream/72 sm:mt-md sm:text-base md:text-lg">
                   {beatCopy.description}
                 </p>
               </div>
@@ -540,12 +556,12 @@ export function CinematicJourney() {
         </div>
 
         <div
-          className="absolute inset-x-lg bottom-7 z-30 transition-opacity md:inset-x-xl"
+          className="absolute inset-x-sm bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-30 transition-opacity sm:inset-x-lg md:inset-x-xl"
           style={{ opacity: 1 - brandOpacity }}
         >
           <div className="mb-3 flex items-center justify-between text-[0.58rem] tracking-[0.18em] text-cream/52 uppercase">
-            <span>{copy.scrollHint}</span>
-            <span className="font-mono text-cream/76">F{currentFrame}</span>
+            <span className="truncate pe-sm">{copy.scrollHint}</span>
+            <span className="shrink-0 font-mono text-cream/76">F{currentFrame}</span>
           </div>
           <div className="relative h-px overflow-visible bg-cream/18">
             <span

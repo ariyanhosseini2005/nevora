@@ -31,7 +31,7 @@ export function WhyUs() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-xl grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-4"
           >
             {whyUsItems.map(({ icon: Icon }, index) => (
               <motion.div key={copy.items[index].title} variants={fadeUp} className="space-y-sm">

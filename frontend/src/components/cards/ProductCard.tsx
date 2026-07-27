@@ -24,7 +24,7 @@ export function ProductCard({
   }).format(rating);
 
   return (
-    <article className="group overflow-hidden rounded-2xl bg-soft-white shadow-md transition-shadow duration-300 hover:shadow-xl">
+    <article className="group h-full overflow-hidden rounded-2xl bg-soft-white shadow-md transition-shadow duration-300 hover:shadow-xl">
       <div className="relative aspect-square overflow-hidden">
         <Image
           src={image}
@@ -35,13 +35,15 @@ export function ProductCard({
         />
       </div>
       <div className="space-y-xs p-md">
-        <div className="flex items-start justify-between gap-sm">
-          <h3 className="font-heading text-lg text-coffee-dark">{name}</h3>
-          <span className="font-heading text-lg text-coffee-brown">
+        <div className="flex flex-col gap-xs min-[420px]:flex-row min-[420px]:items-start min-[420px]:justify-between min-[420px]:gap-sm">
+          <h3 className="min-w-0 break-words font-heading text-lg text-coffee-dark">
+            {name}
+          </h3>
+          <span className="shrink-0 font-heading text-lg text-coffee-brown">
             {formatCurrency(price, "USD", locale === "fa" ? "fa-IR" : "en-US")}
           </span>
         </div>
-        <div className="flex items-center justify-between text-sm text-coffee-brown/80">
+        <div className="flex flex-wrap items-center justify-between gap-xs text-sm text-coffee-brown/80">
           <span>{origin}</span>
           <span
             className="flex items-center gap-xs"

@@ -16,7 +16,10 @@ export function Section({
     <section
       id={id}
       aria-label={ariaLabel}
-      className={cn("px-lg py-xl md:px-xl lg:px-2xl", className)}
+      className={cn(
+        "px-sm py-lg sm:px-lg sm:py-xl md:px-xl lg:px-2xl",
+        className,
+      )}
     >
       {children}
     </section>

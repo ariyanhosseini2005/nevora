@@ -70,9 +70,11 @@ export function CTASection() {
               aria-invalid={Boolean(error)}
               aria-describedby={error ? "newsletter-error" : undefined}
               dir="ltr"
-              className="rounded-full bg-cream px-md py-sm text-coffee-dark placeholder:text-coffee-dark/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-premium-gold sm:w-80"
+              className="min-h-11 w-full min-w-0 rounded-full bg-cream px-md py-sm text-coffee-dark placeholder:text-coffee-dark/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-premium-gold sm:w-80"
             />
-            <Button type="submit">{copy.submit}</Button>
+            <Button type="submit" className="w-full shrink-0 sm:w-auto">
+              {copy.submit}
+            </Button>
           </motion.form>
 
           <div role="status" aria-live="polite" className="mt-sm min-h-6 text-sm text-cream">

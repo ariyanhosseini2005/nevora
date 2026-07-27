@@ -36,7 +36,7 @@ export function CoffeeExperience() {
 
           <motion.ol
             variants={staggerContainer}
-            className="mt-xl grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-4"
           >
             {experienceSteps.map((step, index) => (
               <motion.li key={step.id} variants={fadeUp} className="space-y-sm">

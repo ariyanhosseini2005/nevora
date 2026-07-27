@@ -33,7 +33,7 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const baseStyles =
-  "inline-flex items-center justify-center rounded-full px-md py-sm text-sm font-medium tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold";
+  "inline-flex min-h-11 items-center justify-center rounded-full px-md py-sm text-center text-sm font-medium tracking-wide transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold";
 
 export function Button({ variant = "primary", className, children, ...props }: ButtonProps) {
   const classes = cn(baseStyles, variantStyles[variant], className);

@@ -32,6 +32,7 @@ body {
   background: var(--color-cream);
   color: var(--color-coffee-dark);
   font-family: var(--font-body), sans-serif;
+  overflow-x: clip;
 }
 
 html[lang="fa"] body {
@@ -91,5 +92,31 @@ html[dir="rtl"] .italic {
   100% {
     transform: translateY(220%);
     opacity: 0;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .journey-copy {
+    bottom: 3.75rem;
+  }
+
+  .journey-copy h2 {
+    font-size: clamp(1.75rem, 6vw, 3.5rem);
+  }
+
+  .journey-copy > p:last-child {
+    display: none;
+  }
+
+  .journey-brand {
+    padding-top: 2.75rem;
+  }
+
+  .journey-brand h2 {
+    font-size: clamp(2.75rem, 11vw, 5.5rem);
+  }
+
+  .journey-brand-actions {
+    margin-top: 0.75rem;
   }
 }
