@@ -8,9 +8,9 @@
   --color-cream: #f6f1ea;
   --color-soft-white: #fcfaf7;
 
-  --font-heading: var(--font-playfair);
-  --font-body: var(--font-inter);
-  --font-farsi: var(--font-vazirmatn);
+  --font-heading: "Playfair Display Variable";
+  --font-body: "Inter Variable";
+  --font-farsi: "Vazirmatn Variable";
 
   --spacing-xs: 8px;
   --spacing-sm: 16px;
@@ -34,6 +34,19 @@ body {
   font-family: var(--font-body), sans-serif;
 }
 
+html[lang="fa"] body {
+  font-family: var(--font-farsi), sans-serif;
+}
+
+html[dir="rtl"] .font-heading {
+  font-family: var(--font-farsi), sans-serif;
+  font-style: normal;
+}
+
+html[dir="rtl"] .italic {
+  font-style: normal;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -51,15 +64,32 @@ body {
 
 .skip-link {
   position: absolute;
-  left: -9999px;
-  top: 0;
+  left: var(--spacing-sm);
+  top: var(--spacing-sm);
   z-index: 100;
+  transform: translateY(calc(-100% - var(--spacing-md)));
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--color-cream);
   color: var(--color-coffee-dark);
+  transition: transform 160ms ease;
 }
 
 .skip-link:focus {
-  left: var(--spacing-sm);
-  top: var(--spacing-sm);
+  transform: translateY(0);
+}
+
+@keyframes journey-scroll {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(220%);
+    opacity: 0;
+  }
 }

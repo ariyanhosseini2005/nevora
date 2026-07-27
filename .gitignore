@@ -4,3 +4,8 @@ Thumbs.db
 .env
 .env.local
 .claude/
+.local-archive/
+
+# Local production masters are intentionally excluded from the source repository.
+/docs/homepage/storyboards/*
+!/docs/homepage/storyboards/README.md

@@ -7,10 +7,15 @@ import { Container } from "@/components/layout/Container";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { sectionIds } from "@/constants/routes";
 import { testimonials } from "@/features/homepage/data/testimonials";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { messages } from "@/i18n/messages";
 
 export function Testimonials() {
+  const { locale } = useLanguage();
+  const copy = messages[locale].testimonials;
+
   return (
-    <Section id={sectionIds.testimonials} ariaLabel="Customer reviews" className="bg-cream">
+    <Section id={sectionIds.testimonials} ariaLabel={copy.ariaLabel} className="bg-cream">
       <Container>
         <motion.div
           initial="hidden"
@@ -22,14 +27,14 @@ export function Testimonials() {
             variants={fadeUp}
             className="max-w-[36rem] font-heading text-3xl text-coffee-dark sm:text-4xl"
           >
-            What People Are Saying
+            {copy.heading}
           </motion.h2>
 
           <motion.div
             variants={staggerContainer}
             className="mt-xl grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-3"
           >
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial, index) => (
               <motion.figure
                 key={testimonial.id}
                 variants={fadeUp}
@@ -37,12 +42,12 @@ export function Testimonials() {
               >
                 <Quote className="size-6 text-premium-gold" aria-hidden="true" />
                 <blockquote className="text-coffee-dark">
-                  <p>&ldquo;{testimonial.quote}&rdquo;</p>
+                  <p>&ldquo;{copy.items[index].quote}&rdquo;</p>
                 </blockquote>
                 <figcaption className="text-sm text-coffee-brown">
-                  <span className="font-medium text-coffee-dark">{testimonial.name}</span>
+                  <span className="font-medium text-coffee-dark">{copy.items[index].name}</span>
                   {" — "}
-                  {testimonial.role}
+                  {copy.items[index].role}
                 </figcaption>
               </motion.figure>
             ))}

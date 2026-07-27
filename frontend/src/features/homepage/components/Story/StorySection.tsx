@@ -7,10 +7,15 @@ import { Container } from "@/components/layout/Container";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { sectionIds } from "@/constants/routes";
 import { homepageImages } from "@/features/homepage/data/images";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { messages } from "@/i18n/messages";
 
 export function StorySection() {
+  const { locale } = useLanguage();
+  const copy = messages[locale].story;
+
   return (
-    <Section id={sectionIds.story} ariaLabel="Our story" className="bg-cream">
+    <Section id={sectionIds.story} ariaLabel={copy.ariaLabel} className="bg-cream">
       <Container>
         <motion.div
           initial="hidden"
@@ -22,7 +27,7 @@ export function StorySection() {
           <motion.div variants={fadeUp} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image
               src={homepageImages.story}
-              alt="Coffee beans resting in warm afternoon light"
+              alt={copy.imageAlt}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
@@ -31,17 +36,10 @@ export function StorySection() {
 
           <motion.div variants={fadeUp}>
             <h2 className="font-heading text-3xl text-coffee-dark sm:text-4xl">
-              A brand built on patience
+              {copy.heading}
             </h2>
-            <p className="mt-md text-coffee-brown">
-              NEVORA began with a simple frustration: coffee that moved fast and tasted like it.
-              We slowed everything down — sourcing, roasting, and the way a cup is meant to be
-              enjoyed — to build something that feels less like a product and more like a ritual.
-            </p>
-            <p className="mt-sm text-coffee-brown">
-              Every bag carries the story of the hands that grew it and the care taken to roast
-              it well.
-            </p>
+            <p className="mt-md text-coffee-brown">{copy.paragraphOne}</p>
+            <p className="mt-sm text-coffee-brown">{copy.paragraphTwo}</p>
           </motion.div>
         </motion.div>
       </Container>

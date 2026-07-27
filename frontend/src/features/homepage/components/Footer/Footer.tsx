@@ -1,16 +1,24 @@
+"use client";
+
 import { Mail } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { navLinks } from "@/data/navigation";
 import { sectionIds } from "@/constants/routes";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { messages } from "@/i18n/messages";
 
 const socialLinks = [
   { label: "Instagram", href: "https://instagram.com" },
-  { label: "Twitter", href: "https://twitter.com" },
+  { label: "X", href: "https://x.com" },
   { label: "Facebook", href: "https://facebook.com" },
 ];
 
 export function Footer() {
-  const year = new Date().getFullYear();
+  const { locale } = useLanguage();
+  const copy = messages[locale];
+  const year = new Intl.NumberFormat(locale === "fa" ? "fa-IR" : "en-US", {
+    useGrouping: false,
+  }).format(new Date().getFullYear());
 
   return (
     <footer className="bg-coffee-dark px-lg py-xl text-cream md:px-xl">
@@ -21,17 +29,19 @@ export function Footer() {
               NEVORA
             </a>
             <p className="mt-sm max-w-[20rem] text-sm text-cream/70">
-              A premium coffee brand crafting a slower, more deliberate cup.
+              {copy.footer.description}
             </p>
           </div>
 
-          <nav aria-label="Footer">
-            <h2 className="text-sm uppercase tracking-widest text-cream/60">Explore</h2>
+          <nav aria-label={copy.footer.navLabel}>
+            <h2 className="text-sm tracking-widest text-cream/60 uppercase">
+              {copy.footer.explore}
+            </h2>
             <ul className="mt-sm space-y-xs">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <li key={link.href}>
                   <a href={link.href} className="text-sm text-cream/85 hover:text-premium-gold">
-                    {link.label}
+                    {copy.nav.links[index]}
                   </a>
                 </li>
               ))}
@@ -39,15 +49,18 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className="text-sm uppercase tracking-widest text-cream/60">Connect</h2>
+            <h2 className="text-sm tracking-widest text-cream/60 uppercase">
+              {copy.footer.connect}
+            </h2>
             <a
               href="mailto:hello@nevoracoffee.com"
               className="mt-sm flex items-center gap-xs text-sm text-cream/85 hover:text-premium-gold"
+              dir="ltr"
             >
               <Mail className="size-4" aria-hidden="true" />
               hello@nevoracoffee.com
             </a>
-            <ul className="mt-sm flex gap-md">
+            <ul className="mt-sm flex gap-md" dir="ltr">
               {socialLinks.map((social) => (
                 <li key={social.href}>
                   <a
@@ -63,7 +76,7 @@ export function Footer() {
         </div>
 
         <p className="mt-xl border-t border-cream/10 pt-md text-xs text-cream/50">
-          © {year} NEVORA. All rights reserved.
+          © {year} NEVORA. {copy.footer.rights}
         </p>
       </Container>
     </footer>

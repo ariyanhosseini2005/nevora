@@ -6,10 +6,15 @@ import { Container } from "@/components/layout/Container";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { sectionIds } from "@/constants/routes";
 import { whyUsItems } from "@/features/homepage/data/whyUs";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { messages } from "@/i18n/messages";
 
 export function WhyUs() {
+  const { locale } = useLanguage();
+  const copy = messages[locale].whyUs;
+
   return (
-    <Section id={sectionIds.whyUs} ariaLabel="Why choose NEVORA" className="bg-coffee-dark">
+    <Section id={sectionIds.whyUs} ariaLabel={copy.ariaLabel} className="bg-coffee-dark">
       <Container>
         <motion.div
           initial="hidden"
@@ -21,18 +26,18 @@ export function WhyUs() {
             variants={fadeUp}
             className="max-w-[36rem] font-heading text-3xl text-cream sm:text-4xl"
           >
-            Why NEVORA
+            {copy.heading}
           </motion.h2>
 
           <motion.div
             variants={staggerContainer}
             className="mt-xl grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-4"
           >
-            {whyUsItems.map(({ icon: Icon, title, description }) => (
-              <motion.div key={title} variants={fadeUp} className="space-y-sm">
+            {whyUsItems.map(({ icon: Icon }, index) => (
+              <motion.div key={copy.items[index].title} variants={fadeUp} className="space-y-sm">
                 <Icon className="size-8 text-premium-gold" aria-hidden="true" />
-                <h3 className="font-heading text-lg text-cream">{title}</h3>
-                <p className="text-sm text-cream/75">{description}</p>
+                <h3 className="font-heading text-lg text-cream">{copy.items[index].title}</h3>
+                <p className="text-sm text-cream/75">{copy.items[index].description}</p>
               </motion.div>
             ))}
           </motion.div>

@@ -1,5 +1,5 @@
 import { MainLayout } from "@/layouts/MainLayout";
-import { Hero } from "@/features/homepage/components/Hero/Hero";
+import { CinematicJourney } from "@/features/homepage/components/CinematicJourney/CinematicJourney";
 import { CoffeeExperience } from "@/features/homepage/components/CoffeeExperience/CoffeeExperience";
 import { ProductShowcase } from "@/features/homepage/components/Products/ProductShowcase";
 import { StorySection } from "@/features/homepage/components/Story/StorySection";
@@ -10,7 +10,7 @@ import { CTASection } from "@/features/homepage/components/CTA/CTASection";
 export default function Home() {
   return (
     <MainLayout>
-      <Hero />
+      <CinematicJourney />
       <CoffeeExperience />
       <ProductShowcase />
       <StorySection />

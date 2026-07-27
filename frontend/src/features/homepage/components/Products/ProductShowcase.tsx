@@ -7,10 +7,15 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { sectionIds } from "@/constants/routes";
 import { products } from "@/features/homepage/data/products";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { messages } from "@/i18n/messages";
 
 export function ProductShowcase() {
+  const { locale } = useLanguage();
+  const copy = messages[locale].products;
+
   return (
-    <Section id={sectionIds.products} ariaLabel="Our coffee collection" className="bg-cream">
+    <Section id={sectionIds.products} ariaLabel={copy.ariaLabel} className="bg-cream">
       <Container>
         <motion.div
           initial="hidden"
@@ -22,19 +27,25 @@ export function ProductShowcase() {
             variants={fadeUp}
             className="max-w-[36rem] font-heading text-3xl text-coffee-dark sm:text-4xl"
           >
-            The Collection
+            {copy.heading}
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-sm max-w-[36rem] text-coffee-brown">
-            A small, rotating selection of single-origin beans, chosen for character over volume.
+            {copy.intro}
           </motion.p>
 
           <motion.div
             variants={staggerContainer}
             className="mt-xl grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-3"
           >
-            {products.map((product) => (
+            {products.map((product, index) => (
               <motion.div key={product.id} variants={fadeUp}>
-                <ProductCard {...product} />
+                <ProductCard
+                  {...product}
+                  name={copy.items[index].name}
+                  origin={copy.items[index].origin}
+                  locale={locale}
+                  ratingLabel={copy.ratingLabel}
+                />
               </motion.div>
             ))}
           </motion.div>

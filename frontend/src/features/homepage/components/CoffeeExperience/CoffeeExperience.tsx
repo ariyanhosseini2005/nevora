@@ -7,12 +7,17 @@ import { Container } from "@/components/layout/Container";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { sectionIds } from "@/constants/routes";
 import { experienceSteps } from "@/features/homepage/data/coffeeExperience";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { messages } from "@/i18n/messages";
 
 export function CoffeeExperience() {
+  const { locale } = useLanguage();
+  const copy = messages[locale].experience;
+
   return (
     <Section
       id={sectionIds.coffeeExperience}
-      ariaLabel="From bean to cup"
+      ariaLabel={copy.ariaLabel}
       className="bg-coffee-dark"
     >
       <Container>
@@ -26,7 +31,7 @@ export function CoffeeExperience() {
             variants={fadeUp}
             className="max-w-[36rem] font-heading text-3xl text-cream sm:text-4xl"
           >
-            From Bean to Cup
+            {copy.heading}
           </motion.h2>
 
           <motion.ol
@@ -38,7 +43,7 @@ export function CoffeeExperience() {
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                   <Image
                     src={step.image}
-                    alt={step.title}
+                    alt={copy.items[index].title}
                     fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover"
@@ -47,8 +52,10 @@ export function CoffeeExperience() {
                 <p className="text-xs uppercase tracking-widest text-premium-gold">
                   {String(index + 1).padStart(2, "0")}
                 </p>
-                <h3 className="font-heading text-xl text-cream">{step.title}</h3>
-                <p className="text-sm text-cream/75">{step.description}</p>
+                <h3 className="font-heading text-xl text-cream">
+                  {copy.items[index].title}
+                </h3>
+                <p className="text-sm text-cream/75">{copy.items[index].description}</p>
               </motion.li>
             ))}
           </motion.ol>

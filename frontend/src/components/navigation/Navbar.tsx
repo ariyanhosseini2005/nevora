@@ -4,28 +4,45 @@ import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { navLinks } from "@/data/navigation";
 import { sectionIds } from "@/constants/routes";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { messages } from "@/i18n/messages";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const { locale } = useLanguage();
+  const copy = messages[locale].nav;
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isJourneyActive, setIsJourneyActive] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 40);
+
+    const journey = document.getElementById(sectionIds.hero);
+    if (!journey) {
+      setIsJourneyActive(false);
+      return;
+    }
+
+    const sceneTravel = Math.max(journey.offsetHeight - window.innerHeight, 1);
+    const navigationReveal = journey.offsetTop + sceneTravel * 0.82;
+    setIsJourneyActive(latest < navigationReveal);
   });
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-[color,background-color,opacity,transform] duration-500",
+        isJourneyActive && "pointer-events-none -translate-y-3 opacity-0",
         isScrolled ? "bg-coffee-dark/90 backdrop-blur-sm" : "bg-transparent",
       )}
     >
       <nav
-        aria-label="Primary"
+        aria-label={copy.primaryLabel}
         className="mx-auto flex max-w-(--container-max) items-center justify-between px-lg py-sm md:px-xl"
       >
         <a href={`#${sectionIds.hero}`} className="font-heading text-xl tracking-wide text-cream">
@@ -33,34 +50,38 @@ export function Navbar() {
         </a>
 
         <ul className="hidden items-center gap-lg md:flex">
-          {navLinks.map((link) => (
+          {navLinks.map((link, index) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 className="text-sm text-cream/90 transition-colors hover:text-premium-gold"
               >
-                {link.label}
+                {copy.links[index]}
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-sm md:flex">
+          <LanguageSwitcher />
           <Button href={`#${sectionIds.cta}`} variant="primary">
-            Join Us
+            {copy.join}
           </Button>
         </div>
 
-        <button
-          type="button"
-          className="text-cream md:hidden"
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-menu"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setIsMenuOpen((open) => !open)}
-        >
-          {isMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+        <div className="flex items-center gap-xs md:hidden">
+          <LanguageSwitcher className="h-9 px-2" />
+          <button
+            type="button"
+            className="text-cream"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMenuOpen ? copy.closeMenu : copy.openMenu}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            {isMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>
@@ -74,14 +95,14 @@ export function Navbar() {
             className="overflow-hidden bg-coffee-dark md:hidden"
           >
             <ul className="flex flex-col gap-md px-lg py-md">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     className="text-cream/90"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {link.label}
+                    {copy.links[index]}
                   </a>
                 </li>
               ))}
@@ -91,7 +112,7 @@ export function Navbar() {
                   variant="primary"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Join Us
+                  {copy.join}
                 </Button>
               </li>
             </ul>
