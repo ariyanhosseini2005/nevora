@@ -31,6 +31,7 @@ const MOBILE_PRELOAD_RADIUS = 7;
 const DESKTOP_PRELOAD_RADIUS = 11;
 const MOBILE_CACHE_LIMIT = 18;
 const DESKTOP_CACHE_LIMIT = 28;
+const PUBLIC_BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
 
 const journeyBeatTimings: JourneyBeatTiming[] = [
   {
@@ -113,7 +114,7 @@ const scrollTimeline: ScrollSegment[] = [
 
 const frameSources = Array.from({ length: FRAME_COUNT }, (_, index) => {
   const frame = START_FRAME + index;
-  return `/images/journey/frames-v010/nevora-one-take_f${String(frame).padStart(4, "0")}.webp`;
+  return `${PUBLIC_BASE_PATH}/images/journey/frames-v010/nevora-one-take_f${String(frame).padStart(4, "0")}.webp`;
 });
 
 function clamp(value: number, min = 0, max = 1) {
