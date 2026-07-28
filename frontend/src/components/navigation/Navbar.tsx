@@ -51,13 +51,16 @@ export function Navbar() {
     >
       <nav
         aria-label={copy.primaryLabel}
-        className="mx-auto flex max-w-(--container-max) items-center justify-between px-sm py-sm sm:px-lg md:px-xl"
+        className="mx-auto flex max-w-(--container-max) items-center justify-between gap-xs px-sm pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 sm:gap-sm sm:px-md sm:pt-md sm:pb-md md:px-lg lg:px-xl xl:px-2xl"
       >
-        <a href={`#${sectionIds.hero}`} className="font-heading text-xl tracking-wide text-cream">
+        <a
+          href={`#${sectionIds.hero}`}
+          className="shrink-0 font-heading text-lg tracking-[0.12em] text-cream sm:text-xl"
+        >
           NEVORA
         </a>
 
-        <ul className="hidden items-center gap-md lg:flex xl:gap-lg">
+        <ul className="hidden items-center gap-md xl:flex xl:gap-lg">
           {navLinks.map((link, index) => (
             <li key={link.href}>
               <a
@@ -70,7 +73,7 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-sm lg:flex">
+        <div className="hidden items-center gap-sm xl:flex">
           <LanguageSwitcher />
           <button
             type="button"
@@ -94,12 +97,12 @@ export function Navbar() {
           </Button>
         </div>
 
-        <div className="flex items-center gap-xs lg:hidden">
-          <LanguageSwitcher className="px-2" />
+        <div className="flex min-w-0 items-center gap-0.5 min-[380px]:gap-xs xl:hidden">
+          <LanguageSwitcher className="border-transparent bg-transparent px-1.5 min-[380px]:border-cream/20 min-[380px]:bg-coffee-dark/55 min-[380px]:px-2.5" />
           <button
             type="button"
             data-cart-trigger
-            className="relative grid size-11 place-items-center rounded-full text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold"
+            className="relative grid size-10 shrink-0 place-items-center rounded-full text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold sm:size-11"
             aria-label={cartLabel}
             onClick={openCart}
           >
@@ -115,7 +118,7 @@ export function Navbar() {
           </button>
           <button
             type="button"
-            className="grid size-11 place-items-center rounded-full text-cream transition-colors hover:bg-cream/10"
+            className="grid size-10 shrink-0 place-items-center rounded-full text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold sm:size-11"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             aria-label={isMenuOpen ? copy.closeMenu : copy.openMenu}
@@ -134,24 +137,25 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden bg-coffee-dark lg:hidden"
+            className="max-h-[calc(100svh-4.5rem)] overflow-y-auto border-t border-cream/10 bg-coffee-dark/96 shadow-2xl backdrop-blur-xl xl:hidden"
           >
-            <ul className="flex flex-col gap-md px-sm py-md sm:px-lg md:px-xl">
+            <ul className="flex flex-col px-sm pt-sm pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-md md:px-lg">
               {navLinks.map((link, index) => (
-                <li key={link.href}>
+                <li key={link.href} className="border-b border-cream/10">
                   <a
                     href={link.href}
-                    className="text-cream/90"
+                    className="flex min-h-14 items-center font-heading text-xl text-cream/90 transition-colors hover:text-premium-gold"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {copy.links[index]}
                   </a>
                 </li>
               ))}
-              <li>
+              <li className="pt-md">
                 <Button
                   href={`#${sectionIds.cta}`}
                   variant="primary"
+                  className="w-full"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {copy.join}

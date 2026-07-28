@@ -32,13 +32,13 @@ export function Testimonials() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-3"
+            className="-mx-sm mt-lg flex snap-x snap-mandatory gap-sm overflow-x-auto overscroll-x-contain px-sm pb-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-xl sm:grid sm:grid-cols-2 sm:gap-md sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:gap-lg"
           >
             {testimonials.map((testimonial, index) => (
               <motion.figure
                 key={testimonial.id}
                 variants={fadeUp}
-                className="space-y-md rounded-2xl bg-soft-white p-md shadow-md sm:p-lg"
+                className="w-[86vw] max-w-[23rem] shrink-0 snap-center space-y-md rounded-2xl bg-soft-white p-md shadow-md sm:w-auto sm:max-w-none sm:p-lg"
               >
                 <Quote className="size-6 text-premium-gold" aria-hidden="true" />
                 <blockquote className="text-coffee-dark">

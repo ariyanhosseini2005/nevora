@@ -31,10 +31,14 @@ export function WhyUs() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-4"
+            className="mt-lg grid grid-cols-1 gap-sm min-[480px]:grid-cols-2 sm:mt-xl sm:gap-md lg:grid-cols-4 lg:gap-lg"
           >
             {whyUsItems.map(({ icon: Icon }, index) => (
-              <motion.div key={copy.items[index].title} variants={fadeUp} className="space-y-sm">
+              <motion.div
+                key={copy.items[index].title}
+                variants={fadeUp}
+                className="space-y-sm rounded-2xl border border-cream/10 bg-cream/[0.025] p-md"
+              >
                 <Icon className="size-8 text-premium-gold" aria-hidden="true" />
                 <h3 className="font-heading text-lg text-cream">{copy.items[index].title}</h3>
                 <p className="text-sm text-cream/75">{copy.items[index].description}</p>

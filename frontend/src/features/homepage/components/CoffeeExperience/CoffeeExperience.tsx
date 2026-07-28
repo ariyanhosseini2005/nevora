@@ -36,10 +36,14 @@ export function CoffeeExperience() {
 
           <motion.ol
             variants={staggerContainer}
-            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-4"
+            className="-mx-sm mt-lg flex snap-x snap-mandatory gap-sm overflow-x-auto overscroll-x-contain px-sm pb-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-xl sm:grid sm:grid-cols-2 sm:gap-md sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:gap-lg"
           >
             {experienceSteps.map((step, index) => (
-              <motion.li key={step.id} variants={fadeUp} className="space-y-sm">
+              <motion.li
+                key={step.id}
+                variants={fadeUp}
+                className="w-[82vw] max-w-[22rem] shrink-0 snap-center space-y-sm sm:w-auto sm:max-w-none"
+              >
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                   <Image
                     src={step.image}
@@ -49,7 +53,7 @@ export function CoffeeExperience() {
                     className="object-cover"
                   />
                 </div>
-                <p className="text-xs uppercase tracking-widest text-premium-gold">
+                <p className="text-xs tracking-widest text-premium-gold uppercase">
                   {String(index + 1).padStart(2, "0")}
                 </p>
                 <h3 className="font-heading text-xl text-cream">

@@ -21,7 +21,7 @@ export function Footer() {
   }).format(new Date().getFullYear());
 
   return (
-    <footer className="bg-coffee-dark px-sm py-lg text-cream sm:px-lg sm:py-xl md:px-xl">
+    <footer className="bg-coffee-dark px-sm py-lg text-cream sm:px-md sm:py-xl md:px-lg lg:px-xl xl:px-2xl">
       <Container>
         <div className="grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-3 lg:gap-xl">
           <div className="sm:col-span-2 lg:col-span-1">
@@ -60,7 +60,7 @@ export function Footer() {
               <Mail className="size-4" aria-hidden="true" />
               hello@nevoracoffee.com
             </a>
-            <ul className="mt-sm flex gap-md" dir="ltr">
+            <ul className="mt-sm flex flex-wrap gap-x-md gap-y-xs" dir="ltr">
               {socialLinks.map((social) => (
                 <li key={social.href}>
                   <a

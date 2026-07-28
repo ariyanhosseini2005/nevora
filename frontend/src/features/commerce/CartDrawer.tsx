@@ -78,7 +78,7 @@ export function CartDrawer() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="cart-title"
-            className="absolute inset-y-0 end-0 flex w-full max-w-[31rem] flex-col bg-soft-white text-coffee-dark shadow-2xl"
+            className="absolute inset-y-0 end-0 flex w-full max-w-[31rem] flex-col bg-soft-white pt-[env(safe-area-inset-top)] text-coffee-dark shadow-2xl"
             initial={{ x: direction === "rtl" ? "-100%" : "100%" }}
             animate={{ x: 0 }}
             exit={{ x: direction === "rtl" ? "-100%" : "100%" }}
@@ -104,7 +104,10 @@ export function CartDrawer() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-md py-md sm:px-lg">
+            <div
+              data-lenis-prevent
+              className="flex-1 overscroll-contain overflow-y-auto px-sm py-md min-[380px]:px-md sm:px-lg"
+            >
               {cartLines.length === 0 ? (
                 <div className="grid min-h-full place-items-center py-xl text-center">
                   <div className="max-w-[22rem]">
@@ -125,7 +128,7 @@ export function CartDrawer() {
                   {cartLines.map(({ product, localized, quantity }) => (
                     <li
                       key={product.id}
-                      className="grid grid-cols-[5.5rem_1fr] gap-sm border-b border-coffee-dark/10 pb-md"
+                      className="grid grid-cols-[4.75rem_1fr] gap-sm border-b border-coffee-dark/10 pb-md min-[380px]:grid-cols-[5.5rem_1fr]"
                     >
                       <div className="relative aspect-square overflow-hidden rounded-2xl bg-cream">
                         <Image
@@ -189,7 +192,7 @@ export function CartDrawer() {
             </div>
 
             {cartLines.length > 0 && (
-              <div className="border-t border-coffee-dark/10 bg-cream/60 px-md py-md sm:px-lg">
+              <div className="border-t border-coffee-dark/10 bg-cream/60 px-sm pt-md pb-[max(1rem,env(safe-area-inset-bottom))] min-[380px]:px-md sm:px-lg">
                 <div className="space-y-xs text-sm">
                   <div className="flex items-center justify-between">
                     <span className="text-coffee-brown/72">{copy.cart.subtotal}</span>

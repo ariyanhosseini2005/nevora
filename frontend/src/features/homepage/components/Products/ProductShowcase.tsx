@@ -59,13 +59,13 @@ export function ProductShowcase() {
 
           <motion.div
             variants={staggerContainer}
-            className="mt-lg grid grid-cols-1 gap-md sm:mt-xl sm:grid-cols-2 sm:gap-lg lg:grid-cols-3"
+            className="-mx-sm mt-lg flex snap-x snap-mandatory gap-sm overflow-x-auto overscroll-x-contain px-sm pb-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-xl sm:grid sm:grid-cols-2 sm:gap-md sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:gap-lg"
           >
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
                 variants={fadeUp}
-                className="sm:last:col-span-2 sm:last:mx-auto sm:last:w-[calc(50%-1.5rem)] lg:last:col-span-1 lg:last:w-auto"
+                className="w-[84vw] max-w-[23rem] shrink-0 snap-center sm:w-auto sm:max-w-none sm:last:col-span-2 sm:last:mx-auto sm:last:w-[calc(50%-0.75rem)] lg:last:col-span-1 lg:last:w-auto"
               >
                 <ProductCard
                   {...product}

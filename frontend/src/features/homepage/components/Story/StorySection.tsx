@@ -22,7 +22,7 @@ export function StorySection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="grid grid-cols-1 items-center gap-lg lg:grid-cols-2 lg:gap-xl"
+          className="grid grid-cols-1 items-center gap-lg md:grid-cols-[1.08fr_0.92fr] md:gap-lg lg:gap-xl"
         >
           <motion.div variants={fadeUp} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image
@@ -35,11 +35,15 @@ export function StorySection() {
           </motion.div>
 
           <motion.div variants={fadeUp}>
-            <h2 className="font-heading text-3xl text-coffee-dark sm:text-4xl">
+            <h2 className="font-heading text-[clamp(2rem,6vw,3.5rem)] leading-tight text-coffee-dark md:text-[clamp(2.25rem,4vw,3.5rem)]">
               {copy.heading}
             </h2>
-            <p className="mt-md text-coffee-brown">{copy.paragraphOne}</p>
-            <p className="mt-sm text-coffee-brown">{copy.paragraphTwo}</p>
+            <p className="mt-md text-sm leading-7 text-coffee-brown sm:text-base">
+              {copy.paragraphOne}
+            </p>
+            <p className="mt-sm text-sm leading-7 text-coffee-brown sm:text-base">
+              {copy.paragraphTwo}
+            </p>
           </motion.div>
         </motion.div>
       </Container>
