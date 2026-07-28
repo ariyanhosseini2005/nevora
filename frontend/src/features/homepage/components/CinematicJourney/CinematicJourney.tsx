@@ -132,18 +132,20 @@ function frameAtScrollProgress(progress: number) {
 
 function copyMotion(frame: number, beat: JourneyBeatTiming) {
   const beatLength = beat.end - beat.start + 1;
-  const fadeFrames = Math.min(Math.max(beatLength * 0.18, 10), 16);
-  const overlap = fadeFrames * 0.5;
+  const fadeFrames = Math.min(Math.max(beatLength * 0.15, 6), 10);
+  const handoff = 0.5;
   const enter =
     beat.start === START_FRAME
       ? 1
-      : cinematicEase(clamp((frame - (beat.start - overlap)) / fadeFrames));
+      : cinematicEase(clamp((frame - (beat.start - handoff)) / fadeFrames));
   const exit =
-    beat.end === END_FRAME ? 1 : cinematicEase(clamp((beat.end + overlap - frame) / fadeFrames));
+    beat.end === END_FRAME
+      ? 1
+      : cinematicEase(clamp((beat.end + handoff - frame) / fadeFrames));
 
   return {
     opacity: Math.min(enter, exit),
-    y: (1 - enter) * 24 - (1 - exit) * 18,
+    y: (1 - enter) * 22 - (1 - exit) * 16,
   };
 }
 
