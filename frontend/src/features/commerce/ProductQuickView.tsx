@@ -96,6 +96,7 @@ export function ProductQuickView({
           />
 
           <motion.div
+            data-lenis-prevent
             role="dialog"
             aria-modal="true"
             aria-labelledby={`product-${product.id}-title`}

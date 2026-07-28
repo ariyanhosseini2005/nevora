@@ -130,14 +130,21 @@ function frameAtScrollProgress(progress: number) {
   return FILM_END_FRAME + (END_FRAME - FILM_END_FRAME) * cinematicEase(holdProgress);
 }
 
-function copyOpacity(frame: number, beat: JourneyBeatTiming) {
+function copyMotion(frame: number, beat: JourneyBeatTiming) {
   const beatLength = beat.end - beat.start + 1;
-  const fadeFrames = Math.min(Math.max(beatLength * 0.12, 5), 9);
+  const fadeFrames = Math.min(Math.max(beatLength * 0.18, 10), 16);
+  const overlap = fadeFrames * 0.5;
   const enter =
-    beat.start === START_FRAME ? 1 : cinematicEase(clamp((frame - beat.start + 1) / fadeFrames));
+    beat.start === START_FRAME
+      ? 1
+      : cinematicEase(clamp((frame - (beat.start - overlap)) / fadeFrames));
   const exit =
-    beat.end === END_FRAME ? 1 : cinematicEase(clamp((beat.end - frame + 1) / fadeFrames));
-  return Math.min(enter, exit);
+    beat.end === END_FRAME ? 1 : cinematicEase(clamp((beat.end + overlap - frame) / fadeFrames));
+
+  return {
+    opacity: Math.min(enter, exit),
+    y: (1 - enter) * 24 - (1 - exit) * 18,
+  };
 }
 
 function ReducedMotionJourney() {
@@ -652,7 +659,7 @@ export function CinematicJourney() {
 
         <div className="relative z-10 mx-auto h-full max-w-(--container-max) px-sm sm:px-lg md:px-xl">
           {journeyBeatTimings.map((beat, index) => {
-            const opacity = copyOpacity(framePosition, beat);
+            const motion = copyMotion(framePosition, beat);
             const beatCopy = copy.beats[index];
 
             return (
@@ -660,8 +667,8 @@ export function CinematicJourney() {
                 key={beat.id}
                 className="journey-copy absolute inset-x-sm bottom-[15svh] max-w-[42rem] will-change-[opacity,transform] sm:inset-x-lg sm:bottom-[17svh] md:inset-x-xl md:top-1/2 md:bottom-auto md:-translate-y-1/2"
                 style={{
-                  opacity,
-                  transform: `translate3d(0, ${18 * (1 - opacity)}px, 0)`,
+                  opacity: motion.opacity,
+                  transform: `translate3d(0, ${motion.y}px, 0)`,
                   pointerEvents: activeBeat?.id === beat.id ? "auto" : "none",
                 }}
                 aria-hidden={activeBeat?.id !== beat.id}

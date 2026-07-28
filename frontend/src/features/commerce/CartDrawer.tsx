@@ -74,6 +74,7 @@ export function CartDrawer() {
           />
 
           <motion.aside
+            data-lenis-prevent
             role="dialog"
             aria-modal="true"
             aria-labelledby="cart-title"
