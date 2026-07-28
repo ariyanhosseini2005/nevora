@@ -53,7 +53,7 @@ export function useElementScrollProgress<T extends HTMLElement>(elementRef: RefO
         const responseTime = 112 - distanceRatio * 24;
         const response = 1 - Math.exp(-elapsed / responseTime);
         const desiredStep = (targetProgress - currentProgress) * response;
-        const maxProgressPerSecond = 0.18 + distanceRatio * 0.22;
+        const maxProgressPerSecond = 0.14 + distanceRatio * 0.12;
         const maxStep = maxProgressPerSecond * (elapsed / 1000);
         currentProgress += clamp(desiredStep, -maxStep, maxStep);
 
@@ -73,6 +73,7 @@ export function useElementScrollProgress<T extends HTMLElement>(elementRef: RefO
     function scheduleUpdate() {
       targetProgress = measureProgress();
       if (animationFrame === null && !document.hidden) {
+        lastTime = window.performance.now();
         animationFrame = window.requestAnimationFrame(animate);
       }
     }

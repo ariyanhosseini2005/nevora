@@ -36,6 +36,9 @@ const DESKTOP_CACHE_LIMIT = 24;
 const CONSTRAINED_PRELOAD_RADIUS = 4;
 const CONSTRAINED_CACHE_LIMIT = 10;
 const PUBLIC_BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
+const CONTINUITY_BRIDGE_FRAMES = [312, 323, 351, 356, 540, 580, 588, 600, 608, 624, 692];
+const CONTINUITY_BRIDGE_LEAD = 1.2;
+const CONTINUITY_BRIDGE_TRAIL = 0.35;
 
 const journeyBeatTimings: JourneyBeatTiming[] = [
   {
@@ -228,9 +231,24 @@ export function CinematicJourney() {
   const drawFrame = useCallback((frame: number) => {
     const canvas = canvasRef.current;
     const boundedFrame = clamp(frame, START_FRAME, END_FRAME);
-    const lowerIndex = frameToIndex(Math.floor(boundedFrame));
-    const upperIndex = Math.min(lowerIndex + 1, FRAME_COUNT - 1);
-    const blend = cinematicEase(boundedFrame - Math.floor(boundedFrame));
+    const continuityBridge = CONTINUITY_BRIDGE_FRAMES.find(
+      (bridgeFrame) =>
+        boundedFrame >= bridgeFrame - CONTINUITY_BRIDGE_LEAD &&
+        boundedFrame <= bridgeFrame + CONTINUITY_BRIDGE_TRAIL,
+    );
+    const lowerFrame = continuityBridge ? continuityBridge - 1 : Math.floor(boundedFrame);
+    const upperFrame = continuityBridge ? continuityBridge : Math.min(lowerFrame + 1, END_FRAME);
+    const lowerIndex = frameToIndex(lowerFrame);
+    const upperIndex = frameToIndex(upperFrame);
+    const blend = continuityBridge
+      ? cinematicEase(
+          clamp(
+            (boundedFrame - (continuityBridge - CONTINUITY_BRIDGE_LEAD)) /
+              (CONTINUITY_BRIDGE_LEAD + CONTINUITY_BRIDGE_TRAIL),
+          ),
+        )
+      : cinematicEase(boundedFrame - Math.floor(boundedFrame));
+    const continuityBlur = continuityBridge ? Math.sin(blend * Math.PI) * 0.8 : 0;
     const lowerImage = imageCacheRef.current.get(lowerIndex);
     const upperImage = imageCacheRef.current.get(upperIndex);
     const lowerReady = lowerImage?.complete === true && lowerImage.naturalWidth > 0;
@@ -291,6 +309,7 @@ export function CinematicJourney() {
 
     context.imageSmoothingEnabled = true;
     context.imageSmoothingQuality = "high";
+    context.filter = continuityBlur > 0.05 ? `blur(${continuityBlur.toFixed(2)}px)` : "none";
 
     const drawCover = (image: HTMLImageElement, opacity = 1) => {
       const scale = Math.max(targetWidth / image.naturalWidth, targetHeight / image.naturalHeight);
@@ -320,6 +339,7 @@ export function CinematicJourney() {
     }
 
     context.globalAlpha = 1;
+    context.filter = "none";
     renderedSignatureRef.current = signature;
   }, []);
 
