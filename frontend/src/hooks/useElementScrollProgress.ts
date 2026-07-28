@@ -50,9 +50,12 @@ export function useElementScrollProgress<T extends HTMLElement>(elementRef: RefO
         const elapsed = Math.min(Math.max(time - lastTime, 1), 64);
         const distance = Math.abs(targetProgress - currentProgress);
         const distanceRatio = Math.min(distance / 0.035, 1);
-        const responseTime = 96 - distanceRatio * 40;
+        const responseTime = 112 - distanceRatio * 24;
         const response = 1 - Math.exp(-elapsed / responseTime);
-        currentProgress += (targetProgress - currentProgress) * response;
+        const desiredStep = (targetProgress - currentProgress) * response;
+        const maxProgressPerSecond = 0.18 + distanceRatio * 0.22;
+        const maxStep = maxProgressPerSecond * (elapsed / 1000);
+        currentProgress += clamp(desiredStep, -maxStep, maxStep);
 
         if (Math.abs(targetProgress - currentProgress) < 0.00005) {
           currentProgress = targetProgress;

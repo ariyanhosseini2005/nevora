@@ -17,21 +17,17 @@ type JourneyBeatTiming = {
   end: number;
 };
 
-type ScrollSegment = {
-  scrollStart: number;
-  scrollEnd: number;
-  frameStart: number;
-  frameEnd: number;
-};
-
 type FrameLoadRequest = {
   index: number;
   priority: "high" | "low";
 };
 
 const START_FRAME = 204;
+const FILM_END_FRAME = 719;
 const END_FRAME = 743;
 const FRAME_COUNT = END_FRAME - START_FRAME + 1;
+const FILM_SCROLL_END = 0.94;
+const HOLD_SCROLL_END = 0.995;
 const INITIAL_PRELOAD_COUNT = 3;
 const MOBILE_PRELOAD_RADIUS = 8;
 const DESKTOP_PRELOAD_RADIUS = 12;
@@ -104,22 +100,6 @@ const journeyBeatTimings: JourneyBeatTiming[] = [
   },
 ];
 
-const scrollTimeline: ScrollSegment[] = [
-  { scrollStart: 0, scrollEnd: 0.05, frameStart: 204, frameEnd: 227 },
-  { scrollStart: 0.05, scrollEnd: 0.19, frameStart: 228, frameEnd: 299 },
-  { scrollStart: 0.19, scrollEnd: 0.255, frameStart: 300, frameEnd: 331 },
-  { scrollStart: 0.255, scrollEnd: 0.295, frameStart: 332, frameEnd: 347 },
-  { scrollStart: 0.295, scrollEnd: 0.385, frameStart: 348, frameEnd: 395 },
-  { scrollStart: 0.385, scrollEnd: 0.475, frameStart: 396, frameEnd: 443 },
-  { scrollStart: 0.475, scrollEnd: 0.56, frameStart: 444, frameEnd: 491 },
-  { scrollStart: 0.56, scrollEnd: 0.645, frameStart: 492, frameEnd: 539 },
-  { scrollStart: 0.645, scrollEnd: 0.73, frameStart: 540, frameEnd: 587 },
-  { scrollStart: 0.73, scrollEnd: 0.8, frameStart: 588, frameEnd: 635 },
-  { scrollStart: 0.8, scrollEnd: 0.87, frameStart: 636, frameEnd: 683 },
-  { scrollStart: 0.87, scrollEnd: 0.94, frameStart: 684, frameEnd: 719 },
-  { scrollStart: 0.94, scrollEnd: 0.995, frameStart: 720, frameEnd: 743 },
-];
-
 const frameSources = Array.from({ length: FRAME_COUNT }, (_, index) => {
   const frame = START_FRAME + index;
   return `${PUBLIC_BASE_PATH}/images/journey/frames-v010/nevora-one-take_f${String(frame).padStart(4, "0")}.webp`;
@@ -139,16 +119,12 @@ function cinematicEase(value: number) {
 }
 
 function frameAtScrollProgress(progress: number) {
-  const segment =
-    scrollTimeline.find(
-      (candidate) => progress >= candidate.scrollStart && progress <= candidate.scrollEnd,
-    ) ?? scrollTimeline[scrollTimeline.length - 1];
-  const localProgress = clamp(
-    (progress - segment.scrollStart) / (segment.scrollEnd - segment.scrollStart),
-  );
-  return (
-    segment.frameStart + (segment.frameEnd - segment.frameStart) * cinematicEase(localProgress)
-  );
+  if (progress <= FILM_SCROLL_END) {
+    return START_FRAME + (FILM_END_FRAME - START_FRAME) * clamp(progress / FILM_SCROLL_END);
+  }
+
+  const holdProgress = clamp((progress - FILM_SCROLL_END) / (HOLD_SCROLL_END - FILM_SCROLL_END));
+  return FILM_END_FRAME + (END_FRAME - FILM_END_FRAME) * cinematicEase(holdProgress);
 }
 
 function copyOpacity(frame: number, beat: JourneyBeatTiming) {
@@ -227,7 +203,7 @@ export function CinematicJourney() {
   const previousIndexRef = useRef(0);
   const cacheCenterRef = useRef(0);
   const cacheLimitRef = useRef(DESKTOP_CACHE_LIMIT);
-  const renderedSourceIndexRef = useRef(-1);
+  const renderedSignatureRef = useRef("");
   const drawRequestRef = useRef<number | null>(null);
   const pendingFrameRef = useRef(START_FRAME);
   const loadQueueRef = useRef<FrameLoadRequest[]>([]);
@@ -251,63 +227,100 @@ export function CinematicJourney() {
 
   const drawFrame = useCallback((frame: number) => {
     const canvas = canvasRef.current;
-    const targetIndex = frameToIndex(frame);
-    let image = imageCacheRef.current.get(targetIndex);
-    let resolvedSourceIndex = targetIndex;
+    const boundedFrame = clamp(frame, START_FRAME, END_FRAME);
+    const lowerIndex = frameToIndex(Math.floor(boundedFrame));
+    const upperIndex = Math.min(lowerIndex + 1, FRAME_COUNT - 1);
+    const blend = cinematicEase(boundedFrame - Math.floor(boundedFrame));
+    const lowerImage = imageCacheRef.current.get(lowerIndex);
+    const upperImage = imageCacheRef.current.get(upperIndex);
+    const lowerReady = lowerImage?.complete === true && lowerImage.naturalWidth > 0;
+    const upperReady = upperImage?.complete === true && upperImage.naturalWidth > 0;
+    const targetIndex = frameToIndex(Math.round(boundedFrame));
+    let fallbackImage = imageCacheRef.current.get(targetIndex);
+    let fallbackIndex = targetIndex;
 
-    if (!image?.complete || image.naturalWidth === 0) {
+    if (
+      !lowerReady &&
+      !upperReady &&
+      (!fallbackImage?.complete || fallbackImage.naturalWidth === 0)
+    ) {
       let nearestDistance = Number.POSITIVE_INFINITY;
 
       for (const [candidateIndex, candidate] of imageCacheRef.current) {
         const distance = Math.abs(candidateIndex - targetIndex);
         if (distance < nearestDistance && candidate.complete && candidate.naturalWidth > 0) {
-          image = candidate;
+          fallbackImage = candidate;
           nearestDistance = distance;
-          resolvedSourceIndex = candidateIndex;
+          fallbackIndex = candidateIndex;
         }
       }
     }
 
-    if (!canvas || !image?.complete || image.naturalWidth === 0) return;
+    const primaryImage =
+      (lowerReady ? lowerImage : undefined) ??
+      (upperReady ? upperImage : undefined) ??
+      fallbackImage;
+    if (!canvas || !primaryImage?.complete || primaryImage.naturalWidth === 0) return;
 
     const bounds = canvas.getBoundingClientRect();
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, bounds.width < 768 ? 1.5 : 2);
+    const sourceLimitedRatio = primaryImage.naturalWidth / Math.max(bounds.width, 1);
+    const pixelRatio = Math.max(
+      1,
+      Math.min(window.devicePixelRatio || 1, bounds.width < 768 ? 1.5 : 1.35, sourceLimitedRatio),
+    );
     const targetWidth = Math.max(Math.round(bounds.width * pixelRatio), 1);
     const targetHeight = Math.max(Math.round(bounds.height * pixelRatio), 1);
     const dimensionsChanged = canvas.width !== targetWidth || canvas.height !== targetHeight;
+    const blendStep = Math.round(blend * 48);
+    const signature =
+      lowerReady && upperReady
+        ? `${lowerIndex}:${upperIndex}:${blendStep}`
+        : `fallback:${lowerReady ? lowerIndex : upperReady ? upperIndex : fallbackIndex}`;
 
     if (dimensionsChanged) {
       canvas.width = targetWidth;
       canvas.height = targetHeight;
     }
 
-    if (!dimensionsChanged && renderedSourceIndexRef.current === resolvedSourceIndex) {
+    if (!dimensionsChanged && renderedSignatureRef.current === signature) {
       return;
     }
 
     const context = canvas.getContext("2d", { alpha: false });
     if (!context) return;
 
-    const scale = Math.max(targetWidth / image.naturalWidth, targetHeight / image.naturalHeight);
-    const sourceWidth = targetWidth / scale;
-    const sourceHeight = targetHeight / scale;
-    const sourceX = (image.naturalWidth - sourceWidth) / 2;
-    const sourceY = (image.naturalHeight - sourceHeight) / 2;
-
     context.imageSmoothingEnabled = true;
     context.imageSmoothingQuality = "high";
-    context.drawImage(
-      image,
-      sourceX,
-      sourceY,
-      sourceWidth,
-      sourceHeight,
-      0,
-      0,
-      targetWidth,
-      targetHeight,
-    );
-    renderedSourceIndexRef.current = resolvedSourceIndex;
+
+    const drawCover = (image: HTMLImageElement, opacity = 1) => {
+      const scale = Math.max(targetWidth / image.naturalWidth, targetHeight / image.naturalHeight);
+      const sourceWidth = targetWidth / scale;
+      const sourceHeight = targetHeight / scale;
+      const sourceX = (image.naturalWidth - sourceWidth) / 2;
+      const sourceY = (image.naturalHeight - sourceHeight) / 2;
+      context.globalAlpha = opacity;
+      context.drawImage(
+        image,
+        sourceX,
+        sourceY,
+        sourceWidth,
+        sourceHeight,
+        0,
+        0,
+        targetWidth,
+        targetHeight,
+      );
+    };
+
+    if (lowerReady && upperReady) {
+      drawCover(lowerImage, 1);
+      if (blendStep > 0) drawCover(upperImage, blend);
+    } else {
+      drawCover(primaryImage, 1);
+    }
+
+    context.globalAlpha = 1;
+    renderedSignatureRef.current = signature;
   }, []);
 
   const scheduleDraw = useCallback(
@@ -364,13 +377,19 @@ export function CinematicJourney() {
             imageCacheRef.current.set(index, image);
             trimImageCache();
 
-            if (index === 0) {
-              setFirstFrameReady(true);
-            }
+            const centerIndex = frameToIndex(currentFrameRef.current);
+            const nextIndex = Math.min(centerIndex + 1, FRAME_COUNT - 1);
+            const centerImage = imageCacheRef.current.get(centerIndex);
+            const nextImage = imageCacheRef.current.get(nextIndex);
 
-            if (Math.abs(index - frameToIndex(currentFrameRef.current)) <= 2) {
+            if (
+              centerImage?.complete &&
+              centerImage.naturalWidth > 0 &&
+              nextImage?.complete &&
+              nextImage.naturalWidth > 0
+            ) {
               setFirstFrameReady(true);
-              scheduleDraw(currentFrameRef.current);
+              scheduleDraw(pendingFrameRef.current);
             }
           }
           resolve();
@@ -448,7 +467,11 @@ export function CinematicJourney() {
 
   useEffect(() => {
     if (shouldReduceMotion) return;
+    scheduleDraw(framePosition);
+  }, [framePosition, scheduleDraw, shouldReduceMotion]);
 
+  useEffect(() => {
+    if (shouldReduceMotion) return;
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     const connection = (
       navigator as Navigator & {
@@ -467,7 +490,12 @@ export function CinematicJourney() {
     const indexDelta = currentIndex - previousIndexRef.current;
     const radius = Math.min(baseRadius + Math.abs(indexDelta) * 2, baseRadius + (isMobile ? 4 : 8));
     const movingForward = indexDelta >= 0;
-    const priorityOrder = [currentIndex];
+    const priorityOrder = [
+      currentIndex,
+      Math.min(currentIndex + 1, FRAME_COUNT - 1),
+      Math.max(currentIndex - 1, 0),
+    ];
+    const trailingRadius = Math.max(Math.round(radius * 0.35), 2);
 
     for (let distance = 1; distance <= radius; distance += 1) {
       const forwardIndex = currentIndex + (movingForward ? distance : -distance);
@@ -476,7 +504,7 @@ export function CinematicJourney() {
       if (forwardIndex >= 0 && forwardIndex < FRAME_COUNT) {
         priorityOrder.push(forwardIndex);
       }
-      if (backwardIndex >= 0 && backwardIndex < FRAME_COUNT) {
+      if (distance <= trailingRadius && backwardIndex >= 0 && backwardIndex < FRAME_COUNT) {
         priorityOrder.push(backwardIndex);
       }
     }
@@ -490,16 +518,15 @@ export function CinematicJourney() {
         ? MOBILE_CACHE_LIMIT
         : DESKTOP_CACHE_LIMIT;
     trimImageCache();
-    scheduleDraw(currentFrame);
     maxConcurrentLoadsRef.current = constrainedConnection ? 2 : isMobile ? 2 : 3;
-    loadQueueRef.current = priorityOrder
+    loadQueueRef.current = [...new Set(priorityOrder)]
       .filter((index) => !imageCacheRef.current.has(index) && !inFlightRef.current.has(index))
       .map((index, queuePosition) => ({
         index,
         priority: queuePosition === 0 || Math.abs(index - currentIndex) <= 2 ? "high" : "low",
       }));
     pumpLoadQueue();
-  }, [currentFrame, currentIndex, pumpLoadQueue, scheduleDraw, shouldReduceMotion, trimImageCache]);
+  }, [currentFrame, currentIndex, pumpLoadQueue, shouldReduceMotion, trimImageCache]);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -507,8 +534,8 @@ export function CinematicJourney() {
     const handleResize = () => {
       window.cancelAnimationFrame(resizeFrame);
       resizeFrame = window.requestAnimationFrame(() => {
-        renderedSourceIndexRef.current = -1;
-        scheduleDraw(currentFrameRef.current);
+        renderedSignatureRef.current = "";
+        scheduleDraw(pendingFrameRef.current);
       });
     };
     window.addEventListener("resize", handleResize);
