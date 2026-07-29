@@ -1,0 +1,3628 @@
+{
+  "project": "NEVORA",
+  "version": 10,
+  "source_directory": "frames-v010",
+  "start_frame": 204,
+  "end_frame": 719,
+  "frame_count": 516,
+  "timeline_fps": 24,
+  "width": 768,
+  "height": 768,
+  "format": "webp",
+  "quality": 78,
+  "total_bytes": 15520912,
+  "frames": [
+    {
+      "frame": 204,
+      "beat": "previous",
+      "source_frame": 204,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0204.webp",
+      "bytes": 48248
+    },
+    {
+      "frame": 205,
+      "beat": "previous",
+      "source_frame": 205,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0205.webp",
+      "bytes": 44268
+    },
+    {
+      "frame": 206,
+      "beat": "previous",
+      "source_frame": 206,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0206.webp",
+      "bytes": 41920
+    },
+    {
+      "frame": 207,
+      "beat": "previous",
+      "source_frame": 207,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0207.webp",
+      "bytes": 49216
+    },
+    {
+      "frame": 208,
+      "beat": "previous",
+      "source_frame": 208,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0208.webp",
+      "bytes": 37636
+    },
+    {
+      "frame": 209,
+      "beat": "previous",
+      "source_frame": 209,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0209.webp",
+      "bytes": 38224
+    },
+    {
+      "frame": 210,
+      "beat": "previous",
+      "source_frame": 210,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0210.webp",
+      "bytes": 43290
+    },
+    {
+      "frame": 211,
+      "beat": "previous",
+      "source_frame": 211,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0211.webp",
+      "bytes": 21852
+    },
+    {
+      "frame": 212,
+      "beat": "previous",
+      "source_frame": 212,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0212.webp",
+      "bytes": 31266
+    },
+    {
+      "frame": 213,
+      "beat": "previous",
+      "source_frame": 213,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0213.webp",
+      "bytes": 18696
+    },
+    {
+      "frame": 214,
+      "beat": "previous",
+      "source_frame": 214,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0214.webp",
+      "bytes": 26094
+    },
+    {
+      "frame": 215,
+      "beat": "previous",
+      "source_frame": 215,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0215.webp",
+      "bytes": 28162
+    },
+    {
+      "frame": 216,
+      "beat": "previous",
+      "source_frame": 216,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0216.webp",
+      "bytes": 19564
+    },
+    {
+      "frame": 217,
+      "beat": "previous",
+      "source_frame": 217,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0217.webp",
+      "bytes": 15996
+    },
+    {
+      "frame": 218,
+      "beat": "previous",
+      "source_frame": 218,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0218.webp",
+      "bytes": 13408
+    },
+    {
+      "frame": 219,
+      "beat": "previous",
+      "source_frame": 219,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0219.webp",
+      "bytes": 13644
+    },
+    {
+      "frame": 220,
+      "beat": "previous",
+      "source_frame": 220,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0220.webp",
+      "bytes": 9544
+    },
+    {
+      "frame": 221,
+      "beat": "previous",
+      "source_frame": 221,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0221.webp",
+      "bytes": 9232
+    },
+    {
+      "frame": 222,
+      "beat": "previous",
+      "source_frame": 222,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0222.webp",
+      "bytes": 10052
+    },
+    {
+      "frame": 223,
+      "beat": "previous",
+      "source_frame": 223,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0223.webp",
+      "bytes": 20070
+    },
+    {
+      "frame": 224,
+      "beat": "previous",
+      "source_frame": 224,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0224.webp",
+      "bytes": 21992
+    },
+    {
+      "frame": 225,
+      "beat": "previous",
+      "source_frame": 225,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0225.webp",
+      "bytes": 33966
+    },
+    {
+      "frame": 226,
+      "beat": "previous",
+      "source_frame": 226,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0226.webp",
+      "bytes": 36624
+    },
+    {
+      "frame": 227,
+      "beat": "previous",
+      "source_frame": 227,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0227.webp",
+      "bytes": 25472
+    },
+    {
+      "frame": 228,
+      "beat": "previous",
+      "source_frame": 228,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0228.webp",
+      "bytes": 22726
+    },
+    {
+      "frame": 229,
+      "beat": "previous",
+      "source_frame": 229,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0229.webp",
+      "bytes": 34508
+    },
+    {
+      "frame": 230,
+      "beat": "previous",
+      "source_frame": 230,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0230.webp",
+      "bytes": 36102
+    },
+    {
+      "frame": 231,
+      "beat": "previous",
+      "source_frame": 231,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0231.webp",
+      "bytes": 39362
+    },
+    {
+      "frame": 232,
+      "beat": "previous",
+      "source_frame": 232,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0232.webp",
+      "bytes": 30892
+    },
+    {
+      "frame": 233,
+      "beat": "previous",
+      "source_frame": 233,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0233.webp",
+      "bytes": 26098
+    },
+    {
+      "frame": 234,
+      "beat": "previous",
+      "source_frame": 234,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0234.webp",
+      "bytes": 26564
+    },
+    {
+      "frame": 235,
+      "beat": "previous",
+      "source_frame": 235,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0235.webp",
+      "bytes": 28736
+    },
+    {
+      "frame": 236,
+      "beat": "previous",
+      "source_frame": 236,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0236.webp",
+      "bytes": 25866
+    },
+    {
+      "frame": 237,
+      "beat": "previous",
+      "source_frame": 237,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0237.webp",
+      "bytes": 41114
+    },
+    {
+      "frame": 238,
+      "beat": "previous",
+      "source_frame": 238,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0238.webp",
+      "bytes": 27660
+    },
+    {
+      "frame": 239,
+      "beat": "previous",
+      "source_frame": 239,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0239.webp",
+      "bytes": 25682
+    },
+    {
+      "frame": 240,
+      "beat": "previous",
+      "source_frame": 240,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0240.webp",
+      "bytes": 28574
+    },
+    {
+      "frame": 241,
+      "beat": "previous",
+      "source_frame": 241,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0241.webp",
+      "bytes": 28280
+    },
+    {
+      "frame": 242,
+      "beat": "previous",
+      "source_frame": 242,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0242.webp",
+      "bytes": 31916
+    },
+    {
+      "frame": 243,
+      "beat": "previous",
+      "source_frame": 243,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0243.webp",
+      "bytes": 28830
+    },
+    {
+      "frame": 244,
+      "beat": "previous",
+      "source_frame": 244,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0244.webp",
+      "bytes": 31850
+    },
+    {
+      "frame": 245,
+      "beat": "previous",
+      "source_frame": 245,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0245.webp",
+      "bytes": 28430
+    },
+    {
+      "frame": 246,
+      "beat": "previous",
+      "source_frame": 246,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0246.webp",
+      "bytes": 31268
+    },
+    {
+      "frame": 247,
+      "beat": "previous",
+      "source_frame": 247,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0247.webp",
+      "bytes": 33948
+    },
+    {
+      "frame": 248,
+      "beat": "previous",
+      "source_frame": 248,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0248.webp",
+      "bytes": 30552
+    },
+    {
+      "frame": 249,
+      "beat": "previous",
+      "source_frame": 249,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0249.webp",
+      "bytes": 33230
+    },
+    {
+      "frame": 250,
+      "beat": "previous",
+      "source_frame": 250,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0250.webp",
+      "bytes": 29418
+    },
+    {
+      "frame": 251,
+      "beat": "previous",
+      "source_frame": 251,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0251.webp",
+      "bytes": 28066
+    },
+    {
+      "frame": 252,
+      "beat": "previous",
+      "source_frame": 252,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0252.webp",
+      "bytes": 32436
+    },
+    {
+      "frame": 253,
+      "beat": "previous",
+      "source_frame": 253,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0253.webp",
+      "bytes": 36194
+    },
+    {
+      "frame": 254,
+      "beat": "previous",
+      "source_frame": 254,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0254.webp",
+      "bytes": 33330
+    },
+    {
+      "frame": 255,
+      "beat": "previous",
+      "source_frame": 255,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0255.webp",
+      "bytes": 32190
+    },
+    {
+      "frame": 256,
+      "beat": "previous",
+      "source_frame": 256,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0256.webp",
+      "bytes": 30152
+    },
+    {
+      "frame": 257,
+      "beat": "previous",
+      "source_frame": 257,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0257.webp",
+      "bytes": 33886
+    },
+    {
+      "frame": 258,
+      "beat": "previous",
+      "source_frame": 258,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0258.webp",
+      "bytes": 34196
+    },
+    {
+      "frame": 259,
+      "beat": "previous",
+      "source_frame": 259,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0259.webp",
+      "bytes": 35712
+    },
+    {
+      "frame": 260,
+      "beat": "previous",
+      "source_frame": 260,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0260.webp",
+      "bytes": 45450
+    },
+    {
+      "frame": 261,
+      "beat": "previous",
+      "source_frame": 261,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0261.webp",
+      "bytes": 45846
+    },
+    {
+      "frame": 262,
+      "beat": "previous",
+      "source_frame": 262,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0262.webp",
+      "bytes": 44614
+    },
+    {
+      "frame": 263,
+      "beat": "previous",
+      "source_frame": 263,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0263.webp",
+      "bytes": 42650
+    },
+    {
+      "frame": 264,
+      "beat": "previous",
+      "source_frame": 264,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0264.webp",
+      "bytes": 40532
+    },
+    {
+      "frame": 265,
+      "beat": "previous",
+      "source_frame": 265,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0265.webp",
+      "bytes": 40182
+    },
+    {
+      "frame": 266,
+      "beat": "previous",
+      "source_frame": 266,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0266.webp",
+      "bytes": 40030
+    },
+    {
+      "frame": 267,
+      "beat": "previous",
+      "source_frame": 267,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0267.webp",
+      "bytes": 39802
+    },
+    {
+      "frame": 268,
+      "beat": "previous",
+      "source_frame": 268,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0268.webp",
+      "bytes": 32210
+    },
+    {
+      "frame": 269,
+      "beat": "previous",
+      "source_frame": 269,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0269.webp",
+      "bytes": 32680
+    },
+    {
+      "frame": 270,
+      "beat": "previous",
+      "source_frame": 270,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0270.webp",
+      "bytes": 32848
+    },
+    {
+      "frame": 271,
+      "beat": "previous",
+      "source_frame": 271,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0271.webp",
+      "bytes": 32116
+    },
+    {
+      "frame": 272,
+      "beat": "previous",
+      "source_frame": 272,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0272.webp",
+      "bytes": 32212
+    },
+    {
+      "frame": 273,
+      "beat": "previous",
+      "source_frame": 273,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0273.webp",
+      "bytes": 31714
+    },
+    {
+      "frame": 274,
+      "beat": "previous",
+      "source_frame": 274,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0274.webp",
+      "bytes": 31058
+    },
+    {
+      "frame": 275,
+      "beat": "previous",
+      "source_frame": 275,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0275.webp",
+      "bytes": 29836
+    },
+    {
+      "frame": 276,
+      "beat": "previous",
+      "source_frame": 276,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0276.webp",
+      "bytes": 38120
+    },
+    {
+      "frame": 277,
+      "beat": "previous",
+      "source_frame": 277,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0277.webp",
+      "bytes": 40096
+    },
+    {
+      "frame": 278,
+      "beat": "previous",
+      "source_frame": 278,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0278.webp",
+      "bytes": 39136
+    },
+    {
+      "frame": 279,
+      "beat": "previous",
+      "source_frame": 279,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0279.webp",
+      "bytes": 39190
+    },
+    {
+      "frame": 280,
+      "beat": "previous",
+      "source_frame": 280,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0280.webp",
+      "bytes": 36748
+    },
+    {
+      "frame": 281,
+      "beat": "previous",
+      "source_frame": 281,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0281.webp",
+      "bytes": 37742
+    },
+    {
+      "frame": 282,
+      "beat": "previous",
+      "source_frame": 282,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0282.webp",
+      "bytes": 36206
+    },
+    {
+      "frame": 283,
+      "beat": "previous",
+      "source_frame": 283,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0283.webp",
+      "bytes": 33368
+    },
+    {
+      "frame": 284,
+      "beat": "previous",
+      "source_frame": 284,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0284.webp",
+      "bytes": 44814
+    },
+    {
+      "frame": 285,
+      "beat": "previous",
+      "source_frame": 285,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0285.webp",
+      "bytes": 41866
+    },
+    {
+      "frame": 286,
+      "beat": "previous",
+      "source_frame": 286,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0286.webp",
+      "bytes": 41606
+    },
+    {
+      "frame": 287,
+      "beat": "previous",
+      "source_frame": 287,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0287.webp",
+      "bytes": 43412
+    },
+    {
+      "frame": 288,
+      "beat": "previous",
+      "source_frame": 288,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0288.webp",
+      "bytes": 43412
+    },
+    {
+      "frame": 289,
+      "beat": "previous",
+      "source_frame": 289,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0289.webp",
+      "bytes": 34274
+    },
+    {
+      "frame": 290,
+      "beat": "previous",
+      "source_frame": 290,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0290.webp",
+      "bytes": 28094
+    },
+    {
+      "frame": 291,
+      "beat": "previous",
+      "source_frame": 291,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0291.webp",
+      "bytes": 27374
+    },
+    {
+      "frame": 292,
+      "beat": "previous",
+      "source_frame": 292,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0292.webp",
+      "bytes": 23772
+    },
+    {
+      "frame": 293,
+      "beat": "previous",
+      "source_frame": 293,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0293.webp",
+      "bytes": 22060
+    },
+    {
+      "frame": 294,
+      "beat": "previous",
+      "source_frame": 294,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0294.webp",
+      "bytes": 21264
+    },
+    {
+      "frame": 295,
+      "beat": "previous",
+      "source_frame": 295,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0295.webp",
+      "bytes": 27916
+    },
+    {
+      "frame": 296,
+      "beat": "previous",
+      "source_frame": 296,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0296.webp",
+      "bytes": 31220
+    },
+    {
+      "frame": 297,
+      "beat": "previous",
+      "source_frame": 297,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0297.webp",
+      "bytes": 43624
+    },
+    {
+      "frame": 298,
+      "beat": "previous",
+      "source_frame": 298,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0298.webp",
+      "bytes": 44164
+    },
+    {
+      "frame": 299,
+      "beat": "previous",
+      "source_frame": 299,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0299.webp",
+      "bytes": 44158
+    },
+    {
+      "frame": 300,
+      "beat": "previous",
+      "source_frame": 300,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0300.webp",
+      "bytes": 30846
+    },
+    {
+      "frame": 301,
+      "beat": "previous",
+      "source_frame": 301,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0301.webp",
+      "bytes": 30778
+    },
+    {
+      "frame": 302,
+      "beat": "previous",
+      "source_frame": 302,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0302.webp",
+      "bytes": 30534
+    },
+    {
+      "frame": 303,
+      "beat": "previous",
+      "source_frame": 303,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0303.webp",
+      "bytes": 30804
+    },
+    {
+      "frame": 304,
+      "beat": "previous",
+      "source_frame": 304,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0304.webp",
+      "bytes": 30174
+    },
+    {
+      "frame": 305,
+      "beat": "previous",
+      "source_frame": 305,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0305.webp",
+      "bytes": 29526
+    },
+    {
+      "frame": 306,
+      "beat": "previous",
+      "source_frame": 306,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0306.webp",
+      "bytes": 29216
+    },
+    {
+      "frame": 307,
+      "beat": "previous",
+      "source_frame": 307,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0307.webp",
+      "bytes": 29126
+    },
+    {
+      "frame": 308,
+      "beat": "previous",
+      "source_frame": 308,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0308.webp",
+      "bytes": 26154
+    },
+    {
+      "frame": 309,
+      "beat": "previous",
+      "source_frame": 309,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0309.webp",
+      "bytes": 26524
+    },
+    {
+      "frame": 310,
+      "beat": "previous",
+      "source_frame": 310,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0310.webp",
+      "bytes": 28120
+    },
+    {
+      "frame": 311,
+      "beat": "previous",
+      "source_frame": 311,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0311.webp",
+      "bytes": 46528
+    },
+    {
+      "frame": 312,
+      "beat": "previous",
+      "source_frame": 312,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0312.webp",
+      "bytes": 47572
+    },
+    {
+      "frame": 313,
+      "beat": "previous",
+      "source_frame": 313,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0313.webp",
+      "bytes": 47080
+    },
+    {
+      "frame": 314,
+      "beat": "previous",
+      "source_frame": 314,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0314.webp",
+      "bytes": 48422
+    },
+    {
+      "frame": 315,
+      "beat": "previous",
+      "source_frame": 315,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0315.webp",
+      "bytes": 60624
+    },
+    {
+      "frame": 316,
+      "beat": "previous",
+      "source_frame": 316,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0316.webp",
+      "bytes": 53002
+    },
+    {
+      "frame": 317,
+      "beat": "previous",
+      "source_frame": 317,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0317.webp",
+      "bytes": 51984
+    },
+    {
+      "frame": 318,
+      "beat": "previous",
+      "source_frame": 318,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0318.webp",
+      "bytes": 49830
+    },
+    {
+      "frame": 319,
+      "beat": "previous",
+      "source_frame": 319,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0319.webp",
+      "bytes": 49520
+    },
+    {
+      "frame": 320,
+      "beat": "previous",
+      "source_frame": 320,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0320.webp",
+      "bytes": 51140
+    },
+    {
+      "frame": 321,
+      "beat": "previous",
+      "source_frame": 321,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0321.webp",
+      "bytes": 51472
+    },
+    {
+      "frame": 322,
+      "beat": "previous",
+      "source_frame": 322,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0322.webp",
+      "bytes": 48506
+    },
+    {
+      "frame": 323,
+      "beat": "previous",
+      "source_frame": 323,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0323.webp",
+      "bytes": 51654
+    },
+    {
+      "frame": 324,
+      "beat": "previous",
+      "source_frame": 324,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0324.webp",
+      "bytes": 45574
+    },
+    {
+      "frame": 325,
+      "beat": "previous",
+      "source_frame": 325,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0325.webp",
+      "bytes": 46328
+    },
+    {
+      "frame": 326,
+      "beat": "previous",
+      "source_frame": 326,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0326.webp",
+      "bytes": 48202
+    },
+    {
+      "frame": 327,
+      "beat": "previous",
+      "source_frame": 327,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0327.webp",
+      "bytes": 71936
+    },
+    {
+      "frame": 328,
+      "beat": "previous",
+      "source_frame": 328,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0328.webp",
+      "bytes": 50216
+    },
+    {
+      "frame": 329,
+      "beat": "previous",
+      "source_frame": 329,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0329.webp",
+      "bytes": 50618
+    },
+    {
+      "frame": 330,
+      "beat": "previous",
+      "source_frame": 330,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0330.webp",
+      "bytes": 46804
+    },
+    {
+      "frame": 331,
+      "beat": "previous",
+      "source_frame": 331,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0331.webp",
+      "bytes": 47316
+    },
+    {
+      "frame": 332,
+      "beat": "previous",
+      "source_frame": 332,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0332.webp",
+      "bytes": 58314
+    },
+    {
+      "frame": 333,
+      "beat": "previous",
+      "source_frame": 333,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0333.webp",
+      "bytes": 56078
+    },
+    {
+      "frame": 334,
+      "beat": "previous",
+      "source_frame": 334,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0334.webp",
+      "bytes": 46426
+    },
+    {
+      "frame": 335,
+      "beat": "previous",
+      "source_frame": 335,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0335.webp",
+      "bytes": 46590
+    },
+    {
+      "frame": 336,
+      "beat": "previous",
+      "source_frame": 336,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0336.webp",
+      "bytes": 51498
+    },
+    {
+      "frame": 337,
+      "beat": "previous",
+      "source_frame": 337,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0337.webp",
+      "bytes": 42210
+    },
+    {
+      "frame": 338,
+      "beat": "previous",
+      "source_frame": 338,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0338.webp",
+      "bytes": 39168
+    },
+    {
+      "frame": 339,
+      "beat": "previous",
+      "source_frame": 339,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0339.webp",
+      "bytes": 40120
+    },
+    {
+      "frame": 340,
+      "beat": "previous",
+      "source_frame": 340,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0340.webp",
+      "bytes": 45160
+    },
+    {
+      "frame": 341,
+      "beat": "previous",
+      "source_frame": 341,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0341.webp",
+      "bytes": 44424
+    },
+    {
+      "frame": 342,
+      "beat": "previous",
+      "source_frame": 342,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0342.webp",
+      "bytes": 45752
+    },
+    {
+      "frame": 343,
+      "beat": "previous",
+      "source_frame": 343,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0343.webp",
+      "bytes": 42682
+    },
+    {
+      "frame": 344,
+      "beat": "previous",
+      "source_frame": 344,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0344.webp",
+      "bytes": 43162
+    },
+    {
+      "frame": 345,
+      "beat": "previous",
+      "source_frame": 345,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0345.webp",
+      "bytes": 42088
+    },
+    {
+      "frame": 346,
+      "beat": "previous",
+      "source_frame": 346,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0346.webp",
+      "bytes": 42758
+    },
+    {
+      "frame": 347,
+      "beat": "previous",
+      "source_frame": 347,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0347.webp",
+      "bytes": 42598
+    },
+    {
+      "frame": 348,
+      "beat": "previous",
+      "source_frame": 348,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0348.webp",
+      "bytes": 36064
+    },
+    {
+      "frame": 349,
+      "beat": "previous",
+      "source_frame": 349,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0349.webp",
+      "bytes": 35494
+    },
+    {
+      "frame": 350,
+      "beat": "previous",
+      "source_frame": 350,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0350.webp",
+      "bytes": 35992
+    },
+    {
+      "frame": 351,
+      "beat": "previous",
+      "source_frame": 351,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0351.webp",
+      "bytes": 21300
+    },
+    {
+      "frame": 352,
+      "beat": "previous",
+      "source_frame": 352,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0352.webp",
+      "bytes": 22052
+    },
+    {
+      "frame": 353,
+      "beat": "previous",
+      "source_frame": 353,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0353.webp",
+      "bytes": 22064
+    },
+    {
+      "frame": 354,
+      "beat": "previous",
+      "source_frame": 354,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0354.webp",
+      "bytes": 22432
+    },
+    {
+      "frame": 355,
+      "beat": "previous",
+      "source_frame": 355,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0355.webp",
+      "bytes": 23212
+    },
+    {
+      "frame": 356,
+      "beat": "previous",
+      "source_frame": 356,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0356.webp",
+      "bytes": 30846
+    },
+    {
+      "frame": 357,
+      "beat": "previous",
+      "source_frame": 357,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0357.webp",
+      "bytes": 29450
+    },
+    {
+      "frame": 358,
+      "beat": "previous",
+      "source_frame": 358,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0358.webp",
+      "bytes": 25806
+    },
+    {
+      "frame": 359,
+      "beat": "previous",
+      "source_frame": 359,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0359.webp",
+      "bytes": 26316
+    },
+    {
+      "frame": 360,
+      "beat": "previous",
+      "source_frame": 360,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0360.webp",
+      "bytes": 29514
+    },
+    {
+      "frame": 361,
+      "beat": "previous",
+      "source_frame": 361,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0361.webp",
+      "bytes": 30088
+    },
+    {
+      "frame": 362,
+      "beat": "previous",
+      "source_frame": 362,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0362.webp",
+      "bytes": 29366
+    },
+    {
+      "frame": 363,
+      "beat": "previous",
+      "source_frame": 363,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0363.webp",
+      "bytes": 27632
+    },
+    {
+      "frame": 364,
+      "beat": "previous",
+      "source_frame": 364,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0364.webp",
+      "bytes": 21504
+    },
+    {
+      "frame": 365,
+      "beat": "previous",
+      "source_frame": 365,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0365.webp",
+      "bytes": 25058
+    },
+    {
+      "frame": 366,
+      "beat": "previous",
+      "source_frame": 366,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0366.webp",
+      "bytes": 30072
+    },
+    {
+      "frame": 367,
+      "beat": "previous",
+      "source_frame": 367,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0367.webp",
+      "bytes": 30754
+    },
+    {
+      "frame": 368,
+      "beat": "previous",
+      "source_frame": 368,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0368.webp",
+      "bytes": 27940
+    },
+    {
+      "frame": 369,
+      "beat": "previous",
+      "source_frame": 369,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0369.webp",
+      "bytes": 33198
+    },
+    {
+      "frame": 370,
+      "beat": "previous",
+      "source_frame": 370,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0370.webp",
+      "bytes": 34692
+    },
+    {
+      "frame": 371,
+      "beat": "previous",
+      "source_frame": 371,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0371.webp",
+      "bytes": 28916
+    },
+    {
+      "frame": 372,
+      "beat": "previous",
+      "source_frame": 372,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0372.webp",
+      "bytes": 28740
+    },
+    {
+      "frame": 373,
+      "beat": "previous",
+      "source_frame": 373,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0373.webp",
+      "bytes": 27150
+    },
+    {
+      "frame": 374,
+      "beat": "previous",
+      "source_frame": 374,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0374.webp",
+      "bytes": 26262
+    },
+    {
+      "frame": 375,
+      "beat": "previous",
+      "source_frame": 375,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0375.webp",
+      "bytes": 25908
+    },
+    {
+      "frame": 376,
+      "beat": "previous",
+      "source_frame": 376,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0376.webp",
+      "bytes": 28576
+    },
+    {
+      "frame": 377,
+      "beat": "previous",
+      "source_frame": 377,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0377.webp",
+      "bytes": 30728
+    },
+    {
+      "frame": 378,
+      "beat": "previous",
+      "source_frame": 378,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0378.webp",
+      "bytes": 32582
+    },
+    {
+      "frame": 379,
+      "beat": "previous",
+      "source_frame": 379,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0379.webp",
+      "bytes": 32460
+    },
+    {
+      "frame": 380,
+      "beat": "previous",
+      "source_frame": 380,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0380.webp",
+      "bytes": 30600
+    },
+    {
+      "frame": 381,
+      "beat": "previous",
+      "source_frame": 381,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0381.webp",
+      "bytes": 34408
+    },
+    {
+      "frame": 382,
+      "beat": "previous",
+      "source_frame": 382,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0382.webp",
+      "bytes": 31680
+    },
+    {
+      "frame": 383,
+      "beat": "previous",
+      "source_frame": 383,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0383.webp",
+      "bytes": 28920
+    },
+    {
+      "frame": 384,
+      "beat": "previous",
+      "source_frame": 384,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0384.webp",
+      "bytes": 29374
+    },
+    {
+      "frame": 385,
+      "beat": "previous",
+      "source_frame": 385,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0385.webp",
+      "bytes": 31544
+    },
+    {
+      "frame": 386,
+      "beat": "previous",
+      "source_frame": 386,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0386.webp",
+      "bytes": 32032
+    },
+    {
+      "frame": 387,
+      "beat": "previous",
+      "source_frame": 387,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0387.webp",
+      "bytes": 31104
+    },
+    {
+      "frame": 388,
+      "beat": "previous",
+      "source_frame": 388,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0388.webp",
+      "bytes": 31482
+    },
+    {
+      "frame": 389,
+      "beat": "previous",
+      "source_frame": 389,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0389.webp",
+      "bytes": 31456
+    },
+    {
+      "frame": 390,
+      "beat": "previous",
+      "source_frame": 390,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0390.webp",
+      "bytes": 30646
+    },
+    {
+      "frame": 391,
+      "beat": "previous",
+      "source_frame": 391,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0391.webp",
+      "bytes": 30004
+    },
+    {
+      "frame": 392,
+      "beat": "previous",
+      "source_frame": 392,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0392.webp",
+      "bytes": 30682
+    },
+    {
+      "frame": 393,
+      "beat": "previous",
+      "source_frame": 393,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0393.webp",
+      "bytes": 31658
+    },
+    {
+      "frame": 394,
+      "beat": "previous",
+      "source_frame": 394,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0394.webp",
+      "bytes": 31288
+    },
+    {
+      "frame": 395,
+      "beat": "previous",
+      "source_frame": 395,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0395.webp",
+      "bytes": 30606
+    },
+    {
+      "frame": 396,
+      "beat": "previous",
+      "source_frame": 396,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0396.webp",
+      "bytes": 31884
+    },
+    {
+      "frame": 397,
+      "beat": "previous",
+      "source_frame": 397,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0397.webp",
+      "bytes": 31298
+    },
+    {
+      "frame": 398,
+      "beat": "previous",
+      "source_frame": 398,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0398.webp",
+      "bytes": 31122
+    },
+    {
+      "frame": 399,
+      "beat": "previous",
+      "source_frame": 399,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0399.webp",
+      "bytes": 31394
+    },
+    {
+      "frame": 400,
+      "beat": "previous",
+      "source_frame": 400,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0400.webp",
+      "bytes": 33426
+    },
+    {
+      "frame": 401,
+      "beat": "previous",
+      "source_frame": 401,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0401.webp",
+      "bytes": 33302
+    },
+    {
+      "frame": 402,
+      "beat": "previous",
+      "source_frame": 402,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0402.webp",
+      "bytes": 33708
+    },
+    {
+      "frame": 403,
+      "beat": "previous",
+      "source_frame": 403,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0403.webp",
+      "bytes": 33618
+    },
+    {
+      "frame": 404,
+      "beat": "previous",
+      "source_frame": 404,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0404.webp",
+      "bytes": 33554
+    },
+    {
+      "frame": 405,
+      "beat": "previous",
+      "source_frame": 405,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0405.webp",
+      "bytes": 33838
+    },
+    {
+      "frame": 406,
+      "beat": "previous",
+      "source_frame": 406,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0406.webp",
+      "bytes": 33628
+    },
+    {
+      "frame": 407,
+      "beat": "previous",
+      "source_frame": 407,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0407.webp",
+      "bytes": 33772
+    },
+    {
+      "frame": 408,
+      "beat": "previous",
+      "source_frame": 408,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0408.webp",
+      "bytes": 26378
+    },
+    {
+      "frame": 409,
+      "beat": "previous",
+      "source_frame": 409,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0409.webp",
+      "bytes": 26394
+    },
+    {
+      "frame": 410,
+      "beat": "previous",
+      "source_frame": 410,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0410.webp",
+      "bytes": 26048
+    },
+    {
+      "frame": 411,
+      "beat": "previous",
+      "source_frame": 411,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0411.webp",
+      "bytes": 25906
+    },
+    {
+      "frame": 412,
+      "beat": "previous",
+      "source_frame": 412,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0412.webp",
+      "bytes": 25902
+    },
+    {
+      "frame": 413,
+      "beat": "previous",
+      "source_frame": 413,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0413.webp",
+      "bytes": 26710
+    },
+    {
+      "frame": 414,
+      "beat": "previous",
+      "source_frame": 414,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0414.webp",
+      "bytes": 26492
+    },
+    {
+      "frame": 415,
+      "beat": "previous",
+      "source_frame": 415,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0415.webp",
+      "bytes": 26146
+    },
+    {
+      "frame": 416,
+      "beat": "previous",
+      "source_frame": 416,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0416.webp",
+      "bytes": 27110
+    },
+    {
+      "frame": 417,
+      "beat": "previous",
+      "source_frame": 417,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0417.webp",
+      "bytes": 27452
+    },
+    {
+      "frame": 418,
+      "beat": "previous",
+      "source_frame": 418,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0418.webp",
+      "bytes": 27302
+    },
+    {
+      "frame": 419,
+      "beat": "previous",
+      "source_frame": 419,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0419.webp",
+      "bytes": 26974
+    },
+    {
+      "frame": 420,
+      "beat": "previous",
+      "source_frame": 420,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0420.webp",
+      "bytes": 28744
+    },
+    {
+      "frame": 421,
+      "beat": "previous",
+      "source_frame": 421,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0421.webp",
+      "bytes": 29906
+    },
+    {
+      "frame": 422,
+      "beat": "previous",
+      "source_frame": 422,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0422.webp",
+      "bytes": 29392
+    },
+    {
+      "frame": 423,
+      "beat": "previous",
+      "source_frame": 423,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0423.webp",
+      "bytes": 29270
+    },
+    {
+      "frame": 424,
+      "beat": "previous",
+      "source_frame": 424,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0424.webp",
+      "bytes": 28374
+    },
+    {
+      "frame": 425,
+      "beat": "previous",
+      "source_frame": 425,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0425.webp",
+      "bytes": 29508
+    },
+    {
+      "frame": 426,
+      "beat": "previous",
+      "source_frame": 426,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0426.webp",
+      "bytes": 27300
+    },
+    {
+      "frame": 427,
+      "beat": "previous",
+      "source_frame": 427,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0427.webp",
+      "bytes": 27820
+    },
+    {
+      "frame": 428,
+      "beat": "previous",
+      "source_frame": 428,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0428.webp",
+      "bytes": 27270
+    },
+    {
+      "frame": 429,
+      "beat": "previous",
+      "source_frame": 429,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0429.webp",
+      "bytes": 26568
+    },
+    {
+      "frame": 430,
+      "beat": "previous",
+      "source_frame": 430,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0430.webp",
+      "bytes": 27666
+    },
+    {
+      "frame": 431,
+      "beat": "previous",
+      "source_frame": 431,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0431.webp",
+      "bytes": 27804
+    },
+    {
+      "frame": 432,
+      "beat": "previous",
+      "source_frame": 432,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0432.webp",
+      "bytes": 28106
+    },
+    {
+      "frame": 433,
+      "beat": "previous",
+      "source_frame": 433,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0433.webp",
+      "bytes": 29530
+    },
+    {
+      "frame": 434,
+      "beat": "previous",
+      "source_frame": 434,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0434.webp",
+      "bytes": 29012
+    },
+    {
+      "frame": 435,
+      "beat": "previous",
+      "source_frame": 435,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0435.webp",
+      "bytes": 28612
+    },
+    {
+      "frame": 436,
+      "beat": "previous",
+      "source_frame": 436,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0436.webp",
+      "bytes": 27936
+    },
+    {
+      "frame": 437,
+      "beat": "previous",
+      "source_frame": 437,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0437.webp",
+      "bytes": 29224
+    },
+    {
+      "frame": 438,
+      "beat": "previous",
+      "source_frame": 438,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0438.webp",
+      "bytes": 26620
+    },
+    {
+      "frame": 439,
+      "beat": "previous",
+      "source_frame": 439,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0439.webp",
+      "bytes": 27310
+    },
+    {
+      "frame": 440,
+      "beat": "previous",
+      "source_frame": 440,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0440.webp",
+      "bytes": 27282
+    },
+    {
+      "frame": 441,
+      "beat": "previous",
+      "source_frame": 441,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0441.webp",
+      "bytes": 26756
+    },
+    {
+      "frame": 442,
+      "beat": "previous",
+      "source_frame": 442,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0442.webp",
+      "bytes": 27746
+    },
+    {
+      "frame": 443,
+      "beat": "previous",
+      "source_frame": 443,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0443.webp",
+      "bytes": 27754
+    },
+    {
+      "frame": 444,
+      "beat": "previous",
+      "source_frame": 444,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0444.webp",
+      "bytes": 28568
+    },
+    {
+      "frame": 445,
+      "beat": "previous",
+      "source_frame": 445,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0445.webp",
+      "bytes": 28770
+    },
+    {
+      "frame": 446,
+      "beat": "previous",
+      "source_frame": 446,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0446.webp",
+      "bytes": 27982
+    },
+    {
+      "frame": 447,
+      "beat": "previous",
+      "source_frame": 447,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0447.webp",
+      "bytes": 28326
+    },
+    {
+      "frame": 448,
+      "beat": "previous",
+      "source_frame": 448,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0448.webp",
+      "bytes": 28742
+    },
+    {
+      "frame": 449,
+      "beat": "previous",
+      "source_frame": 449,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0449.webp",
+      "bytes": 29012
+    },
+    {
+      "frame": 450,
+      "beat": "previous",
+      "source_frame": 450,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0450.webp",
+      "bytes": 28892
+    },
+    {
+      "frame": 451,
+      "beat": "previous",
+      "source_frame": 451,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0451.webp",
+      "bytes": 28564
+    },
+    {
+      "frame": 452,
+      "beat": "previous",
+      "source_frame": 452,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0452.webp",
+      "bytes": 28474
+    },
+    {
+      "frame": 453,
+      "beat": "previous",
+      "source_frame": 453,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0453.webp",
+      "bytes": 29798
+    },
+    {
+      "frame": 454,
+      "beat": "previous",
+      "source_frame": 454,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0454.webp",
+      "bytes": 29690
+    },
+    {
+      "frame": 455,
+      "beat": "previous",
+      "source_frame": 455,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0455.webp",
+      "bytes": 29566
+    },
+    {
+      "frame": 456,
+      "beat": "previous",
+      "source_frame": 456,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0456.webp",
+      "bytes": 33734
+    },
+    {
+      "frame": 457,
+      "beat": "previous",
+      "source_frame": 457,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0457.webp",
+      "bytes": 37256
+    },
+    {
+      "frame": 458,
+      "beat": "previous",
+      "source_frame": 458,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0458.webp",
+      "bytes": 34258
+    },
+    {
+      "frame": 459,
+      "beat": "previous",
+      "source_frame": 459,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0459.webp",
+      "bytes": 32294
+    },
+    {
+      "frame": 460,
+      "beat": "previous",
+      "source_frame": 460,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0460.webp",
+      "bytes": 33258
+    },
+    {
+      "frame": 461,
+      "beat": "previous",
+      "source_frame": 461,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0461.webp",
+      "bytes": 33126
+    },
+    {
+      "frame": 462,
+      "beat": "previous",
+      "source_frame": 462,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0462.webp",
+      "bytes": 33040
+    },
+    {
+      "frame": 463,
+      "beat": "previous",
+      "source_frame": 463,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0463.webp",
+      "bytes": 33398
+    },
+    {
+      "frame": 464,
+      "beat": "previous",
+      "source_frame": 464,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0464.webp",
+      "bytes": 32328
+    },
+    {
+      "frame": 465,
+      "beat": "previous",
+      "source_frame": 465,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0465.webp",
+      "bytes": 32738
+    },
+    {
+      "frame": 466,
+      "beat": "previous",
+      "source_frame": 466,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0466.webp",
+      "bytes": 31866
+    },
+    {
+      "frame": 467,
+      "beat": "previous",
+      "source_frame": 467,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0467.webp",
+      "bytes": 31826
+    },
+    {
+      "frame": 468,
+      "beat": "previous",
+      "source_frame": 468,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0468.webp",
+      "bytes": 33050
+    },
+    {
+      "frame": 469,
+      "beat": "previous",
+      "source_frame": 469,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0469.webp",
+      "bytes": 34470
+    },
+    {
+      "frame": 470,
+      "beat": "previous",
+      "source_frame": 470,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0470.webp",
+      "bytes": 32772
+    },
+    {
+      "frame": 471,
+      "beat": "previous",
+      "source_frame": 471,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0471.webp",
+      "bytes": 31736
+    },
+    {
+      "frame": 472,
+      "beat": "previous",
+      "source_frame": 472,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0472.webp",
+      "bytes": 33512
+    },
+    {
+      "frame": 473,
+      "beat": "previous",
+      "source_frame": 473,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0473.webp",
+      "bytes": 32628
+    },
+    {
+      "frame": 474,
+      "beat": "previous",
+      "source_frame": 474,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0474.webp",
+      "bytes": 31844
+    },
+    {
+      "frame": 475,
+      "beat": "previous",
+      "source_frame": 475,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0475.webp",
+      "bytes": 32162
+    },
+    {
+      "frame": 476,
+      "beat": "previous",
+      "source_frame": 476,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0476.webp",
+      "bytes": 32302
+    },
+    {
+      "frame": 477,
+      "beat": "previous",
+      "source_frame": 477,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0477.webp",
+      "bytes": 31876
+    },
+    {
+      "frame": 478,
+      "beat": "previous",
+      "source_frame": 478,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0478.webp",
+      "bytes": 31204
+    },
+    {
+      "frame": 479,
+      "beat": "previous",
+      "source_frame": 479,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0479.webp",
+      "bytes": 31930
+    },
+    {
+      "frame": 480,
+      "beat": "previous",
+      "source_frame": 480,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0480.webp",
+      "bytes": 30782
+    },
+    {
+      "frame": 481,
+      "beat": "previous",
+      "source_frame": 481,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0481.webp",
+      "bytes": 29278
+    },
+    {
+      "frame": 482,
+      "beat": "previous",
+      "source_frame": 482,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0482.webp",
+      "bytes": 24132
+    },
+    {
+      "frame": 483,
+      "beat": "previous",
+      "source_frame": 483,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0483.webp",
+      "bytes": 22208
+    },
+    {
+      "frame": 484,
+      "beat": "previous",
+      "source_frame": 484,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0484.webp",
+      "bytes": 26144
+    },
+    {
+      "frame": 485,
+      "beat": "previous",
+      "source_frame": 485,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0485.webp",
+      "bytes": 27042
+    },
+    {
+      "frame": 486,
+      "beat": "previous",
+      "source_frame": 486,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0486.webp",
+      "bytes": 28056
+    },
+    {
+      "frame": 487,
+      "beat": "previous",
+      "source_frame": 487,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0487.webp",
+      "bytes": 27498
+    },
+    {
+      "frame": 488,
+      "beat": "previous",
+      "source_frame": 488,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0488.webp",
+      "bytes": 28986
+    },
+    {
+      "frame": 489,
+      "beat": "previous",
+      "source_frame": 489,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0489.webp",
+      "bytes": 28912
+    },
+    {
+      "frame": 490,
+      "beat": "previous",
+      "source_frame": 490,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0490.webp",
+      "bytes": 30078
+    },
+    {
+      "frame": 491,
+      "beat": "previous",
+      "source_frame": 491,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0491.webp",
+      "bytes": 30948
+    },
+    {
+      "frame": 492,
+      "beat": "previous",
+      "source_frame": 492,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0492.webp",
+      "bytes": 43008
+    },
+    {
+      "frame": 493,
+      "beat": "previous",
+      "source_frame": 493,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0493.webp",
+      "bytes": 29748
+    },
+    {
+      "frame": 494,
+      "beat": "previous",
+      "source_frame": 494,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0494.webp",
+      "bytes": 27724
+    },
+    {
+      "frame": 495,
+      "beat": "previous",
+      "source_frame": 495,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0495.webp",
+      "bytes": 23858
+    },
+    {
+      "frame": 496,
+      "beat": "previous",
+      "source_frame": 496,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0496.webp",
+      "bytes": 23416
+    },
+    {
+      "frame": 497,
+      "beat": "previous",
+      "source_frame": 497,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0497.webp",
+      "bytes": 21558
+    },
+    {
+      "frame": 498,
+      "beat": "previous",
+      "source_frame": 498,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0498.webp",
+      "bytes": 20942
+    },
+    {
+      "frame": 499,
+      "beat": "previous",
+      "source_frame": 499,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0499.webp",
+      "bytes": 19002
+    },
+    {
+      "frame": 500,
+      "beat": "previous",
+      "source_frame": 500,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0500.webp",
+      "bytes": 17192
+    },
+    {
+      "frame": 501,
+      "beat": "previous",
+      "source_frame": 501,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0501.webp",
+      "bytes": 17158
+    },
+    {
+      "frame": 502,
+      "beat": "previous",
+      "source_frame": 502,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0502.webp",
+      "bytes": 16882
+    },
+    {
+      "frame": 503,
+      "beat": "previous",
+      "source_frame": 503,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0503.webp",
+      "bytes": 15622
+    },
+    {
+      "frame": 504,
+      "beat": "previous",
+      "source_frame": 504,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0504.webp",
+      "bytes": 18254
+    },
+    {
+      "frame": 505,
+      "beat": "previous",
+      "source_frame": 505,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0505.webp",
+      "bytes": 19978
+    },
+    {
+      "frame": 506,
+      "beat": "previous",
+      "source_frame": 506,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0506.webp",
+      "bytes": 25610
+    },
+    {
+      "frame": 507,
+      "beat": "previous",
+      "source_frame": 507,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0507.webp",
+      "bytes": 24558
+    },
+    {
+      "frame": 508,
+      "beat": "previous",
+      "source_frame": 508,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0508.webp",
+      "bytes": 25146
+    },
+    {
+      "frame": 509,
+      "beat": "previous",
+      "source_frame": 509,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0509.webp",
+      "bytes": 27304
+    },
+    {
+      "frame": 510,
+      "beat": "previous",
+      "source_frame": 510,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0510.webp",
+      "bytes": 28246
+    },
+    {
+      "frame": 511,
+      "beat": "previous",
+      "source_frame": 511,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0511.webp",
+      "bytes": 33048
+    },
+    {
+      "frame": 512,
+      "beat": "previous",
+      "source_frame": 512,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0512.webp",
+      "bytes": 31230
+    },
+    {
+      "frame": 513,
+      "beat": "previous",
+      "source_frame": 513,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0513.webp",
+      "bytes": 31396
+    },
+    {
+      "frame": 514,
+      "beat": "previous",
+      "source_frame": 514,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0514.webp",
+      "bytes": 33776
+    },
+    {
+      "frame": 515,
+      "beat": "previous",
+      "source_frame": 515,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0515.webp",
+      "bytes": 33028
+    },
+    {
+      "frame": 516,
+      "beat": "previous",
+      "source_frame": 516,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0516.webp",
+      "bytes": 27478
+    },
+    {
+      "frame": 517,
+      "beat": "previous",
+      "source_frame": 517,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0517.webp",
+      "bytes": 28254
+    },
+    {
+      "frame": 518,
+      "beat": "previous",
+      "source_frame": 518,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0518.webp",
+      "bytes": 29182
+    },
+    {
+      "frame": 519,
+      "beat": "previous",
+      "source_frame": 519,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0519.webp",
+      "bytes": 30446
+    },
+    {
+      "frame": 520,
+      "beat": "previous",
+      "source_frame": 520,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0520.webp",
+      "bytes": 30086
+    },
+    {
+      "frame": 521,
+      "beat": "previous",
+      "source_frame": 521,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0521.webp",
+      "bytes": 30986
+    },
+    {
+      "frame": 522,
+      "beat": "previous",
+      "source_frame": 522,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0522.webp",
+      "bytes": 31842
+    },
+    {
+      "frame": 523,
+      "beat": "previous",
+      "source_frame": 523,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0523.webp",
+      "bytes": 32646
+    },
+    {
+      "frame": 524,
+      "beat": "previous",
+      "source_frame": 524,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0524.webp",
+      "bytes": 32650
+    },
+    {
+      "frame": 525,
+      "beat": "previous",
+      "source_frame": 525,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0525.webp",
+      "bytes": 32524
+    },
+    {
+      "frame": 526,
+      "beat": "previous",
+      "source_frame": 526,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0526.webp",
+      "bytes": 33328
+    },
+    {
+      "frame": 527,
+      "beat": "previous",
+      "source_frame": 527,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0527.webp",
+      "bytes": 33330
+    },
+    {
+      "frame": 528,
+      "beat": "previous",
+      "source_frame": 528,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0528.webp",
+      "bytes": 30274
+    },
+    {
+      "frame": 529,
+      "beat": "previous",
+      "source_frame": 529,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0529.webp",
+      "bytes": 31662
+    },
+    {
+      "frame": 530,
+      "beat": "previous",
+      "source_frame": 530,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0530.webp",
+      "bytes": 33608
+    },
+    {
+      "frame": 531,
+      "beat": "previous",
+      "source_frame": 531,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0531.webp",
+      "bytes": 34664
+    },
+    {
+      "frame": 532,
+      "beat": "previous",
+      "source_frame": 532,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0532.webp",
+      "bytes": 34794
+    },
+    {
+      "frame": 533,
+      "beat": "previous",
+      "source_frame": 533,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0533.webp",
+      "bytes": 34754
+    },
+    {
+      "frame": 534,
+      "beat": "previous",
+      "source_frame": 534,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0534.webp",
+      "bytes": 35794
+    },
+    {
+      "frame": 535,
+      "beat": "previous",
+      "source_frame": 535,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0535.webp",
+      "bytes": 35514
+    },
+    {
+      "frame": 536,
+      "beat": "previous",
+      "source_frame": 536,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0536.webp",
+      "bytes": 40700
+    },
+    {
+      "frame": 537,
+      "beat": "previous",
+      "source_frame": 537,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0537.webp",
+      "bytes": 46138
+    },
+    {
+      "frame": 538,
+      "beat": "previous",
+      "source_frame": 538,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0538.webp",
+      "bytes": 42816
+    },
+    {
+      "frame": 539,
+      "beat": "previous",
+      "source_frame": 539,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0539.webp",
+      "bytes": 40116
+    },
+    {
+      "frame": 540,
+      "beat": "previous",
+      "source_frame": 540,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0540.webp",
+      "bytes": 46676
+    },
+    {
+      "frame": 541,
+      "beat": "previous",
+      "source_frame": 541,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0541.webp",
+      "bytes": 33080
+    },
+    {
+      "frame": 542,
+      "beat": "previous",
+      "source_frame": 542,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0542.webp",
+      "bytes": 32122
+    },
+    {
+      "frame": 543,
+      "beat": "previous",
+      "source_frame": 543,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0543.webp",
+      "bytes": 30686
+    },
+    {
+      "frame": 544,
+      "beat": "previous",
+      "source_frame": 544,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0544.webp",
+      "bytes": 30848
+    },
+    {
+      "frame": 545,
+      "beat": "previous",
+      "source_frame": 545,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0545.webp",
+      "bytes": 31596
+    },
+    {
+      "frame": 546,
+      "beat": "previous",
+      "source_frame": 546,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0546.webp",
+      "bytes": 31572
+    },
+    {
+      "frame": 547,
+      "beat": "previous",
+      "source_frame": 547,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0547.webp",
+      "bytes": 31908
+    },
+    {
+      "frame": 548,
+      "beat": "previous",
+      "source_frame": 548,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0548.webp",
+      "bytes": 33908
+    },
+    {
+      "frame": 549,
+      "beat": "previous",
+      "source_frame": 549,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0549.webp",
+      "bytes": 33060
+    },
+    {
+      "frame": 550,
+      "beat": "previous",
+      "source_frame": 550,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0550.webp",
+      "bytes": 33300
+    },
+    {
+      "frame": 551,
+      "beat": "previous",
+      "source_frame": 551,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0551.webp",
+      "bytes": 31604
+    },
+    {
+      "frame": 552,
+      "beat": "previous",
+      "source_frame": 552,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0552.webp",
+      "bytes": 30500
+    },
+    {
+      "frame": 553,
+      "beat": "previous",
+      "source_frame": 553,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0553.webp",
+      "bytes": 32368
+    },
+    {
+      "frame": 554,
+      "beat": "previous",
+      "source_frame": 554,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0554.webp",
+      "bytes": 32094
+    },
+    {
+      "frame": 555,
+      "beat": "previous",
+      "source_frame": 555,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0555.webp",
+      "bytes": 32560
+    },
+    {
+      "frame": 556,
+      "beat": "previous",
+      "source_frame": 556,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0556.webp",
+      "bytes": 33120
+    },
+    {
+      "frame": 557,
+      "beat": "previous",
+      "source_frame": 557,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0557.webp",
+      "bytes": 33526
+    },
+    {
+      "frame": 558,
+      "beat": "previous",
+      "source_frame": 558,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0558.webp",
+      "bytes": 33600
+    },
+    {
+      "frame": 559,
+      "beat": "previous",
+      "source_frame": 559,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0559.webp",
+      "bytes": 34560
+    },
+    {
+      "frame": 560,
+      "beat": "previous",
+      "source_frame": 560,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0560.webp",
+      "bytes": 33998
+    },
+    {
+      "frame": 561,
+      "beat": "previous",
+      "source_frame": 561,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0561.webp",
+      "bytes": 34636
+    },
+    {
+      "frame": 562,
+      "beat": "previous",
+      "source_frame": 562,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0562.webp",
+      "bytes": 35152
+    },
+    {
+      "frame": 563,
+      "beat": "previous",
+      "source_frame": 563,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0563.webp",
+      "bytes": 34372
+    },
+    {
+      "frame": 564,
+      "beat": "previous",
+      "source_frame": 564,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0564.webp",
+      "bytes": 30248
+    },
+    {
+      "frame": 565,
+      "beat": "previous",
+      "source_frame": 565,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0565.webp",
+      "bytes": 31468
+    },
+    {
+      "frame": 566,
+      "beat": "previous",
+      "source_frame": 566,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0566.webp",
+      "bytes": 31540
+    },
+    {
+      "frame": 567,
+      "beat": "previous",
+      "source_frame": 567,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0567.webp",
+      "bytes": 30956
+    },
+    {
+      "frame": 568,
+      "beat": "previous",
+      "source_frame": 568,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0568.webp",
+      "bytes": 31854
+    },
+    {
+      "frame": 569,
+      "beat": "previous",
+      "source_frame": 569,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0569.webp",
+      "bytes": 31680
+    },
+    {
+      "frame": 570,
+      "beat": "previous",
+      "source_frame": 570,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0570.webp",
+      "bytes": 30622
+    },
+    {
+      "frame": 571,
+      "beat": "previous",
+      "source_frame": 571,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0571.webp",
+      "bytes": 30268
+    },
+    {
+      "frame": 572,
+      "beat": "previous",
+      "source_frame": 572,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0572.webp",
+      "bytes": 29820
+    },
+    {
+      "frame": 573,
+      "beat": "previous",
+      "source_frame": 573,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0573.webp",
+      "bytes": 28842
+    },
+    {
+      "frame": 574,
+      "beat": "previous",
+      "source_frame": 574,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0574.webp",
+      "bytes": 28140
+    },
+    {
+      "frame": 575,
+      "beat": "previous",
+      "source_frame": 575,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0575.webp",
+      "bytes": 27494
+    },
+    {
+      "frame": 576,
+      "beat": "previous",
+      "source_frame": 576,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0576.webp",
+      "bytes": 29150
+    },
+    {
+      "frame": 577,
+      "beat": "previous",
+      "source_frame": 577,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0577.webp",
+      "bytes": 28230
+    },
+    {
+      "frame": 578,
+      "beat": "previous",
+      "source_frame": 578,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0578.webp",
+      "bytes": 26588
+    },
+    {
+      "frame": 579,
+      "beat": "previous",
+      "source_frame": 579,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0579.webp",
+      "bytes": 25580
+    },
+    {
+      "frame": 580,
+      "beat": "previous",
+      "source_frame": 580,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0580.webp",
+      "bytes": 40560
+    },
+    {
+      "frame": 581,
+      "beat": "previous",
+      "source_frame": 581,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0581.webp",
+      "bytes": 40280
+    },
+    {
+      "frame": 582,
+      "beat": "previous",
+      "source_frame": 582,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0582.webp",
+      "bytes": 39802
+    },
+    {
+      "frame": 583,
+      "beat": "previous",
+      "source_frame": 583,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0583.webp",
+      "bytes": 38826
+    },
+    {
+      "frame": 584,
+      "beat": "previous",
+      "source_frame": 584,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0584.webp",
+      "bytes": 39942
+    },
+    {
+      "frame": 585,
+      "beat": "previous",
+      "source_frame": 585,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0585.webp",
+      "bytes": 36550
+    },
+    {
+      "frame": 586,
+      "beat": "previous",
+      "source_frame": 586,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0586.webp",
+      "bytes": 34408
+    },
+    {
+      "frame": 587,
+      "beat": "previous",
+      "source_frame": 587,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0587.webp",
+      "bytes": 31328
+    },
+    {
+      "frame": 588,
+      "beat": "previous",
+      "source_frame": 588,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0588.webp",
+      "bytes": 30924
+    },
+    {
+      "frame": 589,
+      "beat": "previous",
+      "source_frame": 589,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0589.webp",
+      "bytes": 29390
+    },
+    {
+      "frame": 590,
+      "beat": "previous",
+      "source_frame": 590,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0590.webp",
+      "bytes": 28444
+    },
+    {
+      "frame": 591,
+      "beat": "previous",
+      "source_frame": 591,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0591.webp",
+      "bytes": 31038
+    },
+    {
+      "frame": 592,
+      "beat": "previous",
+      "source_frame": 592,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0592.webp",
+      "bytes": 29552
+    },
+    {
+      "frame": 593,
+      "beat": "previous",
+      "source_frame": 593,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0593.webp",
+      "bytes": 28642
+    },
+    {
+      "frame": 594,
+      "beat": "previous",
+      "source_frame": 594,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0594.webp",
+      "bytes": 29656
+    },
+    {
+      "frame": 595,
+      "beat": "previous",
+      "source_frame": 595,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0595.webp",
+      "bytes": 29860
+    },
+    {
+      "frame": 596,
+      "beat": "previous",
+      "source_frame": 596,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0596.webp",
+      "bytes": 31272
+    },
+    {
+      "frame": 597,
+      "beat": "previous",
+      "source_frame": 597,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0597.webp",
+      "bytes": 33506
+    },
+    {
+      "frame": 598,
+      "beat": "previous",
+      "source_frame": 598,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0598.webp",
+      "bytes": 32622
+    },
+    {
+      "frame": 599,
+      "beat": "previous",
+      "source_frame": 599,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0599.webp",
+      "bytes": 33164
+    },
+    {
+      "frame": 600,
+      "beat": "previous",
+      "source_frame": 600,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0600.webp",
+      "bytes": 34714
+    },
+    {
+      "frame": 601,
+      "beat": "previous",
+      "source_frame": 601,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0601.webp",
+      "bytes": 34976
+    },
+    {
+      "frame": 602,
+      "beat": "previous",
+      "source_frame": 602,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0602.webp",
+      "bytes": 35350
+    },
+    {
+      "frame": 603,
+      "beat": "previous",
+      "source_frame": 603,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0603.webp",
+      "bytes": 35740
+    },
+    {
+      "frame": 604,
+      "beat": "previous",
+      "source_frame": 604,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0604.webp",
+      "bytes": 12078
+    },
+    {
+      "frame": 605,
+      "beat": "previous",
+      "source_frame": 605,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0605.webp",
+      "bytes": 10418
+    },
+    {
+      "frame": 606,
+      "beat": "previous",
+      "source_frame": 606,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0606.webp",
+      "bytes": 12836
+    },
+    {
+      "frame": 607,
+      "beat": "previous",
+      "source_frame": 607,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0607.webp",
+      "bytes": 15960
+    },
+    {
+      "frame": 608,
+      "beat": "previous",
+      "source_frame": 608,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0608.webp",
+      "bytes": 36808
+    },
+    {
+      "frame": 609,
+      "beat": "previous",
+      "source_frame": 609,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0609.webp",
+      "bytes": 36526
+    },
+    {
+      "frame": 610,
+      "beat": "previous",
+      "source_frame": 610,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0610.webp",
+      "bytes": 36348
+    },
+    {
+      "frame": 611,
+      "beat": "previous",
+      "source_frame": 611,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0611.webp",
+      "bytes": 32990
+    },
+    {
+      "frame": 612,
+      "beat": "previous",
+      "source_frame": 612,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0612.webp",
+      "bytes": 36300
+    },
+    {
+      "frame": 613,
+      "beat": "previous",
+      "source_frame": 613,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0613.webp",
+      "bytes": 36254
+    },
+    {
+      "frame": 614,
+      "beat": "previous",
+      "source_frame": 614,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0614.webp",
+      "bytes": 36052
+    },
+    {
+      "frame": 615,
+      "beat": "previous",
+      "source_frame": 615,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0615.webp",
+      "bytes": 35846
+    },
+    {
+      "frame": 616,
+      "beat": "previous",
+      "source_frame": 616,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0616.webp",
+      "bytes": 35694
+    },
+    {
+      "frame": 617,
+      "beat": "previous",
+      "source_frame": 617,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0617.webp",
+      "bytes": 35616
+    },
+    {
+      "frame": 618,
+      "beat": "previous",
+      "source_frame": 618,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0618.webp",
+      "bytes": 35414
+    },
+    {
+      "frame": 619,
+      "beat": "previous",
+      "source_frame": 619,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0619.webp",
+      "bytes": 35028
+    },
+    {
+      "frame": 620,
+      "beat": "previous",
+      "source_frame": 620,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0620.webp",
+      "bytes": 35424
+    },
+    {
+      "frame": 621,
+      "beat": "previous",
+      "source_frame": 621,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0621.webp",
+      "bytes": 35796
+    },
+    {
+      "frame": 622,
+      "beat": "previous",
+      "source_frame": 622,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0622.webp",
+      "bytes": 35520
+    },
+    {
+      "frame": 623,
+      "beat": "previous",
+      "source_frame": 623,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0623.webp",
+      "bytes": 35474
+    },
+    {
+      "frame": 624,
+      "beat": "previous",
+      "source_frame": 624,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0624.webp",
+      "bytes": 37084
+    },
+    {
+      "frame": 625,
+      "beat": "previous",
+      "source_frame": 625,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0625.webp",
+      "bytes": 37384
+    },
+    {
+      "frame": 626,
+      "beat": "previous",
+      "source_frame": 626,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0626.webp",
+      "bytes": 37326
+    },
+    {
+      "frame": 627,
+      "beat": "previous",
+      "source_frame": 627,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0627.webp",
+      "bytes": 37674
+    },
+    {
+      "frame": 628,
+      "beat": "previous",
+      "source_frame": 628,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0628.webp",
+      "bytes": 36826
+    },
+    {
+      "frame": 629,
+      "beat": "previous",
+      "source_frame": 629,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0629.webp",
+      "bytes": 37006
+    },
+    {
+      "frame": 630,
+      "beat": "previous",
+      "source_frame": 630,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0630.webp",
+      "bytes": 36666
+    },
+    {
+      "frame": 631,
+      "beat": "previous",
+      "source_frame": 631,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0631.webp",
+      "bytes": 36480
+    },
+    {
+      "frame": 632,
+      "beat": "previous",
+      "source_frame": 632,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0632.webp",
+      "bytes": 31416
+    },
+    {
+      "frame": 633,
+      "beat": "previous",
+      "source_frame": 633,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0633.webp",
+      "bytes": 31762
+    },
+    {
+      "frame": 634,
+      "beat": "previous",
+      "source_frame": 634,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0634.webp",
+      "bytes": 31656
+    },
+    {
+      "frame": 635,
+      "beat": "previous",
+      "source_frame": 635,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0635.webp",
+      "bytes": 31356
+    },
+    {
+      "frame": 636,
+      "beat": "previous",
+      "source_frame": 636,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0636.webp",
+      "bytes": 18140
+    },
+    {
+      "frame": 637,
+      "beat": "previous",
+      "source_frame": 637,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0637.webp",
+      "bytes": 18982
+    },
+    {
+      "frame": 638,
+      "beat": "previous",
+      "source_frame": 638,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0638.webp",
+      "bytes": 19390
+    },
+    {
+      "frame": 639,
+      "beat": "previous",
+      "source_frame": 639,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0639.webp",
+      "bytes": 19580
+    },
+    {
+      "frame": 640,
+      "beat": "previous",
+      "source_frame": 640,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0640.webp",
+      "bytes": 8380
+    },
+    {
+      "frame": 641,
+      "beat": "previous",
+      "source_frame": 641,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0641.webp",
+      "bytes": 7444
+    },
+    {
+      "frame": 642,
+      "beat": "previous",
+      "source_frame": 642,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0642.webp",
+      "bytes": 7162
+    },
+    {
+      "frame": 643,
+      "beat": "previous",
+      "source_frame": 643,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0643.webp",
+      "bytes": 7012
+    },
+    {
+      "frame": 644,
+      "beat": "previous",
+      "source_frame": 644,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0644.webp",
+      "bytes": 6842
+    },
+    {
+      "frame": 645,
+      "beat": "previous",
+      "source_frame": 645,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0645.webp",
+      "bytes": 6716
+    },
+    {
+      "frame": 646,
+      "beat": "previous",
+      "source_frame": 646,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0646.webp",
+      "bytes": 6824
+    },
+    {
+      "frame": 647,
+      "beat": "previous",
+      "source_frame": 647,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0647.webp",
+      "bytes": 6840
+    },
+    {
+      "frame": 648,
+      "beat": "previous",
+      "source_frame": 648,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0648.webp",
+      "bytes": 6208
+    },
+    {
+      "frame": 649,
+      "beat": "previous",
+      "source_frame": 649,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0649.webp",
+      "bytes": 6148
+    },
+    {
+      "frame": 650,
+      "beat": "previous",
+      "source_frame": 650,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0650.webp",
+      "bytes": 6310
+    },
+    {
+      "frame": 651,
+      "beat": "previous",
+      "source_frame": 651,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0651.webp",
+      "bytes": 5926
+    },
+    {
+      "frame": 652,
+      "beat": "previous",
+      "source_frame": 652,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0652.webp",
+      "bytes": 5940
+    },
+    {
+      "frame": 653,
+      "beat": "previous",
+      "source_frame": 653,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0653.webp",
+      "bytes": 5970
+    },
+    {
+      "frame": 654,
+      "beat": "previous",
+      "source_frame": 654,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0654.webp",
+      "bytes": 5966
+    },
+    {
+      "frame": 655,
+      "beat": "previous",
+      "source_frame": 655,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0655.webp",
+      "bytes": 5928
+    },
+    {
+      "frame": 656,
+      "beat": "previous",
+      "source_frame": 656,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0656.webp",
+      "bytes": 5884
+    },
+    {
+      "frame": 657,
+      "beat": "previous",
+      "source_frame": 657,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0657.webp",
+      "bytes": 5790
+    },
+    {
+      "frame": 658,
+      "beat": "previous",
+      "source_frame": 658,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0658.webp",
+      "bytes": 5966
+    },
+    {
+      "frame": 659,
+      "beat": "previous",
+      "source_frame": 659,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0659.webp",
+      "bytes": 6218
+    },
+    {
+      "frame": 660,
+      "beat": "previous",
+      "source_frame": 660,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0660.webp",
+      "bytes": 6368
+    },
+    {
+      "frame": 661,
+      "beat": "previous",
+      "source_frame": 661,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0661.webp",
+      "bytes": 6402
+    },
+    {
+      "frame": 662,
+      "beat": "previous",
+      "source_frame": 662,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0662.webp",
+      "bytes": 6382
+    },
+    {
+      "frame": 663,
+      "beat": "previous",
+      "source_frame": 663,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0663.webp",
+      "bytes": 6132
+    },
+    {
+      "frame": 664,
+      "beat": "previous",
+      "source_frame": 664,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0664.webp",
+      "bytes": 10798
+    },
+    {
+      "frame": 665,
+      "beat": "previous",
+      "source_frame": 665,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0665.webp",
+      "bytes": 12322
+    },
+    {
+      "frame": 666,
+      "beat": "previous",
+      "source_frame": 666,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0666.webp",
+      "bytes": 13734
+    },
+    {
+      "frame": 667,
+      "beat": "previous",
+      "source_frame": 667,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0667.webp",
+      "bytes": 13688
+    },
+    {
+      "frame": 668,
+      "beat": "previous",
+      "source_frame": 668,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0668.webp",
+      "bytes": 16948
+    },
+    {
+      "frame": 669,
+      "beat": "previous",
+      "source_frame": 669,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0669.webp",
+      "bytes": 17344
+    },
+    {
+      "frame": 670,
+      "beat": "previous",
+      "source_frame": 670,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0670.webp",
+      "bytes": 17524
+    },
+    {
+      "frame": 671,
+      "beat": "previous",
+      "source_frame": 671,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0671.webp",
+      "bytes": 17834
+    },
+    {
+      "frame": 672,
+      "beat": "previous",
+      "source_frame": 672,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0672.webp",
+      "bytes": 15050
+    },
+    {
+      "frame": 673,
+      "beat": "previous",
+      "source_frame": 673,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0673.webp",
+      "bytes": 14762
+    },
+    {
+      "frame": 674,
+      "beat": "previous",
+      "source_frame": 674,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0674.webp",
+      "bytes": 14840
+    },
+    {
+      "frame": 675,
+      "beat": "previous",
+      "source_frame": 675,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0675.webp",
+      "bytes": 14570
+    },
+    {
+      "frame": 676,
+      "beat": "previous",
+      "source_frame": 676,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0676.webp",
+      "bytes": 15024
+    },
+    {
+      "frame": 677,
+      "beat": "previous",
+      "source_frame": 677,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0677.webp",
+      "bytes": 14538
+    },
+    {
+      "frame": 678,
+      "beat": "previous",
+      "source_frame": 678,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0678.webp",
+      "bytes": 14812
+    },
+    {
+      "frame": 679,
+      "beat": "previous",
+      "source_frame": 679,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0679.webp",
+      "bytes": 14572
+    },
+    {
+      "frame": 680,
+      "beat": "previous",
+      "source_frame": 680,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0680.webp",
+      "bytes": 15254
+    },
+    {
+      "frame": 681,
+      "beat": "previous",
+      "source_frame": 681,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0681.webp",
+      "bytes": 17600
+    },
+    {
+      "frame": 682,
+      "beat": "previous",
+      "source_frame": 682,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0682.webp",
+      "bytes": 19110
+    },
+    {
+      "frame": 683,
+      "beat": "previous",
+      "source_frame": 683,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0683.webp",
+      "bytes": 19788
+    },
+    {
+      "frame": 684,
+      "beat": "previous",
+      "source_frame": 684,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0684.webp",
+      "bytes": 21382
+    },
+    {
+      "frame": 685,
+      "beat": "previous",
+      "source_frame": 685,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0685.webp",
+      "bytes": 21574
+    },
+    {
+      "frame": 686,
+      "beat": "previous",
+      "source_frame": 686,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0686.webp",
+      "bytes": 23042
+    },
+    {
+      "frame": 687,
+      "beat": "previous",
+      "source_frame": 687,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0687.webp",
+      "bytes": 23454
+    },
+    {
+      "frame": 688,
+      "beat": "previous",
+      "source_frame": 688,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0688.webp",
+      "bytes": 24142
+    },
+    {
+      "frame": 689,
+      "beat": "previous",
+      "source_frame": 689,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0689.webp",
+      "bytes": 24550
+    },
+    {
+      "frame": 690,
+      "beat": "previous",
+      "source_frame": 690,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0690.webp",
+      "bytes": 24818
+    },
+    {
+      "frame": 691,
+      "beat": "previous",
+      "source_frame": 691,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0691.webp",
+      "bytes": 24768
+    },
+    {
+      "frame": 692,
+      "beat": "previous",
+      "source_frame": 692,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0692.webp",
+      "bytes": 27762
+    },
+    {
+      "frame": 693,
+      "beat": "previous",
+      "source_frame": 693,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0693.webp",
+      "bytes": 29088
+    },
+    {
+      "frame": 694,
+      "beat": "previous",
+      "source_frame": 694,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0694.webp",
+      "bytes": 29522
+    },
+    {
+      "frame": 695,
+      "beat": "previous",
+      "source_frame": 695,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0695.webp",
+      "bytes": 30256
+    },
+    {
+      "frame": 696,
+      "beat": "previous",
+      "source_frame": 696,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0696.webp",
+      "bytes": 27382
+    },
+    {
+      "frame": 697,
+      "beat": "previous",
+      "source_frame": 697,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0697.webp",
+      "bytes": 26678
+    },
+    {
+      "frame": 698,
+      "beat": "previous",
+      "source_frame": 698,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0698.webp",
+      "bytes": 26756
+    },
+    {
+      "frame": 699,
+      "beat": "previous",
+      "source_frame": 699,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0699.webp",
+      "bytes": 27166
+    },
+    {
+      "frame": 700,
+      "beat": "previous",
+      "source_frame": 700,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0700.webp",
+      "bytes": 26816
+    },
+    {
+      "frame": 701,
+      "beat": "previous",
+      "source_frame": 701,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0701.webp",
+      "bytes": 26430
+    },
+    {
+      "frame": 702,
+      "beat": "previous",
+      "source_frame": 702,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0702.webp",
+      "bytes": 26502
+    },
+    {
+      "frame": 703,
+      "beat": "previous",
+      "source_frame": 703,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0703.webp",
+      "bytes": 26406
+    },
+    {
+      "frame": 704,
+      "beat": "previous",
+      "source_frame": 704,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0704.webp",
+      "bytes": 26818
+    },
+    {
+      "frame": 705,
+      "beat": "previous",
+      "source_frame": 705,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0705.webp",
+      "bytes": 26860
+    },
+    {
+      "frame": 706,
+      "beat": "previous",
+      "source_frame": 706,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0706.webp",
+      "bytes": 26712
+    },
+    {
+      "frame": 707,
+      "beat": "previous",
+      "source_frame": 707,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0707.webp",
+      "bytes": 26860
+    },
+    {
+      "frame": 708,
+      "beat": "previous",
+      "source_frame": 708,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0708.webp",
+      "bytes": 25930
+    },
+    {
+      "frame": 709,
+      "beat": "previous",
+      "source_frame": 709,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0709.webp",
+      "bytes": 25642
+    },
+    {
+      "frame": 710,
+      "beat": "previous",
+      "source_frame": 710,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0710.webp",
+      "bytes": 25696
+    },
+    {
+      "frame": 711,
+      "beat": "previous",
+      "source_frame": 711,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0711.webp",
+      "bytes": 25204
+    },
+    {
+      "frame": 712,
+      "beat": "previous",
+      "source_frame": 712,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0712.webp",
+      "bytes": 25628
+    },
+    {
+      "frame": 713,
+      "beat": "previous",
+      "source_frame": 713,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0713.webp",
+      "bytes": 25450
+    },
+    {
+      "frame": 714,
+      "beat": "previous",
+      "source_frame": 714,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0714.webp",
+      "bytes": 25674
+    },
+    {
+      "frame": 715,
+      "beat": "previous",
+      "source_frame": 715,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0715.webp",
+      "bytes": 25410
+    },
+    {
+      "frame": 716,
+      "beat": "previous",
+      "source_frame": 716,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0716.webp",
+      "bytes": 25866
+    },
+    {
+      "frame": 717,
+      "beat": "previous",
+      "source_frame": 717,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0717.webp",
+      "bytes": 25612
+    },
+    {
+      "frame": 718,
+      "beat": "previous",
+      "source_frame": 718,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0718.webp",
+      "bytes": 25858
+    },
+    {
+      "frame": 719,
+      "beat": "previous",
+      "source_frame": 719,
+      "web": "/images/journey/frames-v010-768/nevora-one-take_f0719.webp",
+      "bytes": 25722
+    }
+  ]
+}

@@ -13,15 +13,15 @@ const nextConfig: NextConfig = {
     : {
         async headers() {
           return [
-            {
-              source: "/images/journey/frames-v010/:path*",
+            ...["frames-v010", "frames-v010-1024", "frames-v010-768"].map((directory) => ({
+              source: `/images/journey/${directory}/:path*`,
               headers: [
                 {
                   key: "Cache-Control",
                   value: "public, max-age=31536000, immutable",
                 },
               ],
-            },
+            })),
           ];
         },
       }),

@@ -1,9 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { Button } from "@/components/ui/Button";
 import { sectionIds } from "@/constants/routes";
@@ -22,13 +20,33 @@ type FrameLoadRequest = {
   priority: "high" | "low";
 };
 
+type FrameLoadJob = {
+  index: number;
+  priority: "high" | "low";
+  promise: Promise<void>;
+  cancel: () => void;
+};
+
+type FrameTier = "full" | "balanced" | "compact";
+
+type CanvasLayout = {
+  width: number;
+  height: number;
+};
+
+type NavigatorWithConnection = Navigator & {
+  connection?: { saveData?: boolean; effectiveType?: string };
+  deviceMemory?: number;
+};
+
 const START_FRAME = 204;
 const FILM_END_FRAME = 719;
 const END_FRAME = 743;
 const FRAME_COUNT = END_FRAME - START_FRAME + 1;
+const FILM_FRAME_COUNT = FILM_END_FRAME - START_FRAME + 1;
+const LAST_FILM_INDEX = FILM_FRAME_COUNT - 1;
 const FILM_SCROLL_END = 0.94;
 const HOLD_SCROLL_END = 0.995;
-const INITIAL_PRELOAD_COUNT = 3;
 const MOBILE_PRELOAD_RADIUS = 7;
 const DESKTOP_PRELOAD_RADIUS = 10;
 const MOBILE_CACHE_LIMIT = 12;
@@ -39,6 +57,11 @@ const PUBLIC_BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/
 const CONTINUITY_BRIDGE_FRAMES = [312, 323, 351, 356, 540, 580, 588, 600, 608, 624, 692];
 const CONTINUITY_BRIDGE_LEAD = 1.2;
 const CONTINUITY_BRIDGE_TRAIL = 0.35;
+const FRAME_TIER_DIRECTORY: Record<FrameTier, string> = {
+  full: "frames-v010",
+  balanced: "frames-v010-1024",
+  compact: "frames-v010-768",
+};
 
 const journeyBeatTimings: JourneyBeatTiming[] = [
   {
@@ -103,9 +126,70 @@ const journeyBeatTimings: JourneyBeatTiming[] = [
   },
 ];
 
-function frameSource(index: number) {
-  const frame = START_FRAME + Math.min(Math.max(index, 0), FILM_END_FRAME - START_FRAME);
-  return `${PUBLIC_BASE_PATH}/images/journey/frames-v010/nevora-one-take_f${String(frame).padStart(4, "0")}.webp`;
+function frameSource(index: number, tier: FrameTier = "full") {
+  const frame = START_FRAME + Math.min(Math.max(index, 0), LAST_FILM_INDEX);
+  return `${PUBLIC_BASE_PATH}/images/journey/${FRAME_TIER_DIRECTORY[tier]}/nevora-one-take_f${String(frame).padStart(4, "0")}.webp`;
+}
+
+function frameRuntimeProfile() {
+  const navigatorWithConnection = navigator as NavigatorWithConnection;
+  const connection = navigatorWithConnection.connection;
+  const viewport = window.visualViewport;
+  const width = viewport?.width ?? window.innerWidth;
+  const height = viewport?.height ?? window.innerHeight;
+  const networkConstrained =
+    connection?.saveData === true ||
+    connection?.effectiveType === "slow-2g" ||
+    connection?.effectiveType === "2g";
+  const lowMemory =
+    navigatorWithConnection.deviceMemory !== undefined && navigatorWithConnection.deviceMemory <= 4;
+  const veryLowMemory =
+    navigatorWithConnection.deviceMemory !== undefined && navigatorWithConnection.deviceMemory <= 2;
+
+  return {
+    constrained: networkConstrained || lowMemory,
+    compact: networkConstrained || veryLowMemory,
+    isMobile: width <= 767,
+    maxViewportDimension: Math.max(width, height),
+  };
+}
+
+function selectFrameTier(): FrameTier {
+  const profile = frameRuntimeProfile();
+  if (profile.compact) return "compact";
+
+  const framePixelRatioCap = profile.isMobile ? 1.2 : 1.35;
+  return profile.maxViewportDimension * framePixelRatioCap <= 1024 ? "balanced" : "full";
+}
+
+function JourneyPoster({
+  frameIndex,
+  alt,
+  className,
+}: {
+  frameIndex: number;
+  alt: string;
+  className: string;
+}) {
+  return (
+    <picture className={className}>
+      <source
+        media="(max-width: 767px)"
+        srcSet={frameSource(frameIndex, "balanced")}
+        type="image/webp"
+      />
+      <img
+        src={frameSource(frameIndex)}
+        alt={alt}
+        width={1280}
+        height={1280}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        className="h-full w-full object-cover"
+      />
+    </picture>
+  );
 }
 
 function clamp(value: number, min = 0, max = 1) {
@@ -159,14 +243,10 @@ function ReducedMotionJourney() {
       aria-label={copy.ariaLabel}
       className="relative flex min-h-svh items-end overflow-hidden bg-[#080705] px-sm pt-[max(4.5rem,env(safe-area-inset-top))] pb-[max(3rem,env(safe-area-inset-bottom))] text-cream sm:px-md sm:py-xl md:items-center md:px-lg lg:px-xl xl:px-2xl"
     >
-      <Image
-        src={frameSource(FRAME_COUNT - 1)}
+      <JourneyPoster
+        frameIndex={FRAME_COUNT - 1}
         alt={copy.reducedAlt}
-        fill
-        preload
-        unoptimized
-        sizes="100vw"
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 block h-full w-full"
       />
       <div
         className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,7,5,0.08)_0%,rgba(8,7,5,0.24)_46%,rgba(8,7,5,0.92)_100%)] md:bg-[linear-gradient(90deg,rgba(8,7,5,0.9)_0%,rgba(8,7,5,0.28)_62%,rgba(8,7,5,0.18)_100%)]"
@@ -198,22 +278,17 @@ function ReducedMotionJourney() {
 }
 
 export function CinematicJourney() {
-  for (let index = 1; index < INITIAL_PRELOAD_COUNT; index += 1) {
-    ReactDOM.preload(frameSource(index), {
-      as: "image",
-      type: "image/webp",
-      fetchPriority: "low",
-    });
-  }
-
   const { locale, direction } = useLanguage();
   const copy = messages[locale].journey;
   const sceneRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageCacheRef = useRef<Map<number, HTMLImageElement>>(new Map());
-  const inFlightRef = useRef<Map<number, Promise<void>>>(new Map());
+  const inFlightRef = useRef<Map<number, FrameLoadJob>>(new Map());
+  const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
+  const canvasLayoutRef = useRef<CanvasLayout>({ width: 0, height: 0 });
   const currentFrameRef = useRef(START_FRAME);
   const previousIndexRef = useRef(0);
+  const lastNonZeroDirectionRef = useRef<1 | -1>(1);
   const cacheCenterRef = useRef(0);
   const cacheLimitRef = useRef(DESKTOP_CACHE_LIMIT);
   const renderedSignatureRef = useRef("");
@@ -226,6 +301,7 @@ export function CinematicJourney() {
   const progress = useElementScrollProgress(sceneRef);
   const shouldReduceMotion = Boolean(useReducedMotion());
   const [firstFrameReady, setFirstFrameReady] = useState(false);
+  const [frameTier, setFrameTier] = useState<FrameTier | null>(null);
 
   const framePosition = frameAtScrollProgress(progress);
   const currentFrame = Math.round(framePosition);
@@ -238,8 +314,28 @@ export function CinematicJourney() {
   );
   const activeBeat = activeBeatIndex >= 0 ? journeyBeatTimings[activeBeatIndex] : undefined;
 
+  const measureCanvasLayout = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return false;
+
+    const bounds = canvas.getBoundingClientRect();
+    const previous = canvasLayoutRef.current;
+    const changed =
+      Math.abs(previous.width - bounds.width) > 0.5 || Math.abs(previous.height - bounds.height) > 0.5;
+
+    if (changed) {
+      canvasLayoutRef.current = { width: bounds.width, height: bounds.height };
+      renderedSignatureRef.current = "";
+    }
+
+    return changed;
+  }, []);
+
   const drawFrame = useCallback((frame: number) => {
     const canvas = canvasRef.current;
+    const canvasLayout = canvasLayoutRef.current;
+    if (!canvas || !frameTier || canvasLayout.width < 1 || canvasLayout.height < 1) return;
+
     const boundedFrame = clamp(frame, START_FRAME, END_FRAME);
     const visualFrame = Math.min(boundedFrame, FILM_END_FRAME);
     const continuityBridge = CONTINUITY_BRIDGE_FRAMES.find(
@@ -289,16 +385,15 @@ export function CinematicJourney() {
       (lowerReady ? lowerImage : undefined) ??
       (upperReady ? upperImage : undefined) ??
       fallbackImage;
-    if (!canvas || !primaryImage?.complete || primaryImage.naturalWidth === 0) return;
+    if (!primaryImage?.complete || primaryImage.naturalWidth === 0) return;
 
-    const bounds = canvas.getBoundingClientRect();
-    const sourceLimitedRatio = primaryImage.naturalWidth / Math.max(bounds.width, 1);
-    const pixelRatio = Math.max(
-      1,
-      Math.min(window.devicePixelRatio || 1, bounds.width < 768 ? 1.5 : 1.35, sourceLimitedRatio),
-    );
-    const targetWidth = Math.max(Math.round(bounds.width * pixelRatio), 1);
-    const targetHeight = Math.max(Math.round(bounds.height * pixelRatio), 1);
+    const framePixelRatioCap =
+      frameTier === "compact" ? 1 : frameTier === "balanced" ? 1.2 : canvasLayout.width < 768 ? 1.5 : 1.35;
+    const sourceLimitedRatio =
+      primaryImage.naturalWidth / Math.max(canvasLayout.width, canvasLayout.height, 1);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, framePixelRatioCap, sourceLimitedRatio);
+    const targetWidth = Math.max(Math.round(canvasLayout.width * pixelRatio), 1);
+    const targetHeight = Math.max(Math.round(canvasLayout.height * pixelRatio), 1);
     const dimensionsChanged = canvas.width !== targetWidth || canvas.height !== targetHeight;
     const blendStep = Math.round(blend * 48);
     const signature =
@@ -315,7 +410,11 @@ export function CinematicJourney() {
       return;
     }
 
-    const context = canvas.getContext("2d", { alpha: false });
+    let context = canvasContextRef.current;
+    if (!context) {
+      context = canvas.getContext("2d", { alpha: false });
+      canvasContextRef.current = context;
+    }
     if (!context) return;
 
     context.imageSmoothingEnabled = true;
@@ -352,7 +451,7 @@ export function CinematicJourney() {
     context.globalAlpha = 1;
     context.filter = "none";
     renderedSignatureRef.current = signature;
-  }, []);
+  }, [frameTier]);
 
   const scheduleDraw = useCallback(
     (frame: number) => {
@@ -373,9 +472,14 @@ export function CinematicJourney() {
     const limit = cacheLimitRef.current;
     if (cache.size <= limit) return;
 
-    const evictionOrder = [...cache.keys()].sort(
-      (first, second) => Math.abs(second - center) - Math.abs(first - center),
-    );
+    const protectedIndexes = new Set([
+      Math.max(center - 1, 0),
+      center,
+      Math.min(center + 1, LAST_FILM_INDEX),
+    ]);
+    const evictionOrder = [...cache.keys()]
+      .filter((index) => !protectedIndexes.has(index))
+      .sort((first, second) => Math.abs(second - center) - Math.abs(first - center));
 
     while (cache.size > limit) {
       const index = evictionOrder.shift();
@@ -386,38 +490,51 @@ export function CinematicJourney() {
 
   const loadFrame = useCallback(
     (index: number, priority: "high" | "low" = "low") => {
+      if (!frameTier) return Promise.resolve();
+
       const cached = imageCacheRef.current.get(index);
       if (cached?.complete && cached.naturalWidth > 0) {
         return Promise.resolve();
       }
 
       const inFlight = inFlightRef.current.get(index);
-      if (inFlight) return inFlight;
+      if (inFlight) return inFlight.promise;
 
+      let image: HTMLImageElement | null = null;
+      let cancelled = false;
+      let finish: (shouldCache?: boolean) => void = () => undefined;
       const task = new Promise<void>((resolve) => {
-        const image = new window.Image();
+        image = new window.Image();
         let settled = false;
-        image.decoding = "async";
-        image.fetchPriority = priority;
+        const frameImage = image;
+        frameImage.decoding = "async";
+        frameImage.fetchPriority = priority;
 
-        const finish = () => {
+        finish = (shouldCache = true) => {
           if (settled) return;
           settled = true;
+          frameImage.onload = null;
+          frameImage.onerror = null;
 
-          if (mountedRef.current) {
-            imageCacheRef.current.set(index, image);
+          if (shouldCache && !cancelled && mountedRef.current) {
+            imageCacheRef.current.set(index, frameImage);
             trimImageCache();
 
             const centerIndex = frameToIndex(currentFrameRef.current);
-            const nextIndex = Math.min(centerIndex + 1, FRAME_COUNT - 1);
+            const leadingIndex = Math.min(
+              Math.max(centerIndex + lastNonZeroDirectionRef.current, 0),
+              LAST_FILM_INDEX,
+            );
             const centerImage = imageCacheRef.current.get(centerIndex);
-            const nextImage = imageCacheRef.current.get(nextIndex);
+            const leadingImage = imageCacheRef.current.get(leadingIndex);
+            const completedVisibleFrame = index === centerIndex || index === leadingIndex;
 
             if (
+              completedVisibleFrame &&
               centerImage?.complete &&
               centerImage.naturalWidth > 0 &&
-              nextImage?.complete &&
-              nextImage.naturalWidth > 0
+              leadingImage?.complete &&
+              leadingImage.naturalWidth > 0
             ) {
               setFirstFrameReady(true);
               scheduleDraw(pendingFrameRef.current);
@@ -426,31 +543,41 @@ export function CinematicJourney() {
           resolve();
         };
 
-        image.onload = () => {
-          void image
+        frameImage.onload = () => {
+          void frameImage
             .decode()
             .catch(() => undefined)
             .finally(finish);
         };
-        image.onerror = () => {
-          if (!settled) {
-            settled = true;
-            resolve();
-          }
-        };
-        image.src = frameSource(index);
+        frameImage.onerror = () => finish(false);
+        frameImage.src = frameSource(index, frameTier);
       });
 
-      inFlightRef.current.set(index, task);
+      const job: FrameLoadJob = {
+        index,
+        priority,
+        promise: task,
+        cancel: () => {
+          if (cancelled) return;
+          cancelled = true;
+          if (image) {
+            image.onload = null;
+            image.onerror = null;
+            image.src = "";
+          }
+          finish(false);
+        },
+      };
+      inFlightRef.current.set(index, job);
       void task.finally(() => {
-        if (inFlightRef.current.get(index) === task) {
+        if (inFlightRef.current.get(index) === job) {
           inFlightRef.current.delete(index);
         }
       });
 
       return task;
     },
-    [scheduleDraw, trimImageCache],
+    [frameTier, scheduleDraw, trimImageCache],
   );
 
   const pumpLoadQueue = useCallback(
@@ -487,7 +614,10 @@ export function CinematicJourney() {
       mountedRef.current = false;
       loadQueueRef.current = [];
       imageCache.clear();
+      inFlight.forEach((job) => job.cancel());
       inFlight.clear();
+      canvasContextRef.current = null;
+      canvasLayoutRef.current = { width: 0, height: 0 };
 
       if (drawRequestRef.current !== null) {
         window.cancelAnimationFrame(drawRequestRef.current);
@@ -498,85 +628,115 @@ export function CinematicJourney() {
 
   useEffect(() => {
     if (shouldReduceMotion) return;
-    scheduleDraw(framePosition);
-  }, [framePosition, scheduleDraw, shouldReduceMotion]);
+
+    const selectionFrame = window.requestAnimationFrame(() => {
+      setFrameTier(selectFrameTier());
+    });
+
+    return () => window.cancelAnimationFrame(selectionFrame);
+  }, [shouldReduceMotion]);
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const navigatorWithConnection = navigator as Navigator & {
-      connection?: { saveData?: boolean; effectiveType?: string };
-      deviceMemory?: number;
-    };
-    const connection = navigatorWithConnection.connection;
-    const constrainedConnection =
-      connection?.saveData === true ||
-      connection?.effectiveType === "slow-2g" ||
-      connection?.effectiveType === "2g" ||
-      navigatorWithConnection.deviceMemory !== undefined &&
-        navigatorWithConnection.deviceMemory <= 4;
-    const baseRadius = constrainedConnection
+    if (shouldReduceMotion || !frameTier) return;
+    scheduleDraw(framePosition);
+  }, [framePosition, frameTier, scheduleDraw, shouldReduceMotion]);
+
+  useEffect(() => {
+    if (shouldReduceMotion || !frameTier) return;
+    const profile = frameRuntimeProfile();
+    const baseRadius = profile.constrained
       ? CONSTRAINED_PRELOAD_RADIUS
-      : isMobile
+      : profile.isMobile
         ? MOBILE_PRELOAD_RADIUS
         : DESKTOP_PRELOAD_RADIUS;
     const indexDelta = currentIndex - previousIndexRef.current;
-    const radius = Math.min(baseRadius + Math.abs(indexDelta) * 2, baseRadius + (isMobile ? 4 : 8));
-    const movingForward = indexDelta >= 0;
+    const previousDirection = lastNonZeroDirectionRef.current;
+    const directionOfTravel: 1 | -1 =
+      indexDelta === 0 ? previousDirection : indexDelta > 0 ? 1 : -1;
+    const directionChanged = indexDelta !== 0 && directionOfTravel !== previousDirection;
+    if (indexDelta !== 0) lastNonZeroDirectionRef.current = directionOfTravel;
+
+    const radius = Math.min(
+      baseRadius + Math.abs(indexDelta) * 2,
+      baseRadius + (profile.isMobile ? 4 : 8),
+    );
     const priorityOrder = [
       currentIndex,
-      Math.min(currentIndex + 1, FRAME_COUNT - 1),
-      Math.max(currentIndex - 1, 0),
+      Math.min(Math.max(currentIndex + directionOfTravel, 0), LAST_FILM_INDEX),
+      Math.min(Math.max(currentIndex - directionOfTravel, 0), LAST_FILM_INDEX),
     ];
     const trailingRadius = Math.max(Math.round(radius * 0.35), 2);
 
     for (let distance = 1; distance <= radius; distance += 1) {
-      const forwardIndex = currentIndex + (movingForward ? distance : -distance);
-      const backwardIndex = currentIndex + (movingForward ? -distance : distance);
+      const forwardIndex = currentIndex + directionOfTravel * distance;
+      const backwardIndex = currentIndex - directionOfTravel * distance;
 
-      if (forwardIndex >= 0 && forwardIndex < FRAME_COUNT) {
+      if (forwardIndex >= 0 && forwardIndex < FILM_FRAME_COUNT) {
         priorityOrder.push(forwardIndex);
       }
-      if (distance <= trailingRadius && backwardIndex >= 0 && backwardIndex < FRAME_COUNT) {
+      if (distance <= trailingRadius && backwardIndex >= 0 && backwardIndex < FILM_FRAME_COUNT) {
         priorityOrder.push(backwardIndex);
+      }
+    }
+
+    const retainedIndexes = new Set(priorityOrder);
+    const hasMeaningfulJump = Math.abs(indexDelta) >= 3;
+    if (directionChanged || hasMeaningfulJump) {
+      for (const [index, job] of inFlightRef.current) {
+        const isCritical = Math.abs(index - currentIndex) <= 2;
+        if (!isCritical && !retainedIndexes.has(index)) job.cancel();
       }
     }
 
     currentFrameRef.current = Math.min(currentFrame, FILM_END_FRAME);
     previousIndexRef.current = currentIndex;
     cacheCenterRef.current = currentIndex;
-    cacheLimitRef.current = constrainedConnection
+    cacheLimitRef.current = profile.constrained
       ? CONSTRAINED_CACHE_LIMIT
-      : isMobile
+      : profile.isMobile
         ? MOBILE_CACHE_LIMIT
         : DESKTOP_CACHE_LIMIT;
     trimImageCache();
-    maxConcurrentLoadsRef.current = constrainedConnection ? 2 : isMobile ? 2 : 3;
-    loadQueueRef.current = [...new Set(priorityOrder)]
+    maxConcurrentLoadsRef.current = profile.constrained ? 2 : profile.isMobile ? 2 : 3;
+    loadQueueRef.current = [...retainedIndexes]
       .filter((index) => !imageCacheRef.current.has(index) && !inFlightRef.current.has(index))
       .map((index, queuePosition) => ({
         index,
         priority: queuePosition === 0 || Math.abs(index - currentIndex) <= 2 ? "high" : "low",
-      }));
+    }));
     pumpLoadQueue();
-  }, [currentFrame, currentIndex, pumpLoadQueue, shouldReduceMotion, trimImageCache]);
+  }, [currentFrame, currentIndex, frameTier, pumpLoadQueue, shouldReduceMotion, trimImageCache]);
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || !frameTier) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
     let resizeFrame = 0;
     const handleResize = () => {
       window.cancelAnimationFrame(resizeFrame);
       resizeFrame = window.requestAnimationFrame(() => {
-        renderedSignatureRef.current = "";
-        scheduleDraw(pendingFrameRef.current);
+        if (measureCanvasLayout()) {
+          scheduleDraw(pendingFrameRef.current);
+        }
       });
     };
+    const observer =
+      typeof ResizeObserver === "undefined" ? null : new ResizeObserver(handleResize);
+    const viewport = window.visualViewport;
+
+    observer?.observe(canvas);
     window.addEventListener("resize", handleResize);
+    viewport?.addEventListener("resize", handleResize);
+    handleResize();
+
     return () => {
       window.cancelAnimationFrame(resizeFrame);
+      observer?.disconnect();
       window.removeEventListener("resize", handleResize);
+      viewport?.removeEventListener("resize", handleResize);
     };
-  }, [scheduleDraw, shouldReduceMotion]);
+  }, [frameTier, measureCanvasLayout, scheduleDraw, shouldReduceMotion]);
 
   if (shouldReduceMotion) {
     return <ReducedMotionJourney />;
@@ -592,15 +752,10 @@ export function CinematicJourney() {
       <h1 className="sr-only">{copy.srTitle}</h1>
 
       <div className="sticky top-0 h-svh overflow-hidden bg-[#080705] text-cream">
-        <Image
-          src={frameSource(0)}
+        <JourneyPoster
+          frameIndex={0}
           alt=""
-          aria-hidden="true"
-          fill
-          preload
-          unoptimized
-          sizes="100vw"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out ${
+          className={`absolute inset-0 block h-full w-full transition-opacity duration-500 ease-out ${
             firstFrameReady ? "opacity-0" : "opacity-100"
           }`}
         />

@@ -14,8 +14,14 @@ npm run start
 ```
 
 The application is fully bilingual in English and Persian. The frame-by-frame
-hero uses the optimized sequence in
-`public/images/journey/frames-v010` and keeps only a small rolling window of
-decoded frames in memory.
+hero uses the full-quality sequence in `public/images/journey/frames-v010`,
+with responsive 1024px and constrained-network 768px tiers alongside it. The
+runtime keeps only a small rolling window of decoded frames in memory.
+
+Regenerate the responsive tiers after replacing the source frames with:
+
+```bash
+npm run frames:tiers
+```
 
 For project details and asset policy, see the repository root `README.md`.
