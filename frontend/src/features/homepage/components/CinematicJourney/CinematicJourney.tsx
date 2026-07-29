@@ -1,6 +1,8 @@
 "use client";
 
 import { useReducedMotion } from "framer-motion";
+import { useLenis } from "lenis/react";
+import { Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { Button } from "@/components/ui/Button";
@@ -47,6 +49,7 @@ const FILM_FRAME_COUNT = FILM_END_FRAME - START_FRAME + 1;
 const LAST_FILM_INDEX = FILM_FRAME_COUNT - 1;
 const FILM_SCROLL_END = 0.94;
 const HOLD_SCROLL_END = 0.995;
+const FILM_PLAYBACK_DURATION_SECONDS = FRAME_COUNT / 24;
 const MOBILE_PRELOAD_RADIUS = 7;
 const DESKTOP_PRELOAD_RADIUS = 10;
 const MOBILE_CACHE_LIMIT = 12;
@@ -279,6 +282,7 @@ function ReducedMotionJourney() {
 
 export function CinematicJourney() {
   const { locale, direction } = useLanguage();
+  const lenis = useLenis();
   const copy = messages[locale].journey;
   const sceneRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -293,6 +297,8 @@ export function CinematicJourney() {
   const cacheLimitRef = useRef(DESKTOP_CACHE_LIMIT);
   const renderedSignatureRef = useRef("");
   const drawRequestRef = useRef<number | null>(null);
+  const playbackRunRef = useRef(0);
+  const isPlayingRef = useRef(false);
   const pendingFrameRef = useRef(START_FRAME);
   const loadQueueRef = useRef<FrameLoadRequest[]>([]);
   const activeLoadCountRef = useRef(0);
@@ -302,6 +308,7 @@ export function CinematicJourney() {
   const shouldReduceMotion = Boolean(useReducedMotion());
   const [firstFrameReady, setFirstFrameReady] = useState(false);
   const [frameTier, setFrameTier] = useState<FrameTier | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const framePosition = frameAtScrollProgress(progress);
   const currentFrame = Math.round(framePosition);
@@ -313,6 +320,66 @@ export function CinematicJourney() {
     (beat) => currentFrame >= beat.start && currentFrame <= beat.end,
   );
   const activeBeat = activeBeatIndex >= 0 ? journeyBeatTimings[activeBeatIndex] : undefined;
+  const playbackLabel = isPlaying
+    ? copy.pauseFilm
+    : currentFrame >= END_FRAME - 1
+      ? copy.replayFilm
+      : copy.playFilm;
+
+  const stopPlayback = useCallback((settleScroll = true) => {
+    if (!isPlayingRef.current) return;
+
+    playbackRunRef.current += 1;
+    isPlayingRef.current = false;
+
+    if (settleScroll && lenis) {
+      // Lenis exposes cancellation through stop/start. Calling them as a pair
+      // stops the film animator without leaving the visitor's scroll locked.
+      lenis.stop();
+      lenis.start();
+    }
+
+    setIsPlaying(false);
+  }, [lenis]);
+
+  const startPlayback = useCallback(() => {
+    if (!lenis || !firstFrameReady) return;
+
+    const scene = sceneRef.current;
+    if (!scene) return;
+
+    const travel = Math.max(scene.offsetHeight - window.innerHeight, 1);
+    const sceneStart = lenis.actualScroll + scene.getBoundingClientRect().top;
+    const currentScrollProgress = clamp((lenis.scroll - sceneStart) / travel);
+    const shouldReplay = currentScrollProgress >= HOLD_SCROLL_END - 0.0005;
+    const startProgress = shouldReplay ? 0 : currentScrollProgress;
+    const targetScroll = sceneStart + travel * HOLD_SCROLL_END;
+    const playbackDuration = Math.max(
+      ((HOLD_SCROLL_END - startProgress) / HOLD_SCROLL_END) * FILM_PLAYBACK_DURATION_SECONDS,
+      0.35,
+    );
+    const playbackRun = playbackRunRef.current + 1;
+
+    playbackRunRef.current = playbackRun;
+    isPlayingRef.current = true;
+    setIsPlaying(true);
+
+    if (shouldReplay) {
+      lenis.scrollTo(sceneStart, { immediate: true, force: true });
+    }
+
+    lenis.scrollTo(targetScroll, {
+      duration: playbackDuration,
+      easing: (value) => value,
+      lock: false,
+      onComplete: () => {
+        if (playbackRunRef.current !== playbackRun) return;
+
+        isPlayingRef.current = false;
+        setIsPlaying(false);
+      },
+    });
+  }, [firstFrameReady, lenis]);
 
   const measureCanvasLayout = useCallback(() => {
     const canvas = canvasRef.current;
@@ -623,8 +690,58 @@ export function CinematicJourney() {
         window.cancelAnimationFrame(drawRequestRef.current);
         drawRequestRef.current = null;
       }
+
+      playbackRunRef.current += 1;
+      isPlayingRef.current = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    const stopForVirtualScroll = () => {
+      if (isPlayingRef.current) stopPlayback(false);
+    };
+
+    const isPlaybackControl = (target: EventTarget | null) =>
+      target instanceof Element && Boolean(target.closest("[data-journey-playback-control]"));
+
+    const stopOnPointerIntent = (event: PointerEvent) => {
+      if (!isPlaybackControl(event.target) && isPlayingRef.current) stopPlayback();
+    };
+
+    const stopOnKeyboardIntent = (event: KeyboardEvent) => {
+      if (isPlaybackControl(event.target)) return;
+
+      if (
+        ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " ", "Spacebar"].includes(
+          event.key,
+        )
+      ) {
+        stopPlayback();
+      }
+    };
+
+    const stopWhenHidden = () => {
+      if (document.hidden) stopPlayback();
+    };
+
+    const unsubscribeVirtualScroll = lenis.on("virtual-scroll", stopForVirtualScroll);
+    window.addEventListener("pointerdown", stopOnPointerIntent, { capture: true });
+    window.addEventListener("keydown", stopOnKeyboardIntent, { capture: true });
+    document.addEventListener("visibilitychange", stopWhenHidden);
+
+    return () => {
+      unsubscribeVirtualScroll();
+      window.removeEventListener("pointerdown", stopOnPointerIntent, { capture: true });
+      window.removeEventListener("keydown", stopOnKeyboardIntent, { capture: true });
+      document.removeEventListener("visibilitychange", stopWhenHidden);
+    };
+  }, [lenis, stopPlayback]);
+
+  useEffect(() => {
+    if (shouldReduceMotion) stopPlayback();
+  }, [shouldReduceMotion, stopPlayback]);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -865,9 +982,27 @@ export function CinematicJourney() {
           className="journey-progress absolute inset-x-sm bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-30 transition-opacity sm:inset-x-md md:inset-x-lg lg:inset-x-xl xl:inset-x-2xl"
           style={{ opacity: 1 - brandOpacity }}
         >
-          <div className="mb-3 flex items-center justify-between text-[0.58rem] tracking-[0.18em] text-cream/52 uppercase">
-            <span className="journey-scroll-hint truncate pe-sm">{copy.scrollHint}</span>
-            <span className="shrink-0 font-mono text-cream/76">F{currentFrame}</span>
+          <div className="mb-3 flex items-center justify-between gap-sm text-[0.58rem] tracking-[0.18em] text-cream/52 uppercase">
+            <button
+              type="button"
+              data-journey-playback-control
+              className="inline-flex min-h-9 shrink-0 items-center gap-2 rounded-full border border-cream/20 bg-coffee-dark/32 px-3 text-[0.58rem] tracking-[0.16em] text-cream/88 transition-[background-color,border-color,transform,opacity] hover:border-premium-gold hover:bg-coffee-dark/58 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-premium-gold active:scale-95 disabled:cursor-wait disabled:opacity-45 disabled:hover:border-cream/20 disabled:hover:bg-coffee-dark/32 disabled:active:scale-100"
+              aria-label={playbackLabel}
+              aria-pressed={isPlaying}
+              disabled={!firstFrameReady || !lenis}
+              onClick={() => (isPlayingRef.current ? stopPlayback() : startPlayback())}
+            >
+              {isPlaying ? (
+                <Pause className="size-3.5 fill-current" aria-hidden="true" />
+              ) : (
+                <Play className="size-3.5 fill-current" aria-hidden="true" />
+              )}
+              <span>{playbackLabel}</span>
+            </button>
+            <div className="flex min-w-0 items-center justify-end gap-sm">
+              <span className="journey-scroll-hint truncate">{copy.scrollHint}</span>
+              <span className="shrink-0 font-mono text-cream/76">F{currentFrame}</span>
+            </div>
           </div>
           <div className="relative h-px overflow-visible bg-cream/18">
             <span

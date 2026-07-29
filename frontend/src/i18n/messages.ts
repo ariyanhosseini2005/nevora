@@ -37,6 +37,9 @@ type SiteMessages = {
     loading: string;
     scrollHint: string;
     frameLabel: string;
+    playFilm: string;
+    pauseFilm: string;
+    replayFilm: string;
     beats: JourneyBeatMessage[];
     brand: {
       eyebrow: string;
@@ -155,6 +158,9 @@ export const messages: Record<Locale, SiteMessages> = {
       loading: "Preparing the journey",
       scrollHint: "Scroll controls every frame",
       frameLabel: "Frame",
+      playFilm: "Play film",
+      pauseFilm: "Pause film",
+      replayFilm: "Replay film",
       beats: [
         {
           label: "01 · Release",
@@ -433,6 +439,9 @@ export const messages: Record<Locale, SiteMessages> = {
       loading: "در حال آماده‌سازی سفر",
       scrollHint: "هر فریم با اسکرول شما حرکت می‌کند",
       frameLabel: "فریم",
+      playFilm: "پخش فیلم",
+      pauseFilm: "توقف فیلم",
+      replayFilm: "پخش دوباره",
       beats: [
         {
           label: "۰۱ · رهایی",
