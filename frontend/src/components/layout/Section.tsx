@@ -17,7 +17,7 @@ export function Section({
       id={id}
       aria-label={ariaLabel}
       className={cn(
-        "scroll-mt-20 px-sm py-lg sm:px-md sm:py-xl md:px-lg lg:px-xl xl:px-2xl",
+        "scroll-mt-20 px-sm py-lg [content-visibility:auto] [contain-intrinsic-size:auto_48rem] sm:px-md sm:py-xl md:px-lg lg:px-xl xl:px-2xl",
         className,
       )}
     >

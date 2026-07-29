@@ -29,12 +29,12 @@ const FRAME_COUNT = END_FRAME - START_FRAME + 1;
 const FILM_SCROLL_END = 0.94;
 const HOLD_SCROLL_END = 0.995;
 const INITIAL_PRELOAD_COUNT = 3;
-const MOBILE_PRELOAD_RADIUS = 8;
-const DESKTOP_PRELOAD_RADIUS = 12;
-const MOBILE_CACHE_LIMIT = 16;
-const DESKTOP_CACHE_LIMIT = 24;
+const MOBILE_PRELOAD_RADIUS = 7;
+const DESKTOP_PRELOAD_RADIUS = 10;
+const MOBILE_CACHE_LIMIT = 12;
+const DESKTOP_CACHE_LIMIT = 18;
 const CONSTRAINED_PRELOAD_RADIUS = 4;
-const CONSTRAINED_CACHE_LIMIT = 10;
+const CONSTRAINED_CACHE_LIMIT = 7;
 const PUBLIC_BASE_PATH = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
 const CONTINUITY_BRIDGE_FRAMES = [312, 323, 351, 356, 540, 580, 588, 600, 608, 624, 692];
 const CONTINUITY_BRIDGE_LEAD = 1.2;
@@ -103,10 +103,10 @@ const journeyBeatTimings: JourneyBeatTiming[] = [
   },
 ];
 
-const frameSources = Array.from({ length: FRAME_COUNT }, (_, index) => {
-  const frame = START_FRAME + index;
+function frameSource(index: number) {
+  const frame = START_FRAME + Math.min(Math.max(index, 0), FILM_END_FRAME - START_FRAME);
   return `${PUBLIC_BASE_PATH}/images/journey/frames-v010/nevora-one-take_f${String(frame).padStart(4, "0")}.webp`;
-});
+}
 
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
@@ -160,10 +160,11 @@ function ReducedMotionJourney() {
       className="relative flex min-h-svh items-end overflow-hidden bg-[#080705] px-sm pt-[max(4.5rem,env(safe-area-inset-top))] pb-[max(3rem,env(safe-area-inset-bottom))] text-cream sm:px-md sm:py-xl md:items-center md:px-lg lg:px-xl xl:px-2xl"
     >
       <Image
-        src={frameSources[539]}
+        src={frameSource(FRAME_COUNT - 1)}
         alt={copy.reducedAlt}
         fill
-        priority
+        preload
+        unoptimized
         sizes="100vw"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -197,11 +198,11 @@ function ReducedMotionJourney() {
 }
 
 export function CinematicJourney() {
-  for (let index = 0; index < INITIAL_PRELOAD_COUNT; index += 1) {
-    ReactDOM.preload(frameSources[index], {
+  for (let index = 1; index < INITIAL_PRELOAD_COUNT; index += 1) {
+    ReactDOM.preload(frameSource(index), {
       as: "image",
       type: "image/webp",
-      fetchPriority: index === 0 ? "high" : "low",
+      fetchPriority: "low",
     });
   }
 
@@ -228,7 +229,7 @@ export function CinematicJourney() {
 
   const framePosition = frameAtScrollProgress(progress);
   const currentFrame = Math.round(framePosition);
-  const currentIndex = frameToIndex(currentFrame);
+  const currentIndex = frameToIndex(Math.min(currentFrame, FILM_END_FRAME));
   const sequenceProgress = clamp((framePosition - START_FRAME) / (FRAME_COUNT - 1));
   const brandProgress = clamp((framePosition - 720) / (743 - 720));
   const brandOpacity = cinematicEase(clamp((brandProgress - 0.08) / 0.42));
@@ -240,29 +241,30 @@ export function CinematicJourney() {
   const drawFrame = useCallback((frame: number) => {
     const canvas = canvasRef.current;
     const boundedFrame = clamp(frame, START_FRAME, END_FRAME);
+    const visualFrame = Math.min(boundedFrame, FILM_END_FRAME);
     const continuityBridge = CONTINUITY_BRIDGE_FRAMES.find(
       (bridgeFrame) =>
-        boundedFrame >= bridgeFrame - CONTINUITY_BRIDGE_LEAD &&
-        boundedFrame <= bridgeFrame + CONTINUITY_BRIDGE_TRAIL,
+        visualFrame >= bridgeFrame - CONTINUITY_BRIDGE_LEAD &&
+        visualFrame <= bridgeFrame + CONTINUITY_BRIDGE_TRAIL,
     );
-    const lowerFrame = continuityBridge ? continuityBridge - 1 : Math.floor(boundedFrame);
-    const upperFrame = continuityBridge ? continuityBridge : Math.min(lowerFrame + 1, END_FRAME);
+    const lowerFrame = continuityBridge ? continuityBridge - 1 : Math.floor(visualFrame);
+    const upperFrame = continuityBridge ? continuityBridge : Math.min(lowerFrame + 1, FILM_END_FRAME);
     const lowerIndex = frameToIndex(lowerFrame);
     const upperIndex = frameToIndex(upperFrame);
     const blend = continuityBridge
       ? cinematicEase(
           clamp(
-            (boundedFrame - (continuityBridge - CONTINUITY_BRIDGE_LEAD)) /
+            (visualFrame - (continuityBridge - CONTINUITY_BRIDGE_LEAD)) /
               (CONTINUITY_BRIDGE_LEAD + CONTINUITY_BRIDGE_TRAIL),
           ),
         )
-      : cinematicEase(boundedFrame - Math.floor(boundedFrame));
+      : cinematicEase(visualFrame - Math.floor(visualFrame));
     const continuityBlur = continuityBridge ? Math.sin(blend * Math.PI) * 0.8 : 0;
     const lowerImage = imageCacheRef.current.get(lowerIndex);
     const upperImage = imageCacheRef.current.get(upperIndex);
     const lowerReady = lowerImage?.complete === true && lowerImage.naturalWidth > 0;
     const upperReady = upperImage?.complete === true && upperImage.naturalWidth > 0;
-    const targetIndex = frameToIndex(Math.round(boundedFrame));
+    const targetIndex = frameToIndex(Math.round(visualFrame));
     let fallbackImage = imageCacheRef.current.get(targetIndex);
     let fallbackIndex = targetIndex;
 
@@ -436,7 +438,7 @@ export function CinematicJourney() {
             resolve();
           }
         };
-        image.src = frameSources[index];
+        image.src = frameSource(index);
       });
 
       inFlightRef.current.set(index, task);
@@ -502,15 +504,17 @@ export function CinematicJourney() {
   useEffect(() => {
     if (shouldReduceMotion) return;
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const connection = (
-      navigator as Navigator & {
-        connection?: { saveData?: boolean; effectiveType?: string };
-      }
-    ).connection;
+    const navigatorWithConnection = navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+      deviceMemory?: number;
+    };
+    const connection = navigatorWithConnection.connection;
     const constrainedConnection =
       connection?.saveData === true ||
       connection?.effectiveType === "slow-2g" ||
-      connection?.effectiveType === "2g";
+      connection?.effectiveType === "2g" ||
+      navigatorWithConnection.deviceMemory !== undefined &&
+        navigatorWithConnection.deviceMemory <= 4;
     const baseRadius = constrainedConnection
       ? CONSTRAINED_PRELOAD_RADIUS
       : isMobile
@@ -538,7 +542,7 @@ export function CinematicJourney() {
       }
     }
 
-    currentFrameRef.current = currentFrame;
+    currentFrameRef.current = Math.min(currentFrame, FILM_END_FRAME);
     previousIndexRef.current = currentIndex;
     cacheCenterRef.current = currentIndex;
     cacheLimitRef.current = constrainedConnection
@@ -588,6 +592,18 @@ export function CinematicJourney() {
       <h1 className="sr-only">{copy.srTitle}</h1>
 
       <div className="sticky top-0 h-svh overflow-hidden bg-[#080705] text-cream">
+        <Image
+          src={frameSource(0)}
+          alt=""
+          aria-hidden="true"
+          fill
+          preload
+          unoptimized
+          sizes="100vw"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out ${
+            firstFrameReady ? "opacity-0" : "opacity-100"
+          }`}
+        />
         <canvas
           ref={canvasRef}
           className={`absolute inset-0 h-full w-full transition-opacity duration-700 ease-out [backface-visibility:hidden] [transform:translateZ(0)] ${
@@ -729,7 +745,7 @@ export function CinematicJourney() {
         </div>
 
         <div
-          className={`absolute inset-0 z-40 grid place-items-center bg-[#080705] transition-opacity duration-700 ease-out ${
+          className={`absolute inset-0 z-40 grid place-items-center bg-[#080705]/28 backdrop-blur-[1px] transition-opacity duration-700 ease-out ${
             firstFrameReady ? "pointer-events-none opacity-0" : "opacity-100"
           }`}
           aria-hidden={firstFrameReady}

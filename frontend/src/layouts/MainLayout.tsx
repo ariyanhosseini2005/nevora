@@ -4,7 +4,7 @@ import { LocalizedSkipLink } from "@/components/navigation/LocalizedSkipLink";
 import { Footer } from "@/features/homepage/components/Footer/Footer";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 import { CartProvider } from "@/features/commerce/CartProvider";
-import { CartDrawer } from "@/features/commerce/CartDrawer";
+import { LazyCartDrawer } from "@/features/commerce/LazyCartDrawer";
 
 export function MainLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,7 +14,7 @@ export function MainLayout({ children }: { children: ReactNode }) {
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
-        <CartDrawer />
+        <LazyCartDrawer />
       </CartProvider>
     </LanguageProvider>
   );

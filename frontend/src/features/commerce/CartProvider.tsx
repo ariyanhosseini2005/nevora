@@ -20,6 +20,7 @@ type CartContextValue = {
   lines: CartLine[];
   itemCount: number;
   isOpen: boolean;
+  hasOpened: boolean;
   addItem: (productId: string) => void;
   removeItem: (productId: string) => void;
   setQuantity: (productId: string, quantity: number) => void;
@@ -106,6 +107,7 @@ function writeCart(lines: CartLine[]) {
 export function CartProvider({ children }: { children: ReactNode }) {
   const lines = useSyncExternalStore(subscribeToCart, getCartSnapshot, getServerCartSnapshot);
   const [isOpen, setIsOpen] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
 
   const addItem = useCallback((productId: string) => {
     if (!productIds.has(productId)) return;
@@ -121,6 +123,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       : [...currentLines, { productId, quantity: 1 }];
 
     writeCart(nextLines);
+    setHasOpened(true);
     setIsOpen(true);
   }, []);
 
@@ -148,13 +151,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
       lines,
       itemCount: lines.reduce((total, line) => total + line.quantity, 0),
       isOpen,
+      hasOpened,
       addItem,
       removeItem,
       setQuantity,
-      openCart: () => setIsOpen(true),
+      openCart: () => {
+        setHasOpened(true);
+        setIsOpen(true);
+      },
       closeCart: () => setIsOpen(false),
     }),
-    [addItem, isOpen, lines, removeItem, setQuantity],
+    [addItem, hasOpened, isOpen, lines, removeItem, setQuantity],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

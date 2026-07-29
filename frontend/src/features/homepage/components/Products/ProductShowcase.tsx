@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
 import { ProductCard } from "@/components/cards/ProductCard";
-import { ProductQuickView } from "@/features/commerce/ProductQuickView";
 import { useCart } from "@/features/commerce/CartProvider";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { sectionIds } from "@/constants/routes";
@@ -14,16 +14,26 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 import { messages } from "@/i18n/messages";
 import type { Product } from "@/types/product";
 
+const ProductQuickView = dynamic(
+  () => import("@/features/commerce/ProductQuickView").then((module) => module.ProductQuickView),
+  { ssr: false },
+);
+
 export function ProductShowcase() {
   const { locale } = useLanguage();
   const { addItem } = useCart();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [hasOpenedQuickView, setHasOpenedQuickView] = useState(false);
   const copy = messages[locale].products;
   const selectedProductIndex = selectedProduct
     ? products.findIndex((product) => product.id === selectedProduct.id)
     : -1;
   const selectedLocalized = selectedProductIndex >= 0 ? copy.items[selectedProductIndex] : null;
   const closeQuickView = useCallback(() => setSelectedProduct(null), []);
+  const openQuickView = useCallback((product: Product) => {
+    setHasOpenedQuickView(true);
+    setSelectedProduct(product);
+  }, []);
 
   return (
     <Section id={sectionIds.products} ariaLabel={copy.ariaLabel} className="bg-cream">
@@ -76,7 +86,7 @@ export function ProductShowcase() {
                   bagWeight={copy.bagWeight}
                   viewDetails={copy.viewDetails}
                   addToCart={copy.addToCart}
-                  onViewDetails={() => setSelectedProduct(product)}
+                  onViewDetails={() => openQuickView(product)}
                   onAddToCart={() => addItem(product.id)}
                 />
               </motion.div>
@@ -85,20 +95,22 @@ export function ProductShowcase() {
         </motion.div>
       </Container>
 
-      <ProductQuickView
-        product={selectedProduct}
-        localized={selectedLocalized}
-        locale={locale}
-        ratingLabel={copy.ratingLabel}
-        bagWeight={copy.bagWeight}
-        tastingNotes={copy.tastingNotes}
-        roastLabel={copy.roastLabel}
-        processLabel={copy.processLabel}
-        addToCart={copy.addToCart}
-        closeLabel={copy.closeDetails}
-        onClose={closeQuickView}
-        onAddToCart={addItem}
-      />
+      {hasOpenedQuickView && (
+        <ProductQuickView
+          product={selectedProduct}
+          localized={selectedLocalized}
+          locale={locale}
+          ratingLabel={copy.ratingLabel}
+          bagWeight={copy.bagWeight}
+          tastingNotes={copy.tastingNotes}
+          roastLabel={copy.roastLabel}
+          processLabel={copy.processLabel}
+          addToCart={copy.addToCart}
+          closeLabel={copy.closeDetails}
+          onClose={closeQuickView}
+          onAddToCart={addItem}
+        />
+      )}
     </Section>
   );
 }
